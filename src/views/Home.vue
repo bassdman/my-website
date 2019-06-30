@@ -14,6 +14,23 @@
 
 export default {
   name: 'home',
+  metaInfo: {
+    // Children can override the title.
+    title: 'Webdesigner, Querdenker und noch vieles mehr',
+    // Result: My Page Title ← My Site
+    // If a child changes the title to "My Other Page Title",
+    // it will become: My Other Page Title ← My Site
+    titleTemplate: 'Manuel Gelsen | %s',
+    // Define meta tags here.
+    meta: [
+      {"http-equiv": 'Content-Type', content: 'text/html; charset=utf-8'},
+      {name: 'viewport', content: 'width=device-width, initial-scale=1'},
+      {name: 'language', content: 'de'},
+      {name: 'description', content: 'Die persönliche Website von Manuel Gelsen, 90706 Fürth | Webdesigner, Querdenker, Stabiler 30er und noch vieles mehr.'},
+      {name: 'robots', content: 'index,follow'}
+    ],
+    link: [{ rel: "canonical", href: "https://www.manuelgelsen.de" }]
+  }
 };
 </script>
 

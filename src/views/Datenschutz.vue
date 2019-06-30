@@ -289,7 +289,24 @@
 
 <script>
 export default {
-  name: "datenschutz"
+  name: "datenschutz",
+  metaInfo: {
+    // Children can override the title.
+    title: 'Datenschutz',
+    // Result: My Page Title ← My Site
+    // If a child changes the title to "My Other Page Title",
+    // it will become: My Other Page Title ← My Site
+    titleTemplate: 'Manuel Gelsen | %s',
+    // Define meta tags here.
+    meta: [
+      {"http-equiv": 'Content-Type', content: 'text/html; charset=utf-8'},
+      {name: 'language', content: 'de'},
+      {name: 'viewport', content: 'width=device-width, initial-scale=1'},
+      {name: 'description', content: 'DATENSCHUTZERKLÄRUNG Ich freue mich über dein Interesse an meiner Seite. Der Schutz Ihrer Privatsphäre ist sehr wichtig. Nachstehend informiere ich dich ausführlich über den Umgang mit ...'},
+      {name: 'robots', content: 'noindex,follow'}
+    ],
+    link: [{ rel: "canonical", href: "https://www.manuelgelsen.de/datenschutz" }]
+  }
 };
 </script>
 
