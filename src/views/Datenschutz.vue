@@ -1,9 +1,5 @@
 <template>
   <article id="post-12" class="post-12 page type-page status-publish hentry">
-    <header class="entry-header">
-      <h1 class="entry-title">Datenschutz</h1>
-    </header>
-
     <figure>
         <div class="imgwrapper"><img src="../assets/teddy.jpg"></div>
         <figcaption class="imgtitle">Bild von <a href="https://pixabay.com/de/users/pixel2013-2364555/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=3062829">pixel2013</a> auf <a href="https://pixabay.com/de/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=3062829">Pixabay</a></figcaption>
@@ -298,13 +294,6 @@ export default {
 </script>
 
 <style scoped>
-.entry-header{
-    position: absolute;
-    width: 100%;
-    text-align: center;
-    font-size: xx-large;
-    margin-top: 20px;
-}
 img {
   width: 100%;
   margin-top:-200px;

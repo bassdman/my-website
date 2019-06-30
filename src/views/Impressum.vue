@@ -1,9 +1,5 @@
 <template>
   <div>
-    <header class="entry-header">
-      <h1 class="entry-title">Impressum</h1>
-    </header>
-
     <figure>
       <div class="imgwrapper"><img src="../assets/recht.jpg"></div>
       <figcaption class="imgtitle">
@@ -53,16 +49,10 @@
 export default {
   name: "impressum"
 };
+
 </script>
 
 <style scoped>
-.entry-header{
-    position: absolute;
-    width: 100%;
-    text-align: center;
-    font-size: xx-large;
-    margin-top: 20px;
-}
 img {
   width: 100%;
 }

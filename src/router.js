@@ -12,7 +12,7 @@ export default new Router({
             name: 'home',
             component: Home,
             meta: {
-                header: 'absolute'
+                header: 'absolute',
             },
             abc: 'def'
         },
@@ -30,12 +30,16 @@ export default new Router({
             name: 'impressum',
             component: () =>
                 import ('./views/Impressum.vue'),
+            meta: {
+                headerPagename: 'Impressum'
+            }
         },
         {
             path: '/datenschutz',
             name: 'datenschutz',
             component: () =>
                 import ('./views/Datenschutz.vue'),
+            headerPagename: 'Datenschutz'
         },
     ],
 });
