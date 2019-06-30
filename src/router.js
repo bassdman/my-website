@@ -39,7 +39,9 @@ export default new Router({
             name: 'datenschutz',
             component: () =>
                 import ('./views/Datenschutz.vue'),
-            headerPagename: 'Datenschutz'
+            meta: {
+                headerPagename: 'Datenschutz'
+            }
         },
     ],
 });

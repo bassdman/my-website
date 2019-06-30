@@ -300,7 +300,7 @@ img {
 }
 
 .imgwrapper{
-    max-height: 600px;
+    max-height: 90vh;
     overflow: hidden;
 }
 figure{
@@ -310,13 +310,13 @@ figcaption{
     font-size:small;
 }
 q{
-    max-width: 1200px;
+  max-width: 1200px;
   margin: auto;
   display:block;
   font-size:larger;
   font-style:italic;
-  margin-bottom:50px;
-  padding: 2em 5em 0px 5em;
+  margin-bottom:30px;
+  padding: 0em 5em;
 }
 
 </style>

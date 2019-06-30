@@ -57,7 +57,7 @@ img {
   width: 100%;
 }
 .imgwrapper{
-    max-height: 600px;
+    max-height: 90vh;
     overflow:hidden;
 }
 figure{
@@ -65,10 +65,6 @@ figure{
 }
 figcaption{
     font-size:small;
-}
-
-.content{
-    margin-top: 50px;
 }
 
 </style>
