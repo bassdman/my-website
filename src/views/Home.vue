@@ -4,7 +4,7 @@
         <img alt="teaser" src="../assets/startseite.jpg">
     </figure>
   <div class="imAufbau">
-    Diese Seite ist noch in Bearbeitung, wird aber bald in voller Blüte erstrahlen.
+    Diese Seite ist noch in Bearbeitung, wird aber bald in voller Bl&uml;te erstrahlen.
   </div>
   </div>
 </template>
@@ -26,7 +26,7 @@ export default {
       {"http-equiv": 'Content-Type', content: 'text/html; charset=utf-8'},
       {name: 'viewport', content: 'width=device-width, initial-scale=1'},
       {name: 'language', content: 'de'},
-      {name: 'description', content: 'Die persönliche Website von Manuel Gelsen, 90706 Fürth | Webdesigner, Querdenker, Stabiler 30er und noch vieles mehr.'},
+      {name: 'description', content: 'Die pers&ouml;nliche Website von Manuel Gelsen, 90706 F&uuml;rth | Webdesigner, Querdenker, Stabiler 30er und noch vieles mehr.'},
       {name: 'robots', content: 'index,follow'}
     ],
     link: [{ rel: "canonical", href: "https://www.manuelgelsen.de" }]
