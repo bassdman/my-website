@@ -6,6 +6,8 @@ import Meta from 'vue-meta';
 Vue.config.productionTip = false;
 Vue.use(Meta);
 
+export const dataBus = new Vue();
+
 new Vue({
     router,
     render: h => h(App),

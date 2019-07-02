@@ -1,5 +1,5 @@
   <template>
-    <div class="header gbSiteContent">
+    <div class="header gbSiteContent" v-bind:class="{ headerDark: contentPositionTop < 75, displayNone: contentPositionTop >= 75}">
       <div class="name">
         <router-link to="/">Manuel Gelsen</router-link>
       </div>
@@ -8,17 +8,33 @@
 </template>
 
 <script>
+
+import { dataBus } from '../main';
+
 export default {
-  name: "headerElem"
+  name: "headerElem",
+  data() {
+    return {
+      contentPositionTop: 0
+    }
+  },
+ created() {
+  // Using the server bus
+  dataBus.$emit("trigger:contentPositionTop");
+  dataBus.$on('update:contentPositionTop', (contentPositionTop) => {
+   this.contentPositionTop = contentPositionTop;
+  });
+ },
 };
 </script>
 
 <style scoped>
 .header {
-  position: absolute;
+  position: fixed;
   color: white;
   top: 1em;
-  
+  z-index: 2;
+  width: 100%;
 }
 .name {
   font-size: x-large;
@@ -29,5 +45,14 @@ export default {
 .name a {
   text-decoration: none;
   color: inherit;
+}
+
+.headerDark{
+  color: black;
+  display:block;
+  }
+
+.displayNone{
+  display:none;
 }
 </style>

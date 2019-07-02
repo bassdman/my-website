@@ -1,7 +1,7 @@
   <template>
   <header>
     <DefaultHeader v-if="!$route.meta.header || $route.meta.header == 'default'"></DefaultHeader>
-    <StartpageHeader v-if="$route.meta.header == 'absolute'"></StartpageHeader>
+    <StartpageHeader v-if="$route.meta.header == 'fixed'"></StartpageHeader>
   </header>
 </template>
 
