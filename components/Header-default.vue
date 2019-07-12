@@ -2,7 +2,7 @@
   <!-- Der Default Header -->
   <div class="header gbSiteContent">
     <div class="name">
-      <router-link to="/">Manuel Gelsen</router-link>
+      <nuxt-link to="/">Manuel Gelsen</nuxt-link>
     </div>
     <div class="pagename">{{$route.meta.headerPagename }}</div>
     <div class="navigation"></div>

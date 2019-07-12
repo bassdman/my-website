@@ -1,13 +1,13 @@
 <template>
   <footer v-bind:class="{ bgWhite: hasBackground }">
-      <router-link to="/impressum">Impressum</router-link> |
-      <router-link to="/datenschutz">Datenschutz</router-link>
+      <nuxt-link to="/impressum">Impressum</nuxt-link> |
+      <nuxt-link to="/datenschutz">Datenschutz</nuxt-link>
       <span class="version">v {{version}}</span>
   </footer>
 </template>
 
 <script>
-import {version} from '../../package.json';
+import {version} from '../package.json';
 
 export default {
   name: 'footerElem',

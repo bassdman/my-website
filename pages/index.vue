@@ -3,15 +3,23 @@
     <div class="background"></div>
     <div class="content" id="content">
       <div class="welcome">
-        <p class="welcomeHeader">Herzlich willkommen.</p>
-      <p>Ich heiße Manuel Gelsen, bin seit 2014 Webdesigner- / Entwickler im Großraum Nürnberg <br>und mache sonst noch vieles mehr.</p>
+        <p class="welcomeHeader">Herzlich Willkommen,</p>
+      <p>schön, dass du dich auf meiner Seite verirrt hast :) Ich heiße Manuel. <br>
+      Ich bin Webdesigner- / Entwickler und mache gaaaaanz viele verrückte und unverrückte Sachen.</p>
       <p>
-        Hier erfährst du mehr über mich: 
+        Was, erf&auml;hrst du hier: <router-link to="/lebenslauf" class="ueberMich">Klick mich</router-link>
         </p>
-        <p><router-link to="/lebenslauf" class="ueberMich">Über mich</router-link></p>
       </div>
       <div class="name pretext">Manuel Gelsen</div>
       <div class="description pretext">Webdesigner, Querdenker und noch vieles mehr</div>
+      <div><div>So bekämpfen Sie Gelsen in Haus und Garten</div>
+      <div>Natürliche Hausmittel gegen Gelsen <a href="https://www.garten-haus.at/aktuelles/2018/07/natuerliche-hausmittel-gegen-gelsen.html"></a> </div>
+      <div>Hilfreich: Die besten Hausmittel gegen Gelsen und Gelsenstiche ... <a href="https://www.gesundheitstrends.com/a/.../was-hilft-gegen-gelsen-22387"></a></div>
+      <div>5 Tipps gegen Gelsen <a href="https://www.gesund.at/beauty/5-mittel-gegen-gelsen/"></a></div>
+      <div>Die besten 15 Anti-Gelsen-Tipps <a href="Die 15 besten Anti-Gelsen-Tipps"></a></div>
+        <div>So helfen Tomaten gegen Gelsen: Vier Anti-Gelsen-Hausmittel <a href="www.weekend.at/lifestyle/so-helfen-tomaten...gelsen...gelsen-hausmittel/2.172.769"></a></div>
+        
+        </div>
       <div
         class="imAufbau"
       >Diese Seite ist noch in Bearbeitung, wird aber bald in voller Bl&uuml;te erstrahlen.</div>
@@ -21,13 +29,13 @@
 
 <script>
 // @ is an alias to /src
-import { dataBus } from "../main";
+//import { dataBus } from "./main";
 
 export default {
   name: "home",
   created() {
-    const instance = dataBus;
-    dataBus.$on("trigger:contentPositionTop", () => {
+   // const instance = dataBus;
+  /*  dataBus.$on("trigger:contentPositionTop", () => {
       const positionTop = document
         .getElementById("content")
         .getBoundingClientRect().top;
@@ -36,7 +44,7 @@ export default {
 
     window.document.body.onscroll = function(e) {
       dataBus.$emit("trigger:contentPositionTop");
-    };
+    };*/
   },
   metaInfo: {
     // Children can override the title.
@@ -47,9 +55,6 @@ export default {
     titleTemplate: "Manuel Gelsen | %s",
     // Define meta tags here.
     meta: [
-      { "http-equiv": "Content-Type", content: "text/html; charset=utf-8" },
-      { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { name: "language", content: "de" },
       {
         name: "description",
         content:
@@ -89,7 +94,7 @@ img {
 }
 
 .background {
-  background: url(/img/startseite.e5fd3e82.jpg);
+  background: url(../assets/startseite.jpg);
   min-height: 100vh;
   top: 0px;
   right: 0px;
@@ -125,6 +130,7 @@ img {
 
 .welcomeHeader{
   font-size: 40px;
+  margin-bottom: 0px;
 }
 .ueberMich{
   text-decoration: none;

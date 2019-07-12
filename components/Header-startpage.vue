@@ -1,7 +1,7 @@
   <template>
     <div class="header gbSiteContent" v-bind:class="{ headerDark: contentPositionTop < 75, displayNone: contentPositionTop >= 75}">
       <div class="name">
-        <router-link to="/">Manuel Gelsen</router-link>
+        <nuxt-link to="/">Manuel Gelsen</nuxt-link>
       </div>
       <div class="subtitle">Webdesigner, Querdenker und noch vieles mehr</div>
     </div>
@@ -9,21 +9,21 @@
 
 <script>
 
-import { dataBus } from '../main';
+//import { dataBus } from '../main';
 
 export default {
   name: "headerElem",
   data() {
     return {
-      contentPositionTop: 0
+      contentPositionTop: 1000
     }
   },
  created() {
   // Using the server bus
-  dataBus.$emit("trigger:contentPositionTop");
+ /* dataBus.$emit("trigger:contentPositionTop");
   dataBus.$on('update:contentPositionTop', (contentPositionTop) => {
    this.contentPositionTop = contentPositionTop;
-  });
+  });*/
  },
 };
 </script>

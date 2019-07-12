@@ -1,7 +1,7 @@
 <template>
   <article id="post-12" class="post-12 page type-page status-publish hentry">
     <figure>
-        <div class="imgwrapper"><img src="../assets/teddy.jpg"></div>
+        <div class="imgwrapper"><img src="../../assets/teddy.jpg"></div>
         <figcaption class="imgtitle">Bild von <a href="https://pixabay.com/de/users/pixel2013-2364555/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=3062829">pixel2013</a> auf <a href="https://pixabay.com/de/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=3062829">Pixabay</a></figcaption>
     </figure>
     <q>Leider sind Datenschutztexte oft trocken und langweilig zu lesen. Das kann ich nicht ändern. <br>
@@ -290,7 +290,9 @@
 <script>
 export default {
   name: "datenschutz",
-  metaInfo: {
+  head() {
+
+    return {
     // Children can override the title.
     title: 'Datenschutz',
     // Result: My Page Title ← My Site
@@ -299,15 +301,12 @@ export default {
     titleTemplate: 'Manuel Gelsen | %s',
     // Define meta tags here.
     meta: [
-      {"http-equiv": 'Content-Type', content: 'text/html; charset=utf-8'},
-      {name: 'language', content: 'de'},
-      {name: 'viewport', content: 'width=device-width, initial-scale=1'},
       {name: 'description', content: 'DATENSCHUTZERKLÄRUNG Ich freue mich über dein Interesse an meiner Seite. Der Schutz Ihrer Privatsph&auml;re ist sehr wichtig. Nachstehend informiere ich dich ausf&uuml;hrlich über den Umgang mit ...'},
       {name: 'robots', content: 'noindex,follow'}
     ],
     link: [{ rel: "canonical", href: "https://www.manuelgelsen.de/datenschutz" }]
   }
-};
+}};
 </script>
 
 <style scoped>
