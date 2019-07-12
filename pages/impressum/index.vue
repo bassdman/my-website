@@ -59,7 +59,7 @@ export default {
     titleTemplate: "Manuel Gelsen | %s",
     // Define meta tags here.
     meta: [
-      { name: "description", content: "Impressum  Manuel Gelsen, Postfach 1648, 90706 F&uuml;rth, Deutschland. www.manuelgelsen.de  E-Mail: info@manuelgelsen.de" },
+      { name: "description", content: "Impressum  Manuel Gelsen, Postfach 1648, 90706 Fürth, Deutschland. www.manuelgelsen.de  E-Mail: info@manuelgelsen.de" },
       { name: "robots", content: "noindex,follow" }
     ],
     link: [{ rel: "canonical", href: "https://www.manuelgelsen.de/impressum" }]

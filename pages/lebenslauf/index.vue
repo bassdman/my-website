@@ -8,7 +8,7 @@
           <h2>2017</h2>
           <p>Lorem ipsum..</p>
         </div>
-         <div class="content marTopSmall">
+        <div class="content marTopSmall">
           <h2>2015</h2>
           <p>Dolor Sid amnet</p>
         </div>
@@ -31,24 +31,28 @@ export default {
   components: {
     //  Timeline
   },
-  metaInfo: {
-    // Children can override the title.
-    title: "Lebenslauf",
-    // Result: My Page Title ← My Site
-    // If a child changes the title to "My Other Page Title",
-    // it will become: My Other Page Title ← My Site
-    titleTemplate: "Manuel Gelsen | %s",
-    // Define meta tags here.
-    meta: [
-      { name: "language", content: "de" },
-      {
-        name: "description",
-        content:
-          "Impressum  Manuel Gelsen, Postfach 1648, 90706 F&uuml;rth, Deutschland. www.manuelgelsen.de  E-Mail: info@manuelgelsen.de"
-      },
-      { name: "robots", content: "index,follow" }
-    ],
-    link: [{ rel: "canonical", href: "https://www.manuelgelsen.de/impressum" }]
+  head() {
+    return {
+      // Children can override the title.
+      title: "Lebenslauf",
+      // Result: My Page Title ← My Site
+      // If a child changes the title to "My Other Page Title",
+      // it will become: My Other Page Title ← My Site
+      titleTemplate: "Manuel Gelsen | %s",
+      // Define meta tags here.
+      meta: [
+        { name: "language", content: "de" },
+        {
+          name: "description",
+          content:
+            "Arbeitet seit Mai 2017 bei der Onlineprinters GmbH. Davor..."
+        },
+        { name: "robots", content: "index,follow" }
+      ],
+      link: [
+        { rel: "canonical", href: "https://www.manuelgelsen.de/impressum" }
+      ]
+    };
   },
   data() {
     return {};
@@ -76,7 +80,7 @@ export default {
 
 /* The actual timeline (the vertical ruler) */
 .timeline::after {
-  content: '';
+  content: "";
   position: absolute;
   width: 6px;
   background-color: white;
@@ -96,13 +100,13 @@ export default {
 
 /* The circles on the timeline */
 .container::after {
-  content: '';
+  content: "";
   position: absolute;
   width: 25px;
   height: 25px;
   right: -17px;
   background-color: white;
-  border: 4px solid #FF9F55;
+  border: 4px solid #ff9f55;
   top: 15px;
   border-radius: 50%;
   z-index: 1;
@@ -159,24 +163,24 @@ export default {
   border-radius: 6px;
 }
 
-.marTopSmall{
-    margin-top: 10px;
+.marTopSmall {
+  margin-top: 10px;
 }
 /* Media queries - Responsive timeline on screens less than 600px wide */
 @media screen and (max-width: 600px) {
-/* Place the timelime to the left */
+  /* Place the timelime to the left */
   .timeline::after {
     left: 31px;
   }
 
-/* Full-width containers */
+  /* Full-width containers */
   .container {
     width: 100%;
     padding-left: 70px;
     padding-right: 25px;
   }
 
-/* Make sure that all arrows are pointing leftwards */
+  /* Make sure that all arrows are pointing leftwards */
   .container::before {
     left: 60px;
     border: medium solid white;
@@ -184,12 +188,13 @@ export default {
     border-color: transparent white transparent transparent;
   }
 
-/* Make sure all circles are at the same spot */
-  .left::after, .right::after {
+  /* Make sure all circles are at the same spot */
+  .left::after,
+  .right::after {
     left: 15px;
   }
 
-/* Make all right containers behave like the left ones */
+  /* Make all right containers behave like the left ones */
   .right {
     left: 0%;
   }

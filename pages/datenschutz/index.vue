@@ -301,7 +301,7 @@ export default {
     titleTemplate: 'Manuel Gelsen | %s',
     // Define meta tags here.
     meta: [
-      {name: 'description', content: 'DATENSCHUTZERKLÄRUNG Ich freue mich über dein Interesse an meiner Seite. Der Schutz Ihrer Privatsph&auml;re ist sehr wichtig. Nachstehend informiere ich dich ausf&uuml;hrlich über den Umgang mit ...'},
+      {name: 'description', content: 'DATENSCHUTZERKLÄRUNG Ich freue mich über dein Interesse an meiner Seite. Der Schutz Deiner Privatsphäre ist sehr wichtig. Nachstehend informiere ich dich ausführlich über den Umgang mit ...'},
       {name: 'robots', content: 'noindex,follow'}
     ],
     link: [{ rel: "canonical", href: "https://www.manuelgelsen.de/datenschutz" }]

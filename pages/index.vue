@@ -4,22 +4,44 @@
     <div class="content" id="content">
       <div class="welcome">
         <p class="welcomeHeader">Herzlich Willkommen,</p>
-      <p>schön, dass du dich auf meiner Seite verirrt hast :) Ich heiße Manuel. <br>
-      Ich bin Webdesigner- / Entwickler und mache gaaaaanz viele verrückte und unverrückte Sachen.</p>
-      <p>
-        Was, erf&auml;hrst du hier: <router-link to="/lebenslauf" class="ueberMich">Klick mich</router-link>
+        <p>
+          schön, dass du dich auf meiner Seite verirrt hast :) Ich heiße Manuel.
+          <br />Ich bin Webdesigner- / Entwickler und mache gaaaaanz viele verrückte und unverrückte Sachen.
+        </p>
+        <p>
+          Was, erf&auml;hrst du hier:
+          <router-link to="/lebenslauf" class="ueberMich">Klick mich</router-link>
         </p>
       </div>
       <div class="name pretext">Manuel Gelsen</div>
       <div class="description pretext">Webdesigner, Querdenker und noch vieles mehr</div>
-      <div><div>So bekämpfen Sie Gelsen in Haus und Garten</div>
-      <div>Natürliche Hausmittel gegen Gelsen <a href="https://www.garten-haus.at/aktuelles/2018/07/natuerliche-hausmittel-gegen-gelsen.html"></a> </div>
-      <div>Hilfreich: Die besten Hausmittel gegen Gelsen und Gelsenstiche ... <a href="https://www.gesundheitstrends.com/a/.../was-hilft-gegen-gelsen-22387"></a></div>
-      <div>5 Tipps gegen Gelsen <a href="https://www.gesund.at/beauty/5-mittel-gegen-gelsen/"></a></div>
-      <div>Die besten 15 Anti-Gelsen-Tipps <a href="Die 15 besten Anti-Gelsen-Tipps"></a></div>
-        <div>So helfen Tomaten gegen Gelsen: Vier Anti-Gelsen-Hausmittel <a href="www.weekend.at/lifestyle/so-helfen-tomaten...gelsen...gelsen-hausmittel/2.172.769"></a></div>
-        
+      <div>
+        <div>So bekämpfen Sie Gelsen in Haus und Garten</div>
+        <div>
+          Natürliche Hausmittel gegen Gelsen
+          <a
+            href="https://www.garten-haus.at/aktuelles/2018/07/natuerliche-hausmittel-gegen-gelsen.html"
+          ></a>
         </div>
+        <div>
+          Hilfreich: Die besten Hausmittel gegen Gelsen und Gelsenstiche ...
+          <a href="https://www.gesundheitstrends.com/a/.../was-hilft-gegen-gelsen-22387"></a>
+        </div>
+        <div>
+          5 Tipps gegen Gelsen
+          <a href="https://www.gesund.at/beauty/5-mittel-gegen-gelsen/"></a>
+        </div>
+        <div>
+          Die besten 15 Anti-Gelsen-Tipps
+          <a href="Die 15 besten Anti-Gelsen-Tipps"></a>
+        </div>
+        <div>
+          So helfen Tomaten gegen Gelsen: Vier Anti-Gelsen-Hausmittel
+          <a
+            href="www.weekend.at/lifestyle/so-helfen-tomaten...gelsen...gelsen-hausmittel/2.172.769"
+          ></a>
+        </div>
+      </div>
       <div
         class="imAufbau"
       >Diese Seite ist noch in Bearbeitung, wird aber bald in voller Bl&uuml;te erstrahlen.</div>
@@ -34,8 +56,8 @@
 export default {
   name: "home",
   created() {
-   // const instance = dataBus;
-  /*  dataBus.$on("trigger:contentPositionTop", () => {
+    // const instance = dataBus;
+    /*  dataBus.$on("trigger:contentPositionTop", () => {
       const positionTop = document
         .getElementById("content")
         .getBoundingClientRect().top;
@@ -46,23 +68,25 @@ export default {
       dataBus.$emit("trigger:contentPositionTop");
     };*/
   },
-  metaInfo: {
-    // Children can override the title.
-    title: "Webdesigner, Querdenker und noch vieles mehr",
-    // Result: My Page Title ← My Site
-    // If a child changes the title to "My Other Page Title",
-    // it will become: My Other Page Title ← My Site
-    titleTemplate: "Manuel Gelsen | %s",
-    // Define meta tags here.
-    meta: [
-      {
-        name: "description",
-        content:
-          "Die pers&ouml;nliche Website von Manuel Gelsen, 90706 F&uuml;rth | Webdesigner, Querdenker, Stabiler 30er und noch vieles mehr."
-      },
-      { name: "robots", content: "index,follow" }
-    ],
-    link: [{ rel: "canonical", href: "https://www.manuelgelsen.de" }]
+  head() {
+    return {
+      // Children can override the title.
+      title: "Webdesigner, Querdenker und noch vieles mehr",
+      // Result: My Page Title ← My Site
+      // If a child changes the title to "My Other Page Title",
+      // it will become: My Other Page Title ← My Site
+      titleTemplate: "Manuel Gelsen | %s",
+      // Define meta tags here.
+      meta: [
+        {
+          name: "description",
+          content:
+            "Die persönliche Website von Manuel Gelsen, 90706 Fürth | Webdesigner, Querdenker, Stabiler 30er und noch vieles mehr."
+        },
+        { name: "robots", content: "index,follow" }
+      ],
+      link: [{ rel: "canonical", href: "https://www.manuelgelsen.de" }]
+    };
   }
 };
 </script>
@@ -103,14 +127,14 @@ img {
   z-index: -1;
 }
 
-.pretext{
+.pretext {
   color: white;
   text-align: center;
 }
 
 .name {
   margin-top: -105px;
-    font-size: 48px;
+  font-size: 48px;
   font-weight: bold;
 }
 
@@ -119,8 +143,8 @@ img {
   font-size: 20px;
 }
 
-.welcome{
-  position: absolute;;
+.welcome {
+  position: absolute;
   top: 5vh;
   left: 50px;
   font-size: 20px;
@@ -128,11 +152,11 @@ img {
   font-size: 18px;
 }
 
-.welcomeHeader{
+.welcomeHeader {
   font-size: 40px;
   margin-bottom: 0px;
 }
-.ueberMich{
+.ueberMich {
   text-decoration: none;
   background: lightcoral;
   padding: 0.5em 1em;

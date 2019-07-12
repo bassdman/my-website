@@ -3,7 +3,7 @@ module.exports = {
      ** Headers of the page
      */
     head: {
-        title: 'my-website',
+        title: 'Manuel Gelsen',
         meta: [
             { charset: 'utf-8' },
             { "http-equiv": 'Content-Type', content: 'text/html; charset=utf-8' },
