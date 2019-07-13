@@ -1,7 +1,7 @@
 <template>
   <article id="post-12" class="post-12 page type-page status-publish hentry">
     <figure>
-        <div class="imgwrapper"><img src="../../assets/teddy.jpg"></div>
+        <div class="imgwrapper"><img src="../assets/teddy.jpg"></div>
         <figcaption class="imgtitle">Bild von <a href="https://pixabay.com/de/users/pixel2013-2364555/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=3062829">pixel2013</a> auf <a href="https://pixabay.com/de/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=3062829">Pixabay</a></figcaption>
     </figure>
     <q>Leider sind Datenschutztexte oft trocken und langweilig zu lesen. Das kann ich nicht ändern. <br>

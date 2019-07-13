@@ -2,20 +2,22 @@
   <div class="home">
     <div class="background"></div>
     <div class="content" id="content">
+      <div class="name pretext">Manuel Gelsen</div>
+      <div class="description pretext">Webdesigner, Querdenker und noch vieles mehr</div>
+
       <div class="welcome">
-        <p class="welcomeHeader">Herzlich Willkommen,</p>
+        <p class="welcomeHeader">Hallo,</p>
         <p>
-          schön, dass du dich auf meiner Seite verirrt hast :) Ich heiße Manuel.
-          <br />Ich bin Webdesigner- / Entwickler und mache gaaaaanz viele verrückte und unverrückte Sachen.
+          schön, dass du da bist. 
+          <nuxt-link to="/kaffee">Willst du einen Kaffee?</nuxt-link>
+          <br />Ich heiße Manuel. Ich begleite dich auf meiner Website und mache sonst noch viele andere Sachen.
         </p>
         <p>
           Was, erf&auml;hrst du hier:
           <router-link to="/lebenslauf" class="ueberMich">Klick mich</router-link>
         </p>
       </div>
-      <div class="name pretext">Manuel Gelsen</div>
-      <div class="description pretext">Webdesigner, Querdenker und noch vieles mehr</div>
-      <div>
+            <div>
         <div>So bekämpfen Sie Gelsen in Haus und Garten</div>
         <div>
           Natürliche Hausmittel gegen Gelsen
@@ -46,6 +48,7 @@
         class="imAufbau"
       >Diese Seite ist noch in Bearbeitung, wird aber bald in voller Bl&uuml;te erstrahlen.</div>
     </div>
+    <input v-model="nr" type="number" ><span style="color:yellow;">{{nr}}</span>
   </div>
 </template>
 
@@ -55,6 +58,12 @@
 
 export default {
   name: "home",
+  layout: "noheader",
+  data(){
+    return {
+      nr: 0
+    }
+  },
   created() {
     // const instance = dataBus;
     /*  dataBus.$on("trigger:contentPositionTop", () => {
@@ -70,13 +79,8 @@ export default {
   },
   head() {
     return {
-      // Children can override the title.
       title: "Webdesigner, Querdenker und noch vieles mehr",
-      // Result: My Page Title ← My Site
-      // If a child changes the title to "My Other Page Title",
-      // it will become: My Other Page Title ← My Site
       titleTemplate: "Manuel Gelsen | %s",
-      // Define meta tags here.
       meta: [
         {
           name: "description",
@@ -112,13 +116,13 @@ img {
 
 .content {
   background: white;
-  margin-top: 90vh;
+  margin-top: 98vh;
   min-height: 100vh;
   border: 1px solid transparent; /*notwendig wg. eines bugs in chrome. ja, richtig gehört: chrome.*/
 }
 
 .background {
-  background: url(../assets/startseite.jpg);
+  background: url(../assets/berge.jpg);
   min-height: 100vh;
   top: 0px;
   right: 0px;
@@ -144,7 +148,6 @@ img {
 }
 
 .welcome {
-  position: absolute;
   top: 5vh;
   left: 50px;
   font-size: 20px;

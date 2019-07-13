@@ -1,6 +1,5 @@
 <template>
   <div>
-    <headerElem></headerElem>
     <nuxt />
     <FooterElem></FooterElem>
   </div>
@@ -28,12 +27,10 @@ html {
 </style>
 
 <script>
-import HeaderElem from "@/components/Header.vue";
 import FooterElem from "@/components/Footer.vue";
 
 export default {
   components: {
-    HeaderElem,
     FooterElem
   }
 };

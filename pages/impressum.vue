@@ -2,7 +2,7 @@
   <div>
     <figure>
       <div class="imgwrapper">
-        <img src="../../assets/recht.jpg" />
+        <img src="../assets/recht.jpg" />
       </div>
       <figcaption class="imgtitle">
         Bild von

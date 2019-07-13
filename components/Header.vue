@@ -1,23 +1,40 @@
   <template>
-  <header>
-    <DefaultHeader v-if="!$route.meta.header || $route.meta.header == 'default'"></DefaultHeader>
-    <StartpageHeader v-if="$route.meta.header == 'fixed'"></StartpageHeader>
-  </header>
+  <!-- Der Default Header -->
+  <div class="header gbSiteContent">
+    <span class="pagename">{{$route.meta.headerPagename }}</span>
+    <nuxt-link to="/" class="nameWithTitle">
+      <span class="name">Manuel Gelsen</span>
+      <span class="subtitle">Webdesigner, Querdenker und noch vieles mehr</span>
+    </nuxt-link>
+    <span class="navigation"></span>
+  </div>
 </template>
 
 <script>
-import DefaultHeader from '@/components/Header-default.vue';
-import StartpageHeader from '@/components/Header-startpage.vue';
-
 export default {
-  name: "headerElem",
-  components: {
-    DefaultHeader,
-    StartpageHeader,
-  },
+  name: "headerElem"
 };
 </script>
 
 <style scoped>
-
+.header {
+  padding: 0em 0em 1em 0em;
+  display: flex;
+}
+.nameWithTitle{
+  display: inline-flex;
+  text-align: center;
+  flex-direction: column;
+  text-decoration: none;
+  color: inherit;
+  flex: auto;
+}
+.name {
+  font-size: x-large;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+.pagename{
+  align-self: flex-end;
+}
 </style>
