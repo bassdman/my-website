@@ -28,8 +28,8 @@
 
 export default {
   name: "lebenslauf",
-  components: {
-    //  Timeline
+  created(){
+    this.$store.commit('header/setPagename', 'Lebenslauf');
   },
   head() {
     return {

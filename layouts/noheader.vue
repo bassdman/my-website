@@ -1,6 +1,6 @@
 <template>
   <div>
-    <nuxt />
+    <nuxt/>
     <FooterElem></FooterElem>
   </div>
 </template>
@@ -24,6 +24,7 @@ html {
   -moz-osx-font-smoothing: grayscale;
   color: #2c3e50;
 }
+
 </style>
 
 <script>

@@ -50,6 +50,9 @@
 <script>
 export default {
   name: "impressum",
+  created(){
+    this.$store.commit('header/setPagename', 'Impressum');
+  },
   head(){ return {
     // Children can override the title.
     title: "Impressum",

@@ -290,6 +290,9 @@
 <script>
 export default {
   name: "datenschutz",
+  created(){
+    this.$store.commit('header/setPagename', 'Datenschutz');
+  },
   head() {
 
     return {

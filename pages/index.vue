@@ -1,23 +1,36 @@
 <template>
   <div class="home">
-    <div class="background"></div>
+    <div class="background" v-bind:class="{flickerColor:showPortrait}"></div>
     <div class="content" id="content">
-      <div class="name pretext">Manuel Gelsen</div>
-      <div class="description pretext">Webdesigner, Querdenker und noch vieles mehr</div>
+      <div
+        class="name pretext"
+        v-bind:style="{'background-color':'rgba(0,0,0,'+headerOpacity+')'}"
+      >Manuel Gelsen</div>
+      <div
+        class="description pretext"
+        v-bind:style="{'background-color':'rgba(0,0,0,'+headerOpacity+')'}"
+      >Webdesigner, Querdenker und noch vieles mehr</div>
 
       <div class="welcome">
         <p class="welcomeHeader">Hallo,</p>
         <p>
-          schön, dass du da bist. 
-          <nuxt-link to="/kaffee">Willst du einen Kaffee?</nuxt-link>
-          <br />Ich heiße Manuel. Ich begleite dich auf meiner Website und mache sonst noch viele andere Sachen.
+          schön, dass du da bist. Ich heiße Manuel.
+          <br />Du bist auf meiner Website gelandet. Damit du dich zurechtfindest, begleite ich dich etwas.
         </p>
-        <p>
-          Was, erf&auml;hrst du hier:
-          <router-link to="/lebenslauf" class="ueberMich">Klick mich</router-link>
-        </p>
+        <div class="col3">
+          <span>
+            Moment, du siehst mich ja noch gar nicht. Entschuldigung. Hab vergessen das Licht
+            <br />anzumachen. Drücke einfach auf den Schalter da rechts - dann siehst du mich :)
+          </span>
+          <div class="bildich" v-bind:class="{flicker:showPortrait, displayNone:!showPortrait}"></div>
+          <div class="bildichUmrandung" v-bind:class="{displayNone:showPortrait}"></div>
+          <span class="lightbulb">
+            <Lichtschalter v-on:active="showPortrait = $event"></Lichtschalter>
+          </span>
+        </div>
+        <nuxt-link to="/kaffee" class="kaffee">Möchtest du einen Kaffee?</nuxt-link>
       </div>
-            <div>
+      <div v-if="false">
         <div>So bekämpfen Sie Gelsen in Haus und Garten</div>
         <div>
           Natürliche Hausmittel gegen Gelsen
@@ -27,7 +40,9 @@
         </div>
         <div>
           Hilfreich: Die besten Hausmittel gegen Gelsen und Gelsenstiche ...
-          <a href="https://www.gesundheitstrends.com/a/.../was-hilft-gegen-gelsen-22387"></a>
+          <a
+            href="https://www.gesundheitstrends.com/a/.../was-hilft-gegen-gelsen-22387"
+          ></a>
         </div>
         <div>
           5 Tipps gegen Gelsen
@@ -48,7 +63,6 @@
         class="imAufbau"
       >Diese Seite ist noch in Bearbeitung, wird aber bald in voller Bl&uuml;te erstrahlen.</div>
     </div>
-    <input v-model="nr" type="number" ><span style="color:yellow;">{{nr}}</span>
   </div>
 </template>
 
@@ -56,26 +70,42 @@
 // @ is an alias to /src
 //import { dataBus } from "./main";
 
+import Lichtschalter from "@/components/Lichtschalter.vue";
+
 export default {
   name: "home",
   layout: "noheader",
-  data(){
+  components: {
+    Lichtschalter
+  },
+  data() {
     return {
-      nr: 0
-    }
+      headerOpacity: 0,
+      showPortrait: false
+    };
   },
   created() {
-    // const instance = dataBus;
-    /*  dataBus.$on("trigger:contentPositionTop", () => {
-      const positionTop = document
+    if (!process.client) return 0;
+
+    function getHeaderOpacity() {
+      if (document.getElementById("content") == null) return 0;
+
+      const position = document
         .getElementById("content")
         .getBoundingClientRect().top;
-      dataBus.$emit("update:contentPositionTop", positionTop);
-    });
 
-    window.document.body.onscroll = function(e) {
-      dataBus.$emit("trigger:contentPositionTop");
-    };*/
+      if (position > 100) return 0;
+
+      if (position < 30) return 0.9;
+
+      return (100 - position) / 100;
+    }
+
+    const self = this;
+    this.headerOpacity = getHeaderOpacity();
+    document.body.onscroll = function(e) {
+      self.headerOpacity = getHeaderOpacity();
+    };
   },
   head() {
     return {
@@ -102,6 +132,9 @@ figure {
   overflow: hidden;
 }
 
+p {
+  line-height: 1.5em;
+}
 img {
   margin-top: -100px;
 }
@@ -115,8 +148,10 @@ img {
 }
 
 .content {
-  background: white;
-  margin-top: 98vh;
+  background: rgba(0, 0, 0, 0.8);
+  box-shadow: 0 0 6px 9px rgba(0, 0, 0, 0.8);
+  margin-top: 90vh;
+  padding: 0px 1em 1em 1em;
   min-height: 100vh;
   border: 1px solid transparent; /*notwendig wg. eines bugs in chrome. ja, richtig gehört: chrome.*/
 }
@@ -126,6 +161,7 @@ img {
   min-height: 100vh;
   top: 0px;
   right: 0px;
+  filter: grayscale(1);
   left: 0px;
   position: fixed;
   z-index: -1;
@@ -134,17 +170,24 @@ img {
 .pretext {
   color: white;
   text-align: center;
+  position: sticky;
+  top: 56px;
 }
 
 .name {
   margin-top: -105px;
   font-size: 48px;
   font-weight: bold;
+  position: sticky;
+  top: 0px;
 }
 
 .description {
-  margin-top: -5px;
   font-size: 20px;
+}
+
+.kaffee {
+  color: #8b4513;
 }
 
 .welcome {
@@ -164,5 +207,144 @@ img {
   background: lightcoral;
   padding: 0.5em 1em;
   font-weight: bold;
+}
+
+.home {
+  max-width: 1200px;
+  margin: auto;
+}
+
+.col3 {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items:center;
+}
+
+.lightbulb {
+  transform: rotate(-90deg);
+}
+.bildich,.bildichUmrandung {
+  width: 200px;
+  height: 200px;
+  border-radius: 200px;
+  box-shadow: inset 0 0 10px 2px black;
+}
+.bildich {
+  background: url("/ich1.jpg");
+  background-size: cover;
+  display:block;
+}
+
+.displayNone {
+  display: none;
+}
+
+.flicker {
+  animation: flickerOpacity 4s;
+}
+.flickerColor {
+  animation: flickerColor 4s;
+  filter: grayscale(0.5);
+}
+@keyframes flickerOpacity {
+  0% {
+    opacity: 1;
+  }
+  2% {
+    opacity: 0;
+  }
+  4% {
+    opacity: 1;
+  }
+  6% {
+    opacity: 0;
+  }
+  8% {
+    opacity: 0;
+  }
+  9% {
+    opacity: 1;
+  }
+  10% {
+    opacity: 0;
+  }
+  20% {
+    opacity: 0;
+  }
+  30% {
+    opacity: 1;
+  }
+  40% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  60% {
+    opacity: 0;
+  }
+  70% {
+    opacity: 0;
+  }
+  80% {
+    opacity: 0;
+  }
+  90% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@keyframes flickerColor {
+  0% {
+    filter: grayscale(0.5);
+  }
+  2% {
+    filter: grayscale(1);
+  }
+  4% {
+    filter: grayscale(0.5);
+  }
+  6% {
+    filter: grayscale(1);
+  }
+  8% {
+    filter: grayscale(1);
+  }
+  9% {
+    filter: grayscale(0.5);
+  }
+  10% {
+    filter: grayscale(1);
+  }
+  20% {
+    filter: grayscale(1);
+  }
+  30% {
+    filter: grayscale(0.5);
+  }
+  40% {
+    filter: grayscale(1);
+  }
+  50% {
+    filter: grayscale(0.5);
+  }
+  60% {
+    filter: grayscale(1);
+  }
+  70% {
+    filter: grayscale(1);
+  }
+  80% {
+    filter: grayscale(1);
+  }
+  90% {
+    filter: grayscale(1);
+  }
+  100% {
+    filter: grayscale(0.5);
+  }
 }
 </style>

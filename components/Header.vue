@@ -1,7 +1,7 @@
   <template>
   <!-- Der Default Header -->
   <div class="header gbSiteContent">
-    <span class="pagename">{{$route.meta.headerPagename }}</span>
+    <span class="pagename">{{$store.state.header.pagename}}</span>
     <nuxt-link to="/" class="nameWithTitle">
       <span class="name">Manuel Gelsen</span>
       <span class="subtitle">Webdesigner, Querdenker und noch vieles mehr</span>
