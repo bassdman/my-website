@@ -1,12 +1,5 @@
 <template>
-  <article id="post-12" class="post-12 page type-page status-publish hentry">
-    <figure>
-        <div class="imgwrapper"><img src="../assets/teddy.jpg"></div>
-        <figcaption class="imgtitle">Bild von <a href="https://pixabay.com/de/users/pixel2013-2364555/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=3062829">pixel2013</a> auf <a href="https://pixabay.com/de/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=3062829">Pixabay</a></figcaption>
-    </figure>
-    <q>Leider sind Datenschutztexte oft trocken und langweilig zu lesen. Das kann ich nicht ändern. <br>
-    Aber ich habe dir ein Bild eingebau, was dich gleich fröhlicher macht. Viel Spaß beim Lesen :)</q>
-  
+  <article id="post-12" class="post-12 page type-page status-publish hentry content">  
       <div class="entry-content gbSiteContent">
       <h3 id="dsg-general-intro"></h3>
       <p>
@@ -291,7 +284,11 @@
 export default {
   name: "datenschutz",
   created(){
-    this.$store.commit('header/setPagename', 'Datenschutz');
+    this.$store.commit('header/pagename', 'Datenschutz');
+    this.$store.commit('background/setSrc', 'images/teddy.jpg');
+    this.$store.commit('header/opacity', 0.8);
+    this.$store.commit('header/show', true);
+    this.$store.commit('background/figcaption', `Hintergrund von <a href="https://pixabay.com/de/users/pixel2013-2364555/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=3062829">pixel2013</a> auf <a href="https://pixabay.com/de/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=3062829">Pixabay</a>`);
   },
   head() {
 
@@ -336,6 +333,16 @@ q{
   font-style:italic;
   margin-bottom:30px;
   padding: 0em 5em;
+}
+
+
+.content{
+  margin: auto;
+  max-width: 1200px;
+  color: white;
+  background: rgba(0,0,0,.8);
+  padding: 1em;
+  padding-top: 3em;
 }
 
 </style>

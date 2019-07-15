@@ -1,20 +1,6 @@
 <template>
-  <div>
-    <figure>
-      <div class="imgwrapper">
-        <img src="../assets/recht.jpg" />
-      </div>
-      <figcaption class="imgtitle">
-        Bild von
-        <a
-          href="https://pixabay.com/de/users/jessica45-2055892/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=2388500"
-        >jessica45</a> auf
-        <a
-          href="https://pixabay.com/de/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=2388500"
-        >Pixabay</a>
-      </figcaption>
-    </figure>
-    <div class="gbSiteContent content">
+  <div class="content">
+    <div class="gbSiteContent">
       <p>
         Manuel Gelsen
         <br />Postfach 1648
@@ -51,7 +37,18 @@
 export default {
   name: "impressum",
   created(){
-    this.$store.commit('header/setPagename', 'Impressum');
+    this.$store.commit('header/pagename', 'Impressum');
+    this.$store.commit('background/setSrc', 'images/recht.jpg');
+    this.$store.commit('header/opacity', 0.8);
+    this.$store.commit('header/show', true);
+    
+    this.$store.commit('background/figcaption', `Hintergrund von
+        <a
+          href="https://pixabay.com/de/users/jessica45-2055892/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=2388500"
+        >jessica45</a> auf
+        <a
+          href="https://pixabay.com/de/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=2388500"
+        >Pixabay</a>`);
   },
   head(){ return {
     // Children can override the title.
@@ -83,5 +80,13 @@ figure {
 }
 figcaption {
   font-size: small;
+}
+
+.content{
+  margin: auto;
+  max-width: 1200px;
+  color: white;
+  background: rgba(0,0,0,.8);
+  padding: 1em;
 }
 </style>

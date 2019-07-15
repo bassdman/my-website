@@ -1,8 +1,9 @@
 <template>
-  <footer v-bind:class="{ bgWhite: hasBackground }">
-      <nuxt-link to="/impressum">Impressum</nuxt-link> |
-      <nuxt-link to="/datenschutz">Datenschutz</nuxt-link>
-      <span class="version">v {{version}}</span>
+  <footer>
+      <nuxt-link class="colorWhite" to="/impressum">Impressum</nuxt-link> |
+      <nuxt-link class="colorWhite" to="/datenschutz">Datenschutz</nuxt-link>
+      <span class="version fontSizeSmaller">v {{version}} | </span>
+      <span class="fontSizeSmaller colorWhite" v-html="$store.state.background.figCaption"></span>
   </footer>
 </template>
 
@@ -14,7 +15,6 @@ export default {
   data() {
     return {
       version,
-      hasBackground: this.$route.meta.footerWithBackground == true
     }
   }
 };
@@ -24,12 +24,18 @@ export default {
     footer{
         text-align:center;
         padding-top: 50px;
+        color: white;
+        padding: 1em;
+        padding-top: 2em;
     }
     .version{
       margin-left: 30px;
-      font-size: smaller;
     }
-    .bgWhite{
-      background: white;
+    .colorWhite, .colorWhite a{
+      color: white;
+    }
+
+    .fontSizeSmaller{
+      font-size: smaller;
     }
 </style>

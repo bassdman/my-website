@@ -1,6 +1,6 @@
   <template>
   <!-- Der Default Header -->
-  <div class="header gbSiteContent">
+  <div class="header" v-bind:style="{'background-color':'rgba(0,0,0,'+$store.state.header.opacity+')'}" v-bind:class="{'displayNone': $store.state.header.show == false}">
     <span class="pagename">{{$store.state.header.pagename}}</span>
     <nuxt-link to="/" class="nameWithTitle">
       <span class="name">Manuel Gelsen</span>
@@ -12,14 +12,24 @@
 
 <script>
 export default {
-  name: "headerElem"
+  name: "headerElem",
+  data() {
+    return {
+      headerOpacity: 0.8,
+    };
+  },
 };
 </script>
 
 <style scoped>
 .header {
-  padding: 0em 0em 1em 0em;
   display: flex;
+  position: sticky; 
+  top: 0px;
+  padding-bottom: 1em;
+}
+.navigation{
+  flex: 1;
 }
 .nameWithTitle{
   display: inline-flex;
@@ -29,12 +39,23 @@ export default {
   color: inherit;
   flex: auto;
 }
+.subtitle {
+  color: white;
+  text-align: center;
+  font-size: 20px;
+}
+
 .name {
-  font-size: x-large;
+  font-size: 48px;
   font-weight: bold;
-  text-transform: uppercase;
+  color: white;
 }
 .pagename{
-  align-self: flex-end;
+  align-self: center;
+  color: white;
+  flex: 1;
+}
+.displayNone{
+  display: none;
 }
 </style>

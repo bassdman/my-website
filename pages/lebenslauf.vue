@@ -29,7 +29,7 @@
 export default {
   name: "lebenslauf",
   created(){
-    this.$store.commit('header/setPagename', 'Lebenslauf');
+    this.$store.commit('header/pagename', 'Lebenslauf');
   },
   head() {
     return {

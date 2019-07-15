@@ -1,6 +1,5 @@
 <template>
   <div class="home">
-    <div class="background" v-bind:class="{flickerColor:showPortrait}"></div>
     <div class="content" id="content">
       <div
         class="name pretext"
@@ -22,10 +21,10 @@
             Moment, du siehst mich ja noch gar nicht. Entschuldigung. Hab vergessen das Licht
             <br />anzumachen. Drücke einfach auf den Schalter da rechts - dann siehst du mich :)
           </span>
-          <div class="bildich" v-bind:class="{flicker:showPortrait, displayNone:!showPortrait}"></div>
-          <div class="bildichUmrandung" v-bind:class="{displayNone:showPortrait}"></div>
+          <div class="bildich" v-bind:class="{flicker:$store.state.content.flicker, displayNone:!$store.state.content.flicker}"></div>
+          <div class="bildichUmrandung" v-bind:class="{displayNone:$store.state.content.flicker}"></div>
           <span class="lightbulb">
-            <Lichtschalter v-on:active="showPortrait = $event"></Lichtschalter>
+            <Lichtschalter v-on:active="$store.commit('content/flicker', $event);"></Lichtschalter>
           </span>
         </div>
         <nuxt-link to="/kaffee" class="kaffee">Möchtest du einen Kaffee?</nuxt-link>
@@ -78,6 +77,10 @@ export default {
   components: {
     Lichtschalter
   },
+  beforeRouteLeave (to, from, next) {
+    this.blockRouteEvent = true;
+    next();
+  },
   data() {
     return {
       headerOpacity: 0,
@@ -85,6 +88,12 @@ export default {
     };
   },
   created() {
+    this.blockRouteEvent = false;
+    this.$store.commit('background/setSrc', '/images/berge.jpg');
+    this.$store.commit('header/show', false);
+    this.$store.commit('header/pagename', '');
+    this.$store.commit('background/figcaption', `Hintergrund: Privates Photo`);
+
     if (!process.client) return 0;
 
     function getHeaderOpacity() {
@@ -96,15 +105,18 @@ export default {
 
       if (position > 100) return 0;
 
-      if (position < 30) return 0.9;
+      if (position < 30) return 0.8;
 
       return (100 - position) / 100;
     }
 
     const self = this;
-    this.headerOpacity = getHeaderOpacity();
+    self.$store.commit('header/opacity', getHeaderOpacity());
     document.body.onscroll = function(e) {
-      self.headerOpacity = getHeaderOpacity();
+      if(self.blockRouteEvent) 
+        return;
+      self.$store.commit('header/opacity', getHeaderOpacity());
+      self.$store.commit('header/show', getHeaderOpacity() > 0);
     };
   },
   head() {
@@ -126,17 +138,8 @@ export default {
 </script>
 
 <style scoped>
-figure {
-  margin: 0px;
-  height: 100vh;
-  overflow: hidden;
-}
-
 p {
   line-height: 1.5em;
-}
-img {
-  margin-top: -100px;
 }
 .imAufbau {
   padding: 5em;
@@ -157,7 +160,7 @@ img {
 }
 
 .background {
-  background: url(../assets/berge.jpg);
+  background: url(/images/berge.jpg);
   min-height: 100vh;
   top: 0px;
   right: 0px;
@@ -175,7 +178,7 @@ img {
 }
 
 .name {
-  margin-top: -105px;
+  margin-top: -100px;
   font-size: 48px;
   font-weight: bold;
   position: sticky;
@@ -191,22 +194,15 @@ img {
 }
 
 .welcome {
-  top: 5vh;
-  left: 50px;
   font-size: 20px;
   color: white;
   font-size: 18px;
+  margin-top: 15px;
 }
 
 .welcomeHeader {
   font-size: 40px;
-  margin-bottom: 0px;
-}
-.ueberMich {
-  text-decoration: none;
-  background: lightcoral;
-  padding: 0.5em 1em;
-  font-weight: bold;
+  margin: 0px;
 }
 
 .home {
@@ -231,9 +227,12 @@ img {
   box-shadow: inset 0 0 10px 2px black;
 }
 .bildich {
-  background: url("/ich1.jpg");
+  background: url("/images/ich1.jpg");
   background-size: cover;
   display:block;
+}
+.bildichUmrandung{
+  background: black;
 }
 
 .displayNone {
@@ -243,10 +242,7 @@ img {
 .flicker {
   animation: flickerOpacity 4s;
 }
-.flickerColor {
-  animation: flickerColor 4s;
-  filter: grayscale(0.5);
-}
+
 @keyframes flickerOpacity {
   0% {
     opacity: 1;
@@ -297,54 +293,5 @@ img {
     opacity: 1;
   }
 }
-@keyframes flickerColor {
-  0% {
-    filter: grayscale(0.5);
-  }
-  2% {
-    filter: grayscale(1);
-  }
-  4% {
-    filter: grayscale(0.5);
-  }
-  6% {
-    filter: grayscale(1);
-  }
-  8% {
-    filter: grayscale(1);
-  }
-  9% {
-    filter: grayscale(0.5);
-  }
-  10% {
-    filter: grayscale(1);
-  }
-  20% {
-    filter: grayscale(1);
-  }
-  30% {
-    filter: grayscale(0.5);
-  }
-  40% {
-    filter: grayscale(1);
-  }
-  50% {
-    filter: grayscale(0.5);
-  }
-  60% {
-    filter: grayscale(1);
-  }
-  70% {
-    filter: grayscale(1);
-  }
-  80% {
-    filter: grayscale(1);
-  }
-  90% {
-    filter: grayscale(1);
-  }
-  100% {
-    filter: grayscale(0.5);
-  }
-}
+
 </style>

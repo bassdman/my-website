@@ -1,7 +1,8 @@
 <template>
   <div>
-    <headerElem></headerElem>
-    <nuxt />
+    <div class="background" v-bind:class="{flickerColor: $store.state.content.flicker}" v-bind:style="{'background-image':'url('+$store.state.background.src+')'}"></div>
+    <headerElem ></headerElem>
+    <nuxt v-bind:style="{'visibility':visibility}"/>
     <FooterElem></FooterElem>
   </div>
 </template>
@@ -25,6 +26,75 @@ html {
   -moz-osx-font-smoothing: grayscale;
   color: #2c3e50;
 }
+
+body{
+  margin: 0px;
+}
+.background {
+  min-height: 100vh;
+  top: 0px;
+  right: 0px;
+  filter: grayscale(1);
+  left: 0px;
+  position: fixed;
+  z-index: -1;
+}
+
+.flickerColor {
+  animation: flickerColor 4s;
+  filter: grayscale(0.5);
+}
+
+@keyframes flickerColor {
+  0% {
+    filter: grayscale(0.5);
+  }
+  2% {
+    filter: grayscale(1);
+  }
+  4% {
+    filter: grayscale(0.5);
+  }
+  6% {
+    filter: grayscale(1);
+  }
+  8% {
+    filter: grayscale(1);
+  }
+  9% {
+    filter: grayscale(0.5);
+  }
+  10% {
+    filter: grayscale(1);
+  }
+  20% {
+    filter: grayscale(1);
+  }
+  30% {
+    filter: grayscale(0.5);
+  }
+  40% {
+    filter: grayscale(1);
+  }
+  50% {
+    filter: grayscale(0.5);
+  }
+  60% {
+    filter: grayscale(1);
+  }
+  70% {
+    filter: grayscale(1);
+  }
+  80% {
+    filter: grayscale(1);
+  }
+  90% {
+    filter: grayscale(1);
+  }
+  100% {
+    filter: grayscale(0.5);
+  }
+}
 </style>
 
 <script>
@@ -35,6 +105,14 @@ export default {
   components: {
     HeaderElem,
     FooterElem
+  },
+  data(){
+    return {
+      visibility: 'hidden'
+    }
+  },
+  mounted(){
+    this.visibility = 'visible';
   }
 };
 </script>
