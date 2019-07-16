@@ -89,7 +89,7 @@ export default {
   },
   created() {
     this.blockRouteEvent = false;
-    this.$store.commit('background/setSrc', '/images/berge.jpg');
+    this.$store.commit('background/setSrc', require('~/assets/berge.jpg'));
     this.$store.commit('header/show', false);
     this.$store.commit('header/pagename', '');
     this.$store.commit('background/figcaption', `Hintergrund: Privates Photo`);
@@ -227,7 +227,7 @@ p {
   box-shadow: inset 0 0 10px 2px black;
 }
 .bildich {
-  background: url("/images/ich1.jpg");
+  background: url("~assets/ich1.jpg");
   background-size: cover;
   display:block;
 }

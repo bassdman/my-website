@@ -38,7 +38,7 @@ export default {
   name: "impressum",
   created(){
     this.$store.commit('header/pagename', 'Impressum');
-    this.$store.commit('background/setSrc', 'images/recht.jpg');
+    this.$store.commit('background/setSrc', require('~/assets/recht.jpg'));
     this.$store.commit('header/opacity', 0.8);
     this.$store.commit('header/show', true);
     
