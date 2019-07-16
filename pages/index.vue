@@ -1,62 +1,38 @@
 <template>
-  <div class="home">
+  <div class="home">      
     <div class="content" id="content">
       <div
-        class="name pretext"
+        class="name pretext totalWidth alignCenter"
         v-bind:style="{'background-color':'rgba(0,0,0,'+headerOpacity+')'}"
       >Manuel Gelsen</div>
       <div
-        class="description pretext"
+        class="description pretext totalWidth alignCenter"
         v-bind:style="{'background-color':'rgba(0,0,0,'+headerOpacity+')'}"
       >Webdesigner, Querdenker und noch vieles mehr</div>
 
-      <div class="welcome">
-        <p class="welcomeHeader">Hallo,</p>
-        <p>
-          schön, dass du da bist. Ich heiße Manuel.
-          <br />Du bist auf meiner Website gelandet. Damit du dich zurechtfindest, begleite ich dich etwas.
-        </p>
-        <div class="col3">
-          <span>
-            Moment, du siehst mich ja noch gar nicht. Entschuldigung. Hab vergessen das Licht
-            <br />anzumachen. Drücke einfach auf den Schalter da rechts - dann siehst du mich :)
-          </span>
-          <div class="bildich" v-bind:class="{flicker:$store.state.content.flicker, displayNone:!$store.state.content.flicker}"></div>
-          <div class="bildichUmrandung" v-bind:class="{displayNone:$store.state.content.flicker}"></div>
-          <span class="lightbulb">
-            <Lichtschalter v-on:active="$store.commit('content/flicker', $event);"></Lichtschalter>
-          </span>
-        </div>
+      <p class="hello totalWidth">Hallo,</p>
+      <p class="helloText width50">
+        schön, dass du da bist. Ich heiße Manuel.
+        <br />Du bist auf meiner Website gelandet. Damit du dich zurechtfindest, begleite ich dich etwas.
+      </p>
+      <div
+        class="bildich"
+        v-bind:class="{flicker:$store.state.content.flicker, displayNone:!$store.state.content.flicker}"
+      ></div>
+      <div class="bildichUmrandung" v-bind:class="{displayNone:$store.state.content.flicker}"></div>
+      
+      
+      <p class="lichtantext distanceTop width50">
+        Moment, du siehst mich ja noch gar nicht. Entschuldigung. Hab vergessen das Licht
+        <br />anzumachen. Drücke einfach auf den Schalter da rechts - das sollte helfen :)
+      </p>
+      <span class="lightbulb distanceTop">
+        <Lichtschalter v-on:active="$store.commit('content/flicker', $event);"></Lichtschalter>
+      </span>
+
+
+      <div class="kaffeeblock distanceTop totalWidth">
         <nuxt-link to="/kaffee" class="kaffee">Möchtest du einen Kaffee?</nuxt-link>
-      </div>
-      <div v-if="false">
-        <div>So bekämpfen Sie Gelsen in Haus und Garten</div>
-        <div>
-          Natürliche Hausmittel gegen Gelsen
-          <a
-            href="https://www.garten-haus.at/aktuelles/2018/07/natuerliche-hausmittel-gegen-gelsen.html"
-          ></a>
-        </div>
-        <div>
-          Hilfreich: Die besten Hausmittel gegen Gelsen und Gelsenstiche ...
-          <a
-            href="https://www.gesundheitstrends.com/a/.../was-hilft-gegen-gelsen-22387"
-          ></a>
-        </div>
-        <div>
-          5 Tipps gegen Gelsen
-          <a href="https://www.gesund.at/beauty/5-mittel-gegen-gelsen/"></a>
-        </div>
-        <div>
-          Die besten 15 Anti-Gelsen-Tipps
-          <a href="Die 15 besten Anti-Gelsen-Tipps"></a>
-        </div>
-        <div>
-          So helfen Tomaten gegen Gelsen: Vier Anti-Gelsen-Hausmittel
-          <a
-            href="www.weekend.at/lifestyle/so-helfen-tomaten...gelsen...gelsen-hausmittel/2.172.769"
-          ></a>
-        </div>
       </div>
       <div
         class="imAufbau"
@@ -77,7 +53,7 @@ export default {
   components: {
     Lichtschalter
   },
-  beforeRouteLeave (to, from, next) {
+  beforeRouteLeave(to, from, next) {
     this.blockRouteEvent = true;
     next();
   },
@@ -89,10 +65,10 @@ export default {
   },
   created() {
     this.blockRouteEvent = false;
-    this.$store.commit('background/setSrc', require('~/assets/berge.jpg'));
-    this.$store.commit('header/show', false);
-    this.$store.commit('header/pagename', '');
-    this.$store.commit('background/figcaption', `Hintergrund: Privates Photo`);
+    this.$store.commit("background/setSrc", require("~/assets/berge.jpg"));
+    this.$store.commit("header/show", false);
+    this.$store.commit("header/pagename", "");
+    this.$store.commit("background/figcaption", `Hintergrund: Privates Photo`);
 
     if (!process.client) return 0;
 
@@ -111,12 +87,11 @@ export default {
     }
 
     const self = this;
-    self.$store.commit('header/opacity', getHeaderOpacity());
+    self.$store.commit("header/opacity", getHeaderOpacity());
     document.body.onscroll = function(e) {
-      if(self.blockRouteEvent) 
-        return;
-      self.$store.commit('header/opacity', getHeaderOpacity());
-      self.$store.commit('header/show', getHeaderOpacity() > 0);
+      if (self.blockRouteEvent) return;
+      self.$store.commit("header/opacity", getHeaderOpacity());
+      self.$store.commit("header/show", getHeaderOpacity() > 0);
     };
   },
   head() {
@@ -138,8 +113,12 @@ export default {
 </script>
 
 <style scoped>
+.distanceTop {
+  margin-top: 100px;
+}
 p {
   line-height: 1.5em;
+  color: white;
 }
 .imAufbau {
   padding: 5em;
@@ -152,26 +131,17 @@ p {
 
 .content {
   background: rgba(0, 0, 0, 0.8);
+  color: white;
   box-shadow: 0 0 6px 9px rgba(0, 0, 0, 0.8);
   margin-top: 90vh;
   padding: 0px 1em 1em 1em;
+  display: flex;
+  flex-wrap: wrap;
   min-height: 100vh;
   border: 1px solid transparent; /*notwendig wg. eines bugs in chrome. ja, richtig gehört: chrome.*/
 }
 
-.background {
-  background: url(/images/berge.jpg);
-  min-height: 100vh;
-  top: 0px;
-  right: 0px;
-  filter: grayscale(1);
-  left: 0px;
-  position: fixed;
-  z-index: -1;
-}
-
 .pretext {
-  color: white;
   text-align: center;
   position: sticky;
   top: 56px;
@@ -182,11 +152,14 @@ p {
   font-size: 48px;
   font-weight: bold;
   position: sticky;
+  flex: 1 100%;
   top: 0px;
 }
 
 .description {
   font-size: 20px;
+  flex: 1 100%;
+  margin-top: -40px;
 }
 
 .kaffee {
@@ -200,9 +173,12 @@ p {
   margin-top: 15px;
 }
 
-.welcomeHeader {
+.hello {
   font-size: 40px;
   margin: 0px;
+}
+.helloText{
+  align-self: center;
 }
 
 .home {
@@ -210,17 +186,21 @@ p {
   margin: auto;
 }
 
-.col3 {
+.lichtan {
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
-  align-items:center;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
 }
 
 .lightbulb {
+  margin-right: 50px;
+  margin-top: 86px;
   transform: rotate(-90deg);
 }
-.bildich,.bildichUmrandung {
+.bildich,
+.bildichUmrandung {
   width: 200px;
   height: 200px;
   border-radius: 200px;
@@ -229,14 +209,25 @@ p {
 .bildich {
   background: url("~assets/ich1.jpg");
   background-size: cover;
-  display:block;
+  display: block;
 }
-.bildichUmrandung{
+.bildichUmrandung {
   background: black;
 }
 
 .displayNone {
   display: none;
+}
+
+.totalWidth {
+  flex: 1 100%;
+}
+.width50 {
+  flex: 1 50%;
+}
+
+.alignCenter{
+  text-align:center;
 }
 
 .flicker {
@@ -293,5 +284,4 @@ p {
     opacity: 1;
   }
 }
-
 </style>
