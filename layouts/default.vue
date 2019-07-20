@@ -1,9 +1,11 @@
 <template>
   <div>
     <div class="background" v-bind:class="{flickerColor: $store.state.content.flicker}" v-bind:style="{'background-image':'url('+$store.state.background.src+')'}"></div>
-    <headerElem ></headerElem>
+    <Lightbulb class="lightbulbLayout" v-bind:on="$store.state.content.flicker"></Lightbulb>
+    <headerElem></headerElem>
     <nuxt v-bind:style="{'visibility':visibility}"/>
     <FooterElem></FooterElem>
+    <CookieLayer></CookieLayer>
   </div>
 </template>
 
@@ -27,6 +29,12 @@ html {
   color: #2c3e50;
 }
 
+.lightbulbLayout{
+  position: fixed;
+  top:-70px;
+  right:300px;
+  z-index: -1;
+}
 body{
   margin: 0px;
 }
@@ -100,11 +108,16 @@ body{
 <script>
 import HeaderElem from "@/components/Header.vue";
 import FooterElem from "@/components/Footer.vue";
+import Lightbulb from "@/components/Lightbulb.vue";
+import CookieLayer from '../components/CookieLayer.vue';
+CookieLayer
 
 export default {
   components: {
     HeaderElem,
-    FooterElem
+    FooterElem,
+    Lightbulb,
+    CookieLayer
   },
   data(){
     return {

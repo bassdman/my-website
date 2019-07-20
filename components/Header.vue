@@ -1,6 +1,6 @@
   <template>
   <!-- Der Default Header -->
-  <div class="header" v-bind:style="{'background-color':'rgba(0,0,0,'+$store.state.header.opacity+')'}" v-bind:class="{'displayNone': $store.state.header.show == false}">
+  <div class="header" v-bind:class="{'displayNone': !$store.state.header.show || false}">
     <span class="pagename">{{$store.state.header.pagename}}</span>
     <nuxt-link to="/" class="nameWithTitle">
       <span class="name">Manuel Gelsen</span>
@@ -13,11 +13,6 @@
 <script>
 export default {
   name: "headerElem",
-  data() {
-    return {
-      headerOpacity: 0.8,
-    };
-  },
 };
 </script>
 
@@ -27,6 +22,7 @@ export default {
   position: sticky; 
   top: 0px;
   padding-bottom: 1em;
+  background: rgba(0,0,0,.7);
 }
 .navigation{
   flex: 1;

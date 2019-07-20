@@ -1,13 +1,9 @@
 <template>
-  <div class="home">      
+  <div class="home">
     <div class="content" id="content">
-      <div
-        class="name pretext totalWidth alignCenter"
-        v-bind:style="{'background-color':'rgba(0,0,0,'+headerOpacity+')'}"
-      >Manuel Gelsen</div>
+      <div class="name pretext totalWidth alignCenter">Manuel Gelsen</div>
       <div
         class="description pretext totalWidth alignCenter"
-        v-bind:style="{'background-color':'rgba(0,0,0,'+headerOpacity+')'}"
       >Webdesigner, Querdenker und noch vieles mehr</div>
 
       <p class="hello totalWidth">Hallo,</p>
@@ -20,8 +16,7 @@
         v-bind:class="{flicker:$store.state.content.flicker, displayNone:!$store.state.content.flicker}"
       ></div>
       <div class="bildichUmrandung" v-bind:class="{displayNone:$store.state.content.flicker}"></div>
-      
-      
+
       <p class="lichtantext distanceTop width50">
         Moment, du siehst mich ja noch gar nicht. Entschuldigung. Hab vergessen das Licht
         <br />anzumachen. Drücke einfach auf den Schalter da rechts - das sollte helfen :)
@@ -29,7 +24,6 @@
       <span class="lightbulb distanceTop">
         <Lichtschalter v-on:active="$store.commit('content/flicker', $event);"></Lichtschalter>
       </span>
-
 
       <div class="kaffeeblock distanceTop totalWidth">
         <nuxt-link to="/kaffee" class="kaffee">Möchtest du einen Kaffee?</nuxt-link>
@@ -42,10 +36,8 @@
 </template>
 
 <script>
-// @ is an alias to /src
-//import { dataBus } from "./main";
+import Lichtschalter from '../components/lichtschalter.vue';
 
-import Lichtschalter from "@/components/Lichtschalter.vue";
 
 export default {
   name: "home",
@@ -59,39 +51,28 @@ export default {
   },
   data() {
     return {
-      headerOpacity: 0,
       showPortrait: false
     };
   },
   created() {
     this.blockRouteEvent = false;
     this.$store.commit("background/setSrc", require("~/assets/berge.jpg"));
-    this.$store.commit("header/show", false);
     this.$store.commit("header/pagename", "");
     this.$store.commit("background/figcaption", `Hintergrund: Privates Photo`);
 
     if (!process.client) return 0;
 
-    function getHeaderOpacity() {
+    function getContentPosition() {
       if (document.getElementById("content") == null) return 0;
 
-      const position = document
-        .getElementById("content")
-        .getBoundingClientRect().top;
-
-      if (position > 100) return 0;
-
-      if (position < 30) return 0.8;
-
-      return (100 - position) / 100;
+      return document.getElementById("content").getBoundingClientRect().top;
     }
 
     const self = this;
-    self.$store.commit("header/opacity", getHeaderOpacity());
+    self.$store.commit("header/show", getContentPosition() < 0);
     document.body.onscroll = function(e) {
       if (self.blockRouteEvent) return;
-      self.$store.commit("header/opacity", getHeaderOpacity());
-      self.$store.commit("header/show", getHeaderOpacity() > 0);
+      self.$store.commit("header/show", getContentPosition() < 0);
     };
   },
   head() {
@@ -102,7 +83,7 @@ export default {
         {
           name: "description",
           content:
-            "Die persönliche Website von Manuel Gelsen, 90706 Fürth | Webdesigner, Querdenker, Stabiler 30er und noch vieles mehr."
+            "Die offizielle Website von Manuel Gelsen, 30 Jahre, aus Fürth. Moment..., die ist ja noch in Arbeit. Egal. Schau schon mal drauf. Von Tag zu Tag reift diese immer immer weiter :)"
         },
         { name: "robots", content: "index,follow" }
       ],
@@ -143,17 +124,13 @@ p {
 
 .pretext {
   text-align: center;
-  position: sticky;
-  top: 56px;
 }
 
 .name {
   margin-top: -100px;
   font-size: 48px;
   font-weight: bold;
-  position: sticky;
   flex: 1 100%;
-  top: 0px;
 }
 
 .description {
@@ -176,8 +153,9 @@ p {
 .hello {
   font-size: 40px;
   margin: 0px;
+  margin-bottom: 50px;
 }
-.helloText{
+.helloText {
   align-self: center;
 }
 
@@ -226,8 +204,8 @@ p {
   flex: 1 50%;
 }
 
-.alignCenter{
-  text-align:center;
+.alignCenter {
+  text-align: center;
 }
 
 .flicker {
