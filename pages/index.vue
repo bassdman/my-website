@@ -17,7 +17,7 @@
       </span>
       <span v-if="$store.state.light.on" class="flicker">
           <br><br>
-        Gut, dass du das Licht angemacht hast. Es war so düster und unheimlich... schon fast creepy.
+        Gut, dass du das Licht angemacht hast. Es war so düster und unheimlich... schon fast creepy.<br><br>
       </span>
       </p>
       <div
