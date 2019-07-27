@@ -10,20 +10,22 @@
       <p class="helloText width50">
         schön, dass du da bist. Ich heiße Manuel.
         <br />Du bist auf meiner Website gelandet. Damit du dich zurechtfindest, begleite ich dich etwas.
+      <span v-if="!$store.state.light.on">
+          <br><br>
+        Moment, du siehst mich ja noch gar nicht. Entschuldigung. Hab vergessen das Licht
+        <br />anzumachen. Drücke einfach auf den Schalter da rechts - das sollte helfen :)
+      </span>
+      <span v-if="$store.state.light.on" class="flicker">
+          <br><br>
+        Gut, dass du das Licht angemacht hast. Es war so düster und unheimlich... schon fast creepy.
+      </span>
       </p>
       <div
         class="bildich"
-        v-bind:class="{flicker:$store.state.content.flicker, displayNone:!$store.state.content.flicker}"
+        v-bind:class="{flicker:$store.state.light.on}"
+        v-show="$store.state.light.on"
       ></div>
-      <div class="bildichUmrandung" v-bind:class="{displayNone:$store.state.content.flicker}"></div>
-
-      <p class="lichtantext distanceTop width50">
-        Moment, du siehst mich ja noch gar nicht. Entschuldigung. Hab vergessen das Licht
-        <br />anzumachen. Drücke einfach auf den Schalter da rechts - das sollte helfen :)
-      </p>
-      <span class="lightbulb distanceTop">
-        <Lichtschalter v-on:active="$store.commit('content/flicker', $event);"></Lichtschalter>
-      </span>
+      <div class="bildichUmrandung" v-show="!$store.state.light.on"></div>
 
       <div class="kaffeeblock distanceTop totalWidth">
         <nuxt-link to="/kaffee" class="kaffee">Möchtest du einen Kaffee?</nuxt-link>
@@ -36,15 +38,9 @@
 </template>
 
 <script>
-import Lichtschalter from '../components/lichtschalter.vue';
-
-
 export default {
   name: "home",
   layout: "noheader",
-  components: {
-    Lichtschalter
-  },
   beforeRouteLeave(to, from, next) {
     this.blockRouteEvent = true;
     next();
@@ -57,7 +53,6 @@ export default {
   created() {
     this.blockRouteEvent = false;
     this.$store.commit("background/setSrc", require("~/assets/berge.jpg"));
-    this.$store.commit("header/pagename", "");
     this.$store.commit("background/figcaption", `Hintergrund: Privates Photo`);
 
     if (!process.client) return 0;
@@ -172,11 +167,6 @@ p {
   align-items: center;
 }
 
-.lightbulb {
-  margin-right: 50px;
-  margin-top: 86px;
-  transform: rotate(-90deg);
-}
 .bildich,
 .bildichUmrandung {
   width: 200px;
@@ -191,10 +181,6 @@ p {
 }
 .bildichUmrandung {
   background: black;
-}
-
-.displayNone {
-  display: none;
 }
 
 .totalWidth {

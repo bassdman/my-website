@@ -8,13 +8,8 @@ export const mutations = {
     pagename(state, pagename) {
         state.pagename = pagename;
     },
-    opacity(state, opacity) {
-        state.opacity = opacity;
-    },
-    setTop(state, top) {
-        state.top = top;
-    },
     show(state, show) {
-        state.show = show;
+        if (state.show != show)
+            state.show = show;
     }
 }

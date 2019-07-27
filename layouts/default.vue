@@ -1,7 +1,8 @@
 <template>
   <div>
-    <div class="background" v-bind:class="{flickerColor: $store.state.content.flicker}" v-bind:style="{'background-image':'url('+$store.state.background.src+')'}"></div>
-    <Lightbulb class="lightbulbLayout" v-bind:on="$store.state.content.flicker"></Lightbulb>
+    <Sidebar></Sidebar>
+    <div class="background" v-bind:class="{flickerColor: $store.state.light.on}" v-bind:style="{'background-image':'url('+$store.state.background.src+')'}"></div>
+    <Lightbulb class="lightbulbLayout" v-bind:on="$store.state.light.on"></Lightbulb>
     <headerElem></headerElem>
     <nuxt v-bind:style="{'visibility':visibility}"/>
     <FooterElem></FooterElem>
@@ -110,14 +111,15 @@ import HeaderElem from "@/components/Header.vue";
 import FooterElem from "@/components/Footer.vue";
 import Lightbulb from "@/components/Lightbulb.vue";
 import CookieLayer from '../components/CookieLayer.vue';
-CookieLayer
+import Sidebar from '../components/Sidebar.vue';
 
 export default {
   components: {
     HeaderElem,
     FooterElem,
     Lightbulb,
-    CookieLayer
+    CookieLayer,
+    Sidebar
   },
   data(){
     return {
