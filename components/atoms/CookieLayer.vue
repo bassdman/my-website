@@ -84,7 +84,7 @@ export default {
 .datenschutzlink{
     font-size:larger;
     display:block;
-    background: lightcoral;
+    background: goldenrod;
 }
 .cookieLayerCloser:hover {
   font: 26px/100% arial, sans-serif;

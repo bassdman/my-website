@@ -38,16 +38,10 @@ export default {
   name: "impressum",
   created(){
     this.$store.commit('header/pagename', 'Impressum');
-    this.$store.commit('background/setSrc', require('~/assets/recht.jpg'));
+    this.$store.commit('background/setSrc', require('~/assets/impressum.jpg'));
     this.$store.commit('header/show', true);
     
-    this.$store.commit('background/figcaption', `Hintergrund von
-        <a
-          href="https://pixabay.com/de/users/jessica45-2055892/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=2388500"
-        >jessica45</a> auf
-        <a
-          href="https://pixabay.com/de/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=2388500"
-        >Pixabay</a>`);
+    this.$store.commit('background/figcaption', `Hintergrund: Privates Photo`);
   },
   head(){ return {
     // Children can override the title.

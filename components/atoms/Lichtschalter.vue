@@ -1,7 +1,7 @@
 <template>
   <label class="switch" v-on:click="$emit('active', !on)">
     <input type="checkbox" v-model="on"/>
-    <span class="slider"></span>
+    <span class="slider" v-bind:style="{background:on?'goldenrod':'#ccc'}"></span>
   </label>
 </template>
 
@@ -41,7 +41,6 @@ export default {
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: #ccc;
   -webkit-transition: .4s;
   transition: .4s;
 }

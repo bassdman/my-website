@@ -8,7 +8,7 @@
 </template>
 
 <script>
-import {version} from '../package.json';
+import {version} from '@/package.json';
 
 export default {
   name: 'footerElem',

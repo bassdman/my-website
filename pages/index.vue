@@ -12,8 +12,8 @@
         <br />Du bist auf meiner Website gelandet. Damit du dich zurechtfindest, begleite ich dich etwas.
       <span v-if="!$store.state.light.on">
           <br><br>
-        Moment, du siehst mich ja noch gar nicht. Entschuldigung. Hab vergessen das Licht
-        <br />anzumachen. Drücke einfach auf den Schalter da rechts - das sollte helfen :)
+        Moment, du siehst mich noch gar nicht. Entschuldigung. Ich habe vergessen, das Licht
+        <br />anzumachen. Drücke einfach auf den Schalter auf der rechten Seite rechts - das wird helfen :)
       </span>
       <span v-if="$store.state.light.on" class="flicker">
           <br><br>
@@ -27,8 +27,15 @@
       ></div>
       <div class="bildichUmrandung" v-show="!$store.state.light.on"></div>
 
-      <div class="kaffeeblock distanceTop totalWidth">
+      <div class="kaffeeblock distanceTop totalWidth alignCenter">
         <nuxt-link to="/kaffee" class="kaffee">Möchtest du einen Kaffee?</nuxt-link>
+      </div>
+      <div class="wasWissen" v-if="false">
+        Was möchtest du von mir wissen?
+        - geige
+        - Projekte (Podcast / Luitpoldhainfilm)
+        - lebenslauf
+        - Github
       </div>
       <div
         class="imAufbau"
@@ -103,6 +110,7 @@ p {
   border-radius: 5px;
   text-align: center;
   margin: 5em;
+  width: 100%;
 }
 
 .content {

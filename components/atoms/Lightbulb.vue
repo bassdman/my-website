@@ -64,7 +64,7 @@ export default {
 }
 
 .handle{
-    fill: lightcoral;
+    fill: goldenrod;
 }
 /* Scene SVG */
 

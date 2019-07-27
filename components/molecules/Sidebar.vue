@@ -2,13 +2,13 @@
   <div class="sidebar">
     <div class="entryWrapper">
       <Lichtschalter class="lichtschalter" v-on:active="$store.commit('light/setOn', $event);"></Lichtschalter>
-      <div class="label lichtschalterlabel">Es werde Licht</div>
+      <div class="label lichtschalterlabel">Licht</div>
     </div>
   </div>
 </template>
 
 <script>
-import Lichtschalter from "./lichtschalter.vue";
+import Lichtschalter from "@/components/atoms/Lichtschalter.vue";
 
 export default {
   name: "footerElem",
@@ -26,15 +26,14 @@ export default {
   right: 0px;
   top: 300px;
   width: 100px;
-  height: 200px;
+  height: 150px;
   display: flex;
-  flex-wrap: wrap;
+  justify-content: center;
   align-items: center;
 }
 
 .lichtschalter {
   transform: rotate(-90deg);
-  margin-left: 20px;
 }
 
 .label {
@@ -49,6 +48,7 @@ export default {
 
 .entryWrapper{
   display:inline-flex;
-  flex-wrap: wrap;
+  flex-direction: column;
+  align-items: center;
 }
 </style>

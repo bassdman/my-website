@@ -44,6 +44,7 @@ body{
   top: 0px;
   right: 0px;
   filter: grayscale(1);
+  background-size:cover;
   left: 0px;
   position: fixed;
   z-index: -1;
@@ -107,11 +108,11 @@ body{
 </style>
 
 <script>
-import HeaderElem from "@/components/Header.vue";
-import FooterElem from "@/components/Footer.vue";
-import Lightbulb from "@/components/Lightbulb.vue";
-import CookieLayer from '../components/CookieLayer.vue';
-import Sidebar from '../components/Sidebar.vue';
+import HeaderElem from "@/components/molecules/Header.vue";
+import FooterElem from "@/components/molecules/Footer.vue";
+import Lightbulb from "@/components/atoms/Lightbulb.vue";
+import CookieLayer from '@/components/atoms/CookieLayer.vue';
+import Sidebar from '@/components/molecules/Sidebar.vue';
 
 export default {
   components: {
