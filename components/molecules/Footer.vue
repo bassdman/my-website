@@ -32,7 +32,7 @@ export default {
       margin-left: 30px;
     }
     .colorWhite, .colorWhite a{
-      color: white;
+      color: black;
     }
 
     .fontSizeSmaller{

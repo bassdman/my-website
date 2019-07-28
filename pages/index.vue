@@ -10,15 +10,19 @@
       <p class="helloText width50">
         schön, dass du da bist. Ich heiße Manuel.
         <br />Du bist auf meiner Website gelandet. Damit du dich zurechtfindest, begleite ich dich etwas.
-      <span v-if="!$store.state.light.on">
-          <br><br>
-        Moment, du siehst mich noch gar nicht. Entschuldigung. Ich habe vergessen, das Licht
-        <br />anzumachen. Drücke einfach auf den Schalter auf der rechten Seite rechts - das wird helfen :)
-      </span>
-      <span v-if="$store.state.light.on" class="flicker">
-          <br><br>
-        Gut, dass du das Licht angemacht hast. Es war so düster und unheimlich... schon fast creepy.<br><br>
-      </span>
+        <span
+          v-if="!$store.state.light.on"
+        >
+          <br />
+          <br />Moment, du siehst mich noch gar nicht. Entschuldigung. Ich habe vergessen, das Licht
+          <br />anzumachen. Drücke einfach auf den Schalter auf der rechten Seite rechts - das wird helfen :)
+        </span>
+        <span v-if="$store.state.light.on" class="flicker">
+          <br />
+          <br />Gut, dass du das Licht angemacht hast. Es war so düster und unheimlich... schon fast creepy.
+          <br />
+          <br />
+        </span>
       </p>
       <div
         class="bildich"
@@ -27,9 +31,11 @@
       ></div>
       <div class="bildichUmrandung" v-show="!$store.state.light.on"></div>
 
-      <div class="kaffeeblock distanceTop totalWidth alignCenter">
-        <nuxt-link to="/kaffee" class="kaffee">Möchtest du einen Kaffee?</nuxt-link>
-      </div>
+      <nuxt-link to="/kaffee" class="kaffeeblock distanceTop totalWidth">
+          <Coffeecup class="coffeecup"></Coffeecup>
+          <div class="kaffee kaffeeHeadline">Möchtest du einen Kaffee?</div>
+          <div class="kaffee kaffeetext">Nur das Beste für unsere Gäste. Es wäre schon fast traurig, wenn du unseren Kaffee nicht probieren möchtest.</div>
+      </nuxt-link>
       <div class="wasWissen" v-if="false">
         Was möchtest du von mir wissen?
         - geige
@@ -45,8 +51,13 @@
 </template>
 
 <script>
+import Coffeecup from "../components/atoms/Coffeecup.vue";
+
 export default {
   name: "home",
+  components: {
+    Coffeecup
+  },
   layout: "noheader",
   beforeRouteLeave(to, from, next) {
     this.blockRouteEvent = true;
@@ -109,7 +120,7 @@ p {
   font-weight: bold;
   border-radius: 5px;
   text-align: center;
-  margin: 5em;
+  margin: 5em 0em;
   width: 100%;
 }
 
@@ -142,8 +153,32 @@ p {
   margin-top: -40px;
 }
 
+.coffeecup {
+  position: absolute;
+}
+
+.kaffeeblock{
+  padding: 1em;
+  text-decoration: none;
+}
+.kaffeeblock:hover {
+  background: rgba(50, 50, 50, 0.8);
+  box-shadow: 0 0 9px 4px rgb(50, 50, 50);
+}
 .kaffee {
+  display: block;
+  text-align: right;
+}
+.kaffeeHeadline {
   color: #8b4513;
+  font-size: 30px;
+  font-style: italic;
+  margin-bottom: 10px;
+  margin-top: 50px;
+}
+
+.kaffeetext {
+  color: white;
 }
 
 .welcome {
@@ -155,24 +190,16 @@ p {
 
 .hello {
   font-size: 40px;
-  margin: 0px;
-  margin-bottom: 50px;
+  margin: 0px 0px 50px 0.4em;
 }
 .helloText {
   align-self: center;
+  padding: 1em;
 }
 
 .home {
   max-width: 1200px;
   margin: auto;
-}
-
-.lichtan {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: center;
 }
 
 .bildich,

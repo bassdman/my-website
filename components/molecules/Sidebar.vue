@@ -1,5 +1,9 @@
 <template>
   <div class="sidebar">
+    <div class="nail nail1"></div>
+    <div class="nail nail2"></div>
+    <div class="nail nail3"></div>
+    <div class="nail nail4"></div>
     <div class="entryWrapper">
       <Lichtschalter class="lichtschalter" v-on:active="$store.commit('light/setOn', $event);"></Lichtschalter>
       <div class="label lichtschalterlabel">Licht</div>
@@ -50,5 +54,30 @@ export default {
   display:inline-flex;
   flex-direction: column;
   align-items: center;
+}
+
+.nail{
+  width: 10px;
+  height: 10px;
+  border-radius: 5px;
+  background: dimgray;
+  z-index:5;
+  position:absolute;
+}
+
+.nail1, .nail2{
+  top: 0px;
+}
+
+.nail3, .nail4{
+  bottom: 0px;
+}
+
+.nail1, .nail3{
+  left: 0px;
+}
+
+.nail2, .nail4{
+  right: 0px;
 }
 </style>
