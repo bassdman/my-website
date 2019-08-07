@@ -1,47 +1,54 @@
 <template>
   <div class="home">
+    <h1 class="welcome">Willkommen</h1>
+    <h1 class="welcomeSubtitle">im Auenland</h1>
     <div class="content" id="content">
+      <div class="bildich" :class="{flicker:lightOn, visibilityHidden:!lightOn}"></div>
       <div class="name pretext totalWidth alignCenter">Manuel Gelsen</div>
       <div
         class="description pretext totalWidth alignCenter"
       >Webdesigner, Querdenker und noch vieles mehr</div>
 
-      <p class="hello totalWidth">Hallo,</p>
-      <p class="helloText width50">
-        schön, dass du da bist. Ich heiße Manuel.
-        <br />Du bist auf meiner Website gelandet. Damit du dich zurechtfindest, begleite ich dich etwas.
+      <p class="introText">
+        Schön, dass du da bist. Du bist auf meiner Website gelandet.<br>
+        Ja, das ist nicht das Auenland - da habe ich oben etwas zu viel geträumt. Damit du dich jetzt zurechtfindest, begleite ich dich etwas.
         <span
-          v-if="!$store.state.light.on"
+          v-if="!lightOn"
         >
-          <br />
           <br />Moment, du siehst mich noch gar nicht. Entschuldigung. Ich habe vergessen, das Licht
-          <br />anzumachen. Drücke einfach auf den Schalter auf der rechten Seite rechts - das wird helfen :)
+          <br />anzumachen. Drücke auf den Schalter auf der rechten Seite rechts - das wird helfen :)
         </span>
-        <span v-if="$store.state.light.on" class="flicker">
-          <br />
+        <span v-if="lightOn" class="flicker">
           <br />Gut, dass du das Licht angemacht hast. Es war so düster und unheimlich... schon fast creepy.
           <br />
           <br />
         </span>
       </p>
-      <div
-        class="bildich"
-        v-bind:class="{flicker:$store.state.light.on}"
-        v-show="$store.state.light.on"
-      ></div>
-      <div class="bildichUmrandung" v-show="!$store.state.light.on"></div>
 
-      <nuxt-link to="/kaffee" class="kaffeeblock distanceTop totalWidth">
-          <Coffeecup class="coffeecup"></Coffeecup>
-          <div class="kaffee kaffeeHeadline">Möchtest du einen Kaffee?</div>
-          <div class="kaffee kaffeetext">Nur das Beste für unsere Gäste. Es wäre schon fast traurig, wenn du unseren Kaffee nicht probieren möchtest.</div>
+      <nuxt-link to="/kaffee" class="kaffeeblock totalWidth">
+        <div class="kaffee kaffeeHeadline">Kaffeeeeeeeee...?</div>
+        <Coffeecup class="coffeecup"></Coffeecup>
+        <div
+          class="kaffee kaffeetext"
+        >Nur das Beste für unsere Gäste - auch für dich. <br>Es wäre schon fast traurig, wenn du unseren Kaffee nicht probieren möchtest.</div>
       </nuxt-link>
+
+      <div class="wasWissen">
+        <h2 class="headline">Projekte</h2>Kommen wir nun zum interessanten Teil. Du erfährst alles über meine inneren Abgründe und Berge und... Na ja, so weit jetzt nicht.
+        <br />Was möchtest du wissen?
+        <div>
+          <div>Welches Instrument spielst du?</div>
+          <div>Bei was für Projekten hast du so mitgewirkt?</div>
+          <div>Erzähl mal was über dich</div>
+        </div>
+      </div>
       <div class="wasWissen" v-if="false">
         Was möchtest du von mir wissen?
         - geige
         - Projekte (Podcast / Luitpoldhainfilm)
         - lebenslauf
         - Github
+        - Martinas Website
       </div>
       <div
         class="imAufbau"
@@ -68,6 +75,11 @@ export default {
       showPortrait: false
     };
   },
+  computed: {
+    lightOn() {
+      return this.$store.state.light.on;
+    }
+  },
   created() {
     this.blockRouteEvent = false;
     this.$store.commit("background/setSrc", require("~/assets/berge.jpg"));
@@ -82,10 +94,10 @@ export default {
     }
 
     const self = this;
-    self.$store.commit("header/show", getContentPosition() < 0);
+    self.$store.commit("header/show", getContentPosition() < -100);
     document.body.onscroll = function(e) {
       if (self.blockRouteEvent) return;
-      self.$store.commit("header/show", getContentPosition() < 0);
+      self.$store.commit("header/show", getContentPosition() < -100);
     };
   },
   head() {
@@ -107,9 +119,28 @@ export default {
 </script>
 
 <style scoped>
-.distanceTop {
-  margin-top: 100px;
+.welcome,
+.welcomeSubtitle {
+  color: white;
+  display: block;
+  text-align: center;
 }
+.welcome {
+  font-size: 60px;
+  margin-top: 40vh;
+}
+.welcomeSubtitle {
+  font-size: 30px;
+  margin-top: -20px;
+}
+
+.headline {
+  flex: 1 100%;
+  text-align: center;
+  margin-top: 2em;
+  margin-left: 15px;
+}
+
 p {
   line-height: 1.5em;
   color: white;
@@ -127,13 +158,25 @@ p {
 .content {
   background: rgba(0, 0, 0, 0.8);
   color: white;
-  box-shadow: 0 0 6px 9px rgba(0, 0, 0, 0.8);
-  margin-top: 90vh;
+  margin-top: 45vh;
   padding: 0px 1em 1em 1em;
   display: flex;
   flex-wrap: wrap;
   min-height: 100vh;
+  justify-content: center;
   border: 1px solid transparent; /*notwendig wg. eines bugs in chrome. ja, richtig gehört: chrome.*/
+}
+
+/*Halbkreis*/
+.content::before {
+  height: 110px;
+  background: rgba(0, 0, 0, 0.8);
+  width: 220px;
+  border-top-left-radius: 110px;
+  border-top-right-radius: 110px;
+  margin-top: -111px;
+  content: "";
+  position: absolute;
 }
 
 .pretext {
@@ -141,60 +184,54 @@ p {
 }
 
 .name {
-  margin-top: -100px;
-  font-size: 48px;
+  font-size: 30px;
   font-weight: bold;
   flex: 1 100%;
+  margin-top:.5em;
 }
 
 .description {
   font-size: 20px;
   flex: 1 100%;
-  margin-top: -40px;
+  margin-top: .5em;
 }
 
 .coffeecup {
-  position: absolute;
+  align-self:center;
+}
+
+.kaffeeblock {
+  text-decoration: none;
+  margin-top: 50px;
+}
+
+.kaffee {
+  display: block;
 }
 
 .kaffeeblock{
-  padding: 1em;
-  text-decoration: none;
-}
-.kaffeeblock:hover {
-  background: rgba(50, 50, 50, 0.8);
-  box-shadow: 0 0 9px 4px rgb(50, 50, 50);
-}
-.kaffee {
-  display: block;
-  text-align: right;
+  display: flex;
+  flex-direction:column;
 }
 .kaffeeHeadline {
   color: #8b4513;
   font-size: 30px;
   font-style: italic;
   margin-bottom: 10px;
-  margin-top: 50px;
+  text-align: center;
 }
 
 .kaffeetext {
   color: white;
+  text-align: center;
+  margin-top: 30px;
 }
 
-.welcome {
-  font-size: 20px;
-  color: white;
-  font-size: 18px;
-  margin-top: 15px;
-}
-
-.hello {
-  font-size: 40px;
-  margin: 0px 0px 50px 0.4em;
-}
-.helloText {
+.introText {
   align-self: center;
+  text-align:center;
   padding: 1em;
+  font-size: 13px;
 }
 
 .home {
@@ -202,20 +239,16 @@ p {
   margin: auto;
 }
 
-.bildich,
-.bildichUmrandung {
+.bildich {
   width: 200px;
   height: 200px;
   border-radius: 200px;
-  box-shadow: inset 0 0 10px 2px black;
-}
-.bildich {
+  box-shadow: 0 0 10px 4px black;
+  margin-top: -104px;
   background: url("~assets/ich1.jpg");
   background-size: cover;
   display: block;
-}
-.bildichUmrandung {
-  background: black;
+  z-index: 1;
 }
 
 .totalWidth {

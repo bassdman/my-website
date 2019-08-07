@@ -55,6 +55,9 @@ body{
   filter: grayscale(0.5);
 }
 
+.visibilityHidden{
+  visibility:hidden;
+}
 @keyframes flickerColor {
   0% {
     filter: grayscale(0.5);
@@ -104,6 +107,24 @@ body{
   100% {
     filter: grayscale(0.5);
   }
+}
+
+.bsoffn{
+  animation-name: bsoffn;
+  animation-duration: 10s;
+}
+@keyframes bsoffn {
+  0% {transform: scale(1)}
+  10% {transform: scale(1.5)}
+  20% {transform: scale(4);margin-top: 100px;}
+  30% {transform: scale(2); margin-top: -150px;}
+  40% {transform: scale(.3);margin-top: -200px;}
+  50% {transform: scale(.1)}
+  60% {transform: scale(1)}
+  70% {transform: scale(3)}
+  80% {transform: scale(2)}
+  90% {transform: scale(1.5)}
+  100% {transform: scale(3)}
 }
 </style>
 
