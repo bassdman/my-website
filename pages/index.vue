@@ -1,8 +1,136 @@
 <template>
   <div class="home">
     <h1 class="welcome">Willkommen</h1>
-    <h1 class="welcomeSubtitle">im Auenland</h1>
+    <h1 class="welcomeSubtitle">Ich habe dich erwartet</h1>
     <div class="content" id="content">
+      <div class="wall wall_top_zinnen">
+        <div class="brick brickzinne"></div>
+        <div class="brick brickzinne"></div>
+        <div class="brick brickzinne"></div>
+        <div class="brick brickzinne"></div>
+        <div class="brick brickhidden"></div>
+        <div class="brick brickzinne"></div>
+        <div class="brick brickzinne"></div>
+        <div class="brick brickzinne"></div>
+        <div class="brick brickzinne"></div>
+      </div>
+      <div class="wall wall_top">
+        <div class="brick"></div>
+        <div class="brick bricksmall"></div>
+        <div class="brick"></div>
+        <div class="brick"></div>
+        <div class="brick"></div>
+        <div class="brick bricksmall"></div>
+        <div class="brick"></div>
+        <div class="brick"></div>
+        <div class="brick"></div>
+        <div class="brick"></div>
+        <div class="brick"></div>
+        <div class="brick bricksmall"></div>
+        <div class="brick"></div>
+        <div class="brick"></div>
+        <div class="brick"></div>
+      </div>
+      <div class="wall wall_left">
+        <div class="brick"></div>
+        <div class="brick bricksmall"></div>
+        <div class="brick bricksmall"></div>
+        <div class="brick"></div>
+        <div class="brick"></div>
+        <div class="brick bricksmall"></div>
+        <div class="brick bricksmall"></div>
+        <div class="brick"></div>
+        <div class="brick"></div>
+        <div class="brick bricksmall"></div>
+        <div class="brick bricksmall"></div>
+        <div class="brick"></div>
+        <div class="brick"></div>
+        <div class="brick bricksmall"></div>
+        <div class="brick bricksmall"></div>
+        <div class="brick"></div>
+        <div class="brick"></div>
+        <div class="brick bricksmall"></div>
+        <div class="brick bricksmall"></div>
+        <div class="brick"></div>
+        <div class="brick"></div>
+        <div class="brick bricksmall"></div>
+        <div class="brick bricksmall"></div>
+        <div class="brick"></div>
+        <div class="brick"></div>
+        <div class="brick bricksmall"></div>
+        <div class="brick bricksmall"></div>
+        <div class="brick"></div>
+        <div class="brick"></div>
+        <div class="brick bricksmall"></div>
+        <div class="brick bricksmall"></div>
+        <div class="brick"></div>
+        <div class="brick"></div>
+        <div class="brick bricksmall"></div>
+        <div class="brick bricksmall"></div>
+        <div class="brick"></div>
+        <div class="brick"></div>
+        <div class="brick bricksmall"></div>
+        <div class="brick bricksmall"></div>
+        <div class="brick"></div>
+        <div class="brick"></div>
+        <div class="brick bricksmall"></div>
+        <div class="brick bricksmall"></div>
+        <div class="brick"></div>
+        <div class="brick"></div>
+        <div class="brick bricksmall"></div>
+        <div class="brick bricksmall"></div>
+        <div class="brick"></div>
+      </div>
+      <div class="wall wall_right">
+        <div class="brick"></div>
+        <div class="brick bricksmall"></div>
+        <div class="brick bricksmall"></div>
+        <div class="brick"></div>
+        <div class="brick"></div>
+        <div class="brick bricksmall"></div>
+        <div class="brick bricksmall"></div>
+        <div class="brick"></div>
+        <div class="brick"></div>
+        <div class="brick bricksmall"></div>
+        <div class="brick bricksmall"></div>
+        <div class="brick"></div>
+        <div class="brick"></div>
+        <div class="brick bricksmall"></div>
+        <div class="brick bricksmall"></div>
+        <div class="brick"></div>
+        <div class="brick"></div>
+        <div class="brick bricksmall"></div>
+        <div class="brick bricksmall"></div>
+        <div class="brick"></div>
+        <div class="brick"></div>
+        <div class="brick bricksmall"></div>
+        <div class="brick bricksmall"></div>
+        <div class="brick"></div>
+        <div class="brick"></div>
+        <div class="brick bricksmall"></div>
+        <div class="brick bricksmall"></div>
+        <div class="brick"></div>
+        <div class="brick"></div>
+        <div class="brick bricksmall"></div>
+        <div class="brick bricksmall"></div>
+        <div class="brick"></div>
+        <div class="brick"></div>
+        <div class="brick bricksmall"></div>
+        <div class="brick bricksmall"></div>
+        <div class="brick"></div>
+        <div class="brick"></div>
+        <div class="brick bricksmall"></div>
+        <div class="brick bricksmall"></div>
+        <div class="brick"></div>
+        <div class="brick"></div>
+        <div class="brick bricksmall"></div>
+        <div class="brick bricksmall"></div>
+        <div class="brick"></div>
+        <div class="brick"></div>
+        <div class="brick bricksmall"></div>
+        <div class="brick bricksmall"></div>
+        <div class="brick"></div>
+      </div>
       <div class="bildich" :class="{flicker:lightOn, visibilityHidden:!lightOn}"></div>
       <div class="name pretext totalWidth alignCenter">Manuel Gelsen</div>
       <div
@@ -10,8 +138,8 @@
       >Webdesigner, Querdenker und noch vieles mehr</div>
 
       <p class="introText">
-        Schön, dass du da bist. Du bist auf meiner Website gelandet.<br>
-        Ja, das ist nicht das Auenland - da habe ich oben etwas zu viel geträumt. Damit du dich jetzt zurechtfindest, begleite ich dich etwas.
+        Schön, dass du da bist. Du bist auf meiner Website gelandet.
+        <br />Wir sind nicht im Auenland...? Ja, natürlich, sorry. Da war ich oben etwas zu viel in meinen Träumen.
         <span
           v-if="!lightOn"
         >
@@ -28,9 +156,10 @@
       <nuxt-link to="/kaffee" class="kaffeeblock totalWidth">
         <div class="kaffee kaffeeHeadline">Kaffeeeeeeeee...?</div>
         <Coffeecup class="coffeecup"></Coffeecup>
-        <div
-          class="kaffee kaffeetext"
-        >Nur das Beste für unsere Gäste - auch für dich. <br>Es wäre schon fast traurig, wenn du unseren Kaffee nicht probieren möchtest.</div>
+        <div class="kaffee kaffeetext">
+          Nur das Beste für unsere Gäste - auch für dich.
+          <br />Es wäre schon fast traurig, wenn du unseren Kaffee nicht probieren möchtest.
+        </div>
       </nuxt-link>
 
       <div class="wasWissen">
@@ -156,9 +285,9 @@ p {
 }
 
 .content {
+  margin-top: 45vh;
   background: rgba(0, 0, 0, 0.8);
   color: white;
-  margin-top: 45vh;
   padding: 0px 1em 1em 1em;
   display: flex;
   flex-wrap: wrap;
@@ -187,17 +316,17 @@ p {
   font-size: 30px;
   font-weight: bold;
   flex: 1 100%;
-  margin-top:.5em;
+  margin-top: 0.5em;
 }
 
 .description {
   font-size: 20px;
   flex: 1 100%;
-  margin-top: .5em;
+  margin-top: 0.5em;
 }
 
 .coffeecup {
-  align-self:center;
+  align-self: center;
 }
 
 .kaffeeblock {
@@ -209,9 +338,9 @@ p {
   display: block;
 }
 
-.kaffeeblock{
+.kaffeeblock {
   display: flex;
-  flex-direction:column;
+  flex-direction: column;
 }
 .kaffeeHeadline {
   color: #8b4513;
@@ -229,7 +358,7 @@ p {
 
 .introText {
   align-self: center;
-  text-align:center;
+  text-align: center;
   padding: 1em;
   font-size: 13px;
 }
@@ -264,6 +393,56 @@ p {
 
 .flicker {
   animation: flickerOpacity 4s;
+}
+
+.wall {
+  background: #777777;
+  position: absolute;
+  margin-top: -20px;
+  z-index: -1;
+}
+
+.wall_top_zinnen{
+  margin-top: -80px;
+  background: none;
+}
+.wall_top, .wall_top_zinnen{
+  z-index:-1;
+}
+.wall_left {
+  left: 0px;
+  margin-right: 2px;
+  width: 165px;
+}
+.wall_right {
+  right: 0px;
+  width: 165px;
+}
+
+.brick {
+  background: #cccccc;
+  width: 90px;
+  height: 45px;
+  border-radius: 2px;
+  margin: 4px;
+  display: inline-block;
+  box-shadow: 0 0 19px 1px gray inset;
+}
+
+.brickzinne, .brickhidden{
+  margin-left: 20px;
+  margin-right: 15px;
+  height: 80px;
+  width:110px;
+}
+
+.brickhidden{
+  visibility: hidden;
+  width: 160px;
+}
+
+.bricksmall {
+  width: 50px !important;
 }
 
 @keyframes flickerOpacity {

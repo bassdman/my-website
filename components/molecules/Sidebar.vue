@@ -33,6 +33,7 @@ export default {
   height: 150px;
   display: flex;
   justify-content: center;
+  z-index: 2;
   align-items: center;
 }
 
