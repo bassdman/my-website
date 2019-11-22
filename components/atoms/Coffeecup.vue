@@ -113,8 +113,8 @@
 
 <script>
 export default {
-    name: 'coffeecup'
-}
+  name: "coffeecup"
+};
 </script>
 
 
@@ -124,7 +124,7 @@ html {
 }
 
 body {
-  background: #FFFCE8;
+  background: #fffce8;
   height: 100%;
 }
 
@@ -229,7 +229,7 @@ body {
   stroke-dasharray: 100;
 }
 .squiggle path {
-  stroke: #5D5D5D;
+  stroke: #5d5d5d;
 }
 
 @keyframes dash {

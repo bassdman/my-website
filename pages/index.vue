@@ -1,7 +1,7 @@
 <template>
   <div class="home">
-    <h1 class="welcome">Willkommen</h1>
-    <h1 class="welcomeSubtitle">Ich habe dich erwartet</h1>
+    <h1 class="welcome">Aaaaah, frische Landluft :)</h1>
+    <h1 class="welcomeSubtitle">Moooment, was sehe ich denn da unten?</h1>
   
     <Castle class="castle"></Castle>
     <div class="content" id="content">
@@ -185,14 +185,14 @@ p {
 
 /*Halbkreis*/
 .content::before {
-  height: 110px;
-  background: #777777;
-  width: 220px;
-  border-top-left-radius: 110px;
-  border-top-right-radius: 110px;
-  margin-top: -111px;
-  content: "";
-  position: absolute;
+  height: 220px;
+    background: #888888;
+    width: 220px;
+    border-radius: 110px;
+    margin-top: -115px;
+    content: "";
+    position: absolute;
+    box-shadow: inset 0px 0px 22px 26px #777777;
 }
 
 .pretext {
@@ -248,10 +248,6 @@ p {
   text-align: center;
   padding: 1em;
   font-size: 13px;
-}
-
-.home {
-  
 }
 
 .bildich {

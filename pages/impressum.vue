@@ -41,7 +41,7 @@ export default {
     this.$store.commit('background/setSrc', require('~/assets/impressum.jpg'));
     this.$store.commit('header/show', true);
     
-    this.$store.commit('background/figcaption', `Hintergrund: Privates Photo`);
+    this.$store.commit('background/figcaption', `Hintergrund:<br>Privates Photo`);
   },
   head(){ return {
     // Children can override the title.

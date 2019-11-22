@@ -1,41 +1,49 @@
 <template>
   <footer>
-      <nuxt-link class="colorWhite" to="/impressum">Impressum</nuxt-link> |
-      <nuxt-link class="colorWhite" to="/datenschutz">Datenschutz</nuxt-link>
-      <span class="version fontSizeSmaller">v {{version}} | </span>
-      <span class="fontSizeSmaller colorWhite" v-html="$store.state.background.figCaption"></span>
+    <sign link="/impressum" width="180">Impressum</sign>
+    <sign link="/datenschutz" width="210">Datenschutz</sign>
+    <sign width="250" boards="6">
+      <div class="infosign">
+        <div class="colorWhite" v-html="$store.state.background.figCaption"></div>
+        <div>v {{version}}</div>
+      </div>
+    </sign>
   </footer>
 </template>
 
 <script>
-import {version} from '@/package.json';
+import { version } from "@/package.json";
+import Sign from "../../components/atoms/Sign.vue";
 
 export default {
-  name: 'footerElem',
+  name: "footerElem",
+  components: {
+    Sign
+  },
   data() {
     return {
-      version,
-    }
+      version
+    };
   }
 };
 </script>
 
 <style>
-    footer{
-        text-align:center;
-        padding-top: 50px;
-        color: white;
-        padding: 1em;
-        padding-top: 2em;
-    }
-    .version{
-      margin-left: 30px;
-    }
-    .colorWhite, .colorWhite a{
-      color: black;
-    }
+footer {
+  text-align: center;
+  margin-top: 77px;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+}
+.colorWhite,
+.colorWhite a {
+  color: black;
+}
 
-    .fontSizeSmaller{
-      font-size: smaller;
-    }
+.infosign {
+  font-size: 14px;
+  font-weight: bold;
+}
 </style>

@@ -287,7 +287,7 @@ export default {
     this.$store.commit('header/pagename', 'Datenschutz');
     this.$store.commit('background/setSrc', require('~/assets/impressum.jpg'));
     this.$store.commit('header/show', true);
-    this.$store.commit('background/figcaption', `Hintergrund von <a href="https://pixabay.com/de/users/pixel2013-2364555/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=3062829">pixel2013</a> auf <a href="https://pixabay.com/de/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=3062829">Pixabay</a>`);
+    this.$store.commit('background/figcaption', `Hintergrund von<br><a href="https://pixabay.com/de/users/pixel2013-2364555/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=3062829">pixel2013</a> auf <a href="https://pixabay.com/de/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=3062829">Pixabay</a>`);
   },
   head() {
 
