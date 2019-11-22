@@ -2,135 +2,9 @@
   <div class="home">
     <h1 class="welcome">Willkommen</h1>
     <h1 class="welcomeSubtitle">Ich habe dich erwartet</h1>
+  
+    <Castle class="castle"></Castle>
     <div class="content" id="content">
-      <div class="wall wall_top_zinnen">
-        <div class="brick brickzinne"></div>
-        <div class="brick brickzinne"></div>
-        <div class="brick brickzinne"></div>
-        <div class="brick brickzinne"></div>
-        <div class="brick brickhidden"></div>
-        <div class="brick brickzinne"></div>
-        <div class="brick brickzinne"></div>
-        <div class="brick brickzinne"></div>
-        <div class="brick brickzinne"></div>
-      </div>
-      <div class="wall wall_top">
-        <div class="brick"></div>
-        <div class="brick bricksmall"></div>
-        <div class="brick"></div>
-        <div class="brick"></div>
-        <div class="brick"></div>
-        <div class="brick bricksmall"></div>
-        <div class="brick"></div>
-        <div class="brick"></div>
-        <div class="brick"></div>
-        <div class="brick"></div>
-        <div class="brick"></div>
-        <div class="brick bricksmall"></div>
-        <div class="brick"></div>
-        <div class="brick"></div>
-        <div class="brick"></div>
-      </div>
-      <div class="wall wall_left">
-        <div class="brick"></div>
-        <div class="brick bricksmall"></div>
-        <div class="brick bricksmall"></div>
-        <div class="brick"></div>
-        <div class="brick"></div>
-        <div class="brick bricksmall"></div>
-        <div class="brick bricksmall"></div>
-        <div class="brick"></div>
-        <div class="brick"></div>
-        <div class="brick bricksmall"></div>
-        <div class="brick bricksmall"></div>
-        <div class="brick"></div>
-        <div class="brick"></div>
-        <div class="brick bricksmall"></div>
-        <div class="brick bricksmall"></div>
-        <div class="brick"></div>
-        <div class="brick"></div>
-        <div class="brick bricksmall"></div>
-        <div class="brick bricksmall"></div>
-        <div class="brick"></div>
-        <div class="brick"></div>
-        <div class="brick bricksmall"></div>
-        <div class="brick bricksmall"></div>
-        <div class="brick"></div>
-        <div class="brick"></div>
-        <div class="brick bricksmall"></div>
-        <div class="brick bricksmall"></div>
-        <div class="brick"></div>
-        <div class="brick"></div>
-        <div class="brick bricksmall"></div>
-        <div class="brick bricksmall"></div>
-        <div class="brick"></div>
-        <div class="brick"></div>
-        <div class="brick bricksmall"></div>
-        <div class="brick bricksmall"></div>
-        <div class="brick"></div>
-        <div class="brick"></div>
-        <div class="brick bricksmall"></div>
-        <div class="brick bricksmall"></div>
-        <div class="brick"></div>
-        <div class="brick"></div>
-        <div class="brick bricksmall"></div>
-        <div class="brick bricksmall"></div>
-        <div class="brick"></div>
-        <div class="brick"></div>
-        <div class="brick bricksmall"></div>
-        <div class="brick bricksmall"></div>
-        <div class="brick"></div>
-      </div>
-      <div class="wall wall_right">
-        <div class="brick"></div>
-        <div class="brick bricksmall"></div>
-        <div class="brick bricksmall"></div>
-        <div class="brick"></div>
-        <div class="brick"></div>
-        <div class="brick bricksmall"></div>
-        <div class="brick bricksmall"></div>
-        <div class="brick"></div>
-        <div class="brick"></div>
-        <div class="brick bricksmall"></div>
-        <div class="brick bricksmall"></div>
-        <div class="brick"></div>
-        <div class="brick"></div>
-        <div class="brick bricksmall"></div>
-        <div class="brick bricksmall"></div>
-        <div class="brick"></div>
-        <div class="brick"></div>
-        <div class="brick bricksmall"></div>
-        <div class="brick bricksmall"></div>
-        <div class="brick"></div>
-        <div class="brick"></div>
-        <div class="brick bricksmall"></div>
-        <div class="brick bricksmall"></div>
-        <div class="brick"></div>
-        <div class="brick"></div>
-        <div class="brick bricksmall"></div>
-        <div class="brick bricksmall"></div>
-        <div class="brick"></div>
-        <div class="brick"></div>
-        <div class="brick bricksmall"></div>
-        <div class="brick bricksmall"></div>
-        <div class="brick"></div>
-        <div class="brick"></div>
-        <div class="brick bricksmall"></div>
-        <div class="brick bricksmall"></div>
-        <div class="brick"></div>
-        <div class="brick"></div>
-        <div class="brick bricksmall"></div>
-        <div class="brick bricksmall"></div>
-        <div class="brick"></div>
-        <div class="brick"></div>
-        <div class="brick bricksmall"></div>
-        <div class="brick bricksmall"></div>
-        <div class="brick"></div>
-        <div class="brick"></div>
-        <div class="brick bricksmall"></div>
-        <div class="brick bricksmall"></div>
-        <div class="brick"></div>
-      </div>
       <div class="bildich" :class="{flicker:lightOn, visibilityHidden:!lightOn}"></div>
       <div class="name pretext totalWidth alignCenter">Manuel Gelsen</div>
       <div
@@ -188,11 +62,13 @@
 
 <script>
 import Coffeecup from "../components/atoms/Coffeecup.vue";
+import Castle from "../components/atoms/Castle.vue"
 
 export default {
   name: "home",
   components: {
-    Coffeecup
+    Coffeecup,
+    Castle
   },
   layout: "noheader",
   beforeRouteLeave(to, from, next) {
@@ -284,8 +160,13 @@ p {
   width: 100%;
 }
 
+.castle{
+    margin-top: 45vh;
+}
+
 .content {
-  margin-top: 45vh;
+  max-width: 1200px;
+  margin: auto;
   background: rgba(0, 0, 0, 0.8);
   color: white;
   padding: 0px 1em 1em 1em;
@@ -296,10 +177,16 @@ p {
   border: 1px solid transparent; /*notwendig wg. eines bugs in chrome. ja, richtig gehört: chrome.*/
 }
 
+@media screen and (min-width: 900px){
+  .content{
+    max-width: calc(100% - 360px);
+  }
+}
+
 /*Halbkreis*/
 .content::before {
   height: 110px;
-  background: rgba(0, 0, 0, 0.8);
+  background: #777777;
   width: 220px;
   border-top-left-radius: 110px;
   border-top-right-radius: 110px;
@@ -364,8 +251,7 @@ p {
 }
 
 .home {
-  max-width: 1200px;
-  margin: auto;
+  
 }
 
 .bildich {
@@ -393,56 +279,6 @@ p {
 
 .flicker {
   animation: flickerOpacity 4s;
-}
-
-.wall {
-  background: #777777;
-  position: absolute;
-  margin-top: -20px;
-  z-index: -1;
-}
-
-.wall_top_zinnen{
-  margin-top: -80px;
-  background: none;
-}
-.wall_top, .wall_top_zinnen{
-  z-index:-1;
-}
-.wall_left {
-  left: 0px;
-  margin-right: 2px;
-  width: 165px;
-}
-.wall_right {
-  right: 0px;
-  width: 165px;
-}
-
-.brick {
-  background: #cccccc;
-  width: 90px;
-  height: 45px;
-  border-radius: 2px;
-  margin: 4px;
-  display: inline-block;
-  box-shadow: 0 0 19px 1px gray inset;
-}
-
-.brickzinne, .brickhidden{
-  margin-left: 20px;
-  margin-right: 15px;
-  height: 80px;
-  width:110px;
-}
-
-.brickhidden{
-  visibility: hidden;
-  width: 160px;
-}
-
-.bricksmall {
-  width: 50px !important;
 }
 
 @keyframes flickerOpacity {
