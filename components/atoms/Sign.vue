@@ -1,17 +1,41 @@
 <template>
-  <div class="sign_total" v-bind:style="{width:(width || 200) + 'px'}">
-    <div class="text" v-bind:style="signclasses">
-      <nuxt-link class="colorWhite" v-if="link" v-bind:to="link">
-        <slot></slot>
-      </nuxt-link>
-      <span v-if="!link">
-        <slot></slot>
-      </span>
+  <div class="sign_total" v-bind:style="{width:width + 'px'}">
+    <div class="kette kette_links" v-if="kettenlaenge > 0">
+      <div
+        class="ring"
+        v-for="(ring,i) in rings"
+        :key="ring"
+        :index="i"
+        v-bind:style="{'margin-top': -i * 15 + 'px', background: i == 0 || i == rings - 1 ? '#777777' : 'inherit'  }"
+      >&nbsp;</div>
     </div>
-    <div v-for="board in _boards" :key="board" v-bind:style="{width: board}">
-      <div class="brett">&nbsp;</div>
+    <div
+      class="kette kette_rechts"
+      v-if="kettenlaenge > 0"
+      v-bind:style="{'margin-left':(width-100)+'px'}"
+    >
+      <div
+        class="ring"
+        v-for="(ring,i) in rings"
+        :key="ring"
+        :index="i"
+        v-bind:style="{'margin-top': -i * 15 + 'px', background: i == 0 || i == rings - 1 ? '#777777' : 'inherit'  }"
+      >&nbsp;</div>
     </div>
-    <div class="stab"></div>
+    <div class="signboard" v-bind:style="{width:width + 'px'}">
+      <div class="text">
+        <nuxt-link class="colorWhite" v-if="link" v-bind:to="link">
+          <slot></slot>
+        </nuxt-link>
+        <span v-if="!link">
+          <slot></slot>
+        </span>
+      </div>
+      <div v-for="board in _boards" :key="board" v-bind:style="{width: board}">
+        <div class="brett">&nbsp;</div>
+      </div>
+    </div>
+    <div class="stab" v-bind:style="stabclasses"></div>
   </div>
 </template>
 
@@ -20,9 +44,11 @@ export default {
   name: "sign",
   props: {
     text: String,
-    height: [Number, String],
-    width: [Number, String],
+    height: { default: 100, type: [Number, String] },
+    width: { default: 200, type: [Number, String] },
     link: String,
+    stablaenge: { default: 50, type: [String, Number] },
+    kettenlaenge: { default: 0, type: [String, Number] },
     boards: { default: 4, type: [Number, String] }
   },
   created() {
@@ -34,10 +60,26 @@ export default {
   },
   computed: {
     signclasses() {
-      console.log("signclasses");
       return {
         height: (this.$props.height || 100) + "px",
         width: (this.$props.width || 200) + "px"
+      };
+    },
+    stabclasses() {
+      return {
+        height: this.stablaenge + "px"
+      };
+    },
+    rings() {
+        const retArr = [];
+      const length = parseInt(parseFloat(this.kettenlaenge / 15));
+      return length;
+    },
+    ringstyles() {
+      const i = this.index;
+      return {
+        "margin-top": -i * 15 + "px",
+        background: i == 0 || i == this.rings - 1 ? "#777777" : "inherit"
       };
     }
   }
@@ -45,6 +87,21 @@ export default {
 </script>
 
 <style>
+.sign_total {
+  display: inline-flex;
+  flex-direction: column;
+}
+
+.kette_links {
+  margin-left: 80px;
+}
+.ring {
+  width: 15px;
+  height: 15px;
+  border: 3px solid gray;
+  border-radius: 15px;
+  position: absolute;
+}
 .stab,
 .brett {
   background: #ca8e0c;
@@ -58,17 +115,16 @@ export default {
   font-style: italic;
   font-size: 20px;
   font-family: fantasy;
-  margin-top: 10px;
 }
 .stab {
   width: 10px;
   align-self: center;
-  height: 50px;
 }
-.sign_total {
+.signboard {
   display: inline-flex;
   justify-content: center;
   align-items: center;
+  margin-top: -5px;
   flex-direction: column;
 }
 </style>

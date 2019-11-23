@@ -2,15 +2,20 @@
   <div class="home">
     <h1 class="welcome">Aaaaah, frische Landluft :)</h1>
     <h1 class="welcomeSubtitle">Moooment, was sehe ich denn da unten?</h1>
-  
+
     <Castle class="castle"></Castle>
     <div class="content" id="content">
       <div class="bildich" :class="{flicker:lightOn, visibilityHidden:!lightOn}"></div>
-      <div class="name pretext totalWidth alignCenter">Manuel Gelsen</div>
-      <div
-        class="description pretext totalWidth alignCenter"
-      >Webdesigner, Querdenker und noch vieles mehr</div>
-
+      <div class="signcontainer">
+        <sign width="600" boards="6" stablaenge="0" kettenlaenge="150" class="sign">
+          <div>
+            <div class="name pretext totalWidth alignCenter">Manuel Gelsen</div>
+            <div
+              class="description pretext totalWidth alignCenter"
+            >Webdesigner, Querdenker und noch vieles mehr</div>
+          </div>
+        </sign>
+      </div>
       <p class="introText">
         Schön, dass du da bist. Du bist auf meiner Website gelandet.
         <br />Wir sind nicht im Auenland...? Ja, natürlich, sorry. Da war ich oben etwas zu viel in meinen Träumen.
@@ -27,32 +32,6 @@
         </span>
       </p>
 
-      <nuxt-link to="/kaffee" class="kaffeeblock totalWidth">
-        <div class="kaffee kaffeeHeadline">Kaffeeeeeeeee...?</div>
-        <Coffeecup class="coffeecup"></Coffeecup>
-        <div class="kaffee kaffeetext">
-          Nur das Beste für unsere Gäste - auch für dich.
-          <br />Es wäre schon fast traurig, wenn du unseren Kaffee nicht probieren möchtest.
-        </div>
-      </nuxt-link>
-
-      <div class="wasWissen">
-        <h2 class="headline">Projekte</h2>Kommen wir nun zum interessanten Teil. Du erfährst alles über meine inneren Abgründe und Berge und... Na ja, so weit jetzt nicht.
-        <br />Was möchtest du wissen?
-        <div>
-          <div>Welches Instrument spielst du?</div>
-          <div>Bei was für Projekten hast du so mitgewirkt?</div>
-          <div>Erzähl mal was über dich</div>
-        </div>
-      </div>
-      <div class="wasWissen" v-if="false">
-        Was möchtest du von mir wissen?
-        - geige
-        - Projekte (Podcast / Luitpoldhainfilm)
-        - lebenslauf
-        - Github
-        - Martinas Website
-      </div>
       <div
         class="imAufbau"
       >Diese Seite ist noch in Bearbeitung, wird aber bald in voller Bl&uuml;te erstrahlen.</div>
@@ -62,13 +41,15 @@
 
 <script>
 import Coffeecup from "../components/atoms/Coffeecup.vue";
-import Castle from "../components/atoms/Castle.vue"
+import Castle from "../components/atoms/Castle.vue";
+import Sign from "../components/atoms/Sign.vue";
 
 export default {
   name: "home",
   components: {
     Coffeecup,
-    Castle
+    Castle,
+    Sign
   },
   layout: "noheader",
   beforeRouteLeave(to, from, next) {
@@ -113,7 +94,7 @@ export default {
         {
           name: "description",
           content:
-            "Die offizielle Website von Manuel Gelsen, 30 Jahre, aus Fürth. Moment..., die ist ja noch in Arbeit. Egal. Schau schon mal drauf. Von Tag zu Tag reift diese immer immer weiter :)"
+            "Was frische Landluft alles bewirkt... Das ist also die offizielle Website von Manuel Gelsen, 30 Jahre, aus Fürth...? Hier ist ja noch alles eine Baustelle. Zeit mal, dem auf den Grund zu gehen."
         },
         { name: "robots", content: "index,follow" }
       ],
@@ -150,6 +131,15 @@ p {
   line-height: 1.5em;
   color: white;
 }
+
+.signcontainer{
+  width: 100%;
+  text-align: center;
+}
+.sign {
+  margin-top: 50px;
+}
+
 .imAufbau {
   padding: 5em;
   background: #ffa5009e;
@@ -160,8 +150,8 @@ p {
   width: 100%;
 }
 
-.castle{
-    margin-top: 45vh;
+.castle {
+  margin-top: 45vh;
 }
 
 .content {
@@ -177,8 +167,8 @@ p {
   border: 1px solid transparent; /*notwendig wg. eines bugs in chrome. ja, richtig gehört: chrome.*/
 }
 
-@media screen and (min-width: 900px){
-  .content{
+@media screen and (min-width: 900px) {
+  .content {
     max-width: calc(100% - 360px);
   }
 }
@@ -186,13 +176,13 @@ p {
 /*Halbkreis*/
 .content::before {
   height: 220px;
-    background: #888888;
-    width: 220px;
-    border-radius: 110px;
-    margin-top: -115px;
-    content: "";
-    position: absolute;
-    box-shadow: inset 0px 0px 22px 26px #777777;
+  background: #dddddd;
+  width: 220px;
+  border-radius: 110px;
+  margin-top: -115px;
+  content: "";
+  position: absolute;
+  box-shadow: inset 0px 0px 22px 26px #cccccc;
 }
 
 .pretext {
@@ -202,45 +192,11 @@ p {
 .name {
   font-size: 30px;
   font-weight: bold;
-  flex: 1 100%;
-  margin-top: 0.5em;
 }
 
 .description {
   font-size: 20px;
-  flex: 1 100%;
   margin-top: 0.5em;
-}
-
-.coffeecup {
-  align-self: center;
-}
-
-.kaffeeblock {
-  text-decoration: none;
-  margin-top: 50px;
-}
-
-.kaffee {
-  display: block;
-}
-
-.kaffeeblock {
-  display: flex;
-  flex-direction: column;
-}
-.kaffeeHeadline {
-  color: #8b4513;
-  font-size: 30px;
-  font-style: italic;
-  margin-bottom: 10px;
-  text-align: center;
-}
-
-.kaffeetext {
-  color: white;
-  text-align: center;
-  margin-top: 30px;
 }
 
 .introText {

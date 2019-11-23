@@ -1,148 +1,55 @@
 <template>
   <div>
-    <div class="wall wall_top_zinnen">
-      <div class="brick brickzinne"></div>
-      <div class="brick brickzinne"></div>
-      <div class="brick brickzinne"></div>
-      <div class="brick brickzinne"></div>
-      <div class="brick brickzinne"></div>
-      <div class="brick brickzinne"></div>
-      <div class="brick brickzinne"></div>
-      <div class="brick brickzinne"></div>
+    <div class="wall_top_zinnen">
+      <div class="wall brickzinne"></div>
+      <div class="wall brickzinne"></div>
+      <div class="wall brickzinne"></div>
+      <div class="wall brickzinne"></div>
+      <div class="wall brickzinne"></div>
+      <div class="wall brickzinne"></div>
+      <div class="wall brickzinne"></div>
+      <div class="wall brickzinne"></div>
     </div>
-    <div class="wall wall_top">
-      <div class="brick bricksmall"></div>
-      <div class="brick"></div>
-      <div class="brick"></div>
-      <div class="brick"></div>
-      <div class="brick"></div>
-      <div class="brick bricksmall"></div>
-      <div class="brick"></div>
-      <div class="brick"></div>
-      <div class="brick"></div>
-      <div class="brick"></div>
-      <div class="brick"></div>
-      <div class="brick bricksmall"></div>
-      <div class="brick"></div>
-      <div class="brick"></div>
-      <div class="brick"></div>
-    </div>
-    <div class="wall wall_top">
-      <div class="brick"></div>
-      <div class="brick"></div>
-      <div class="brick bricklarge"></div>
-      <div class="brick"></div>
-      <div class="brick"></div>
-      <div class="brick bricklarge"></div>
-      <div class="brick bricksmall"></div>
-      <div class="brick"></div>
-      <div class="brick bricklarge"></div>
-      <div class="brick"></div>
-      <div class="brick"></div>
-      <div class="brick"></div>
-      <div class="brick"></div>
+    <div class="wall wall_top">&nbsp;</div>
+
+    <div class="wall_rundung">
+      <div class="wall wallElement wallElement1">
+        &nbsp;
+      </div>
+      <div class="wall wallElement wallElement1">
+        &nbsp;
+      </div>
     </div>
 
-    <div class="wall wall_left">
-      <div class="brick"></div>
-      <div class="brick bricksmall"></div>
-      <div class="brick bricksmall"></div>
-      <div class="brick"></div>
-      <div class="brick"></div>
-      <div class="brick bricksmall"></div>
-      <div class="brick bricksmall"></div>
-      <div class="brick"></div>
-      <div class="brick"></div>
-      <div class="brick bricksmall"></div>
-      <div class="brick bricksmall"></div>
-      <div class="brick"></div>
-      <div class="brick"></div>
-      <div class="brick bricksmall"></div>
-      <div class="brick bricksmall"></div>
-      <div class="brick"></div>
-      <div class="brick"></div>
-      <div class="brick bricksmall"></div>
-      <div class="brick bricksmall"></div>
-      <div class="brick"></div>
-      <div class="brick"></div>
-      <div class="brick bricksmall"></div>
-      <div class="brick bricksmall"></div>
-      <div class="brick"></div>
-      <div class="brick"></div>
-      <div class="brick bricksmall"></div>
-      <div class="brick bricksmall"></div>
-      <div class="brick"></div>
-      <div class="brick"></div>
-      <div class="brick bricksmall"></div>
-      <div class="brick bricksmall"></div>
-      <div class="brick"></div>
-      <div class="brick"></div>
-      <div class="brick bricksmall"></div>
-      <div class="brick bricksmall"></div>
-      <div class="brick"></div>
-      <div class="brick"></div>
-      <div class="brick bricksmall"></div>
-      <div class="brick bricksmall"></div>
-      <div class="brick"></div>
-      <div class="brick"></div>
-      <div class="brick bricksmall"></div>
-      <div class="brick bricksmall"></div>
-      <div class="brick"></div>
-      <div class="brick"></div>
-      <div class="brick bricksmall"></div>
-      <div class="brick bricksmall"></div>
-      <div class="brick"></div>
+    <div class="wall_rundung">
+      <div class="wall wallElement wallElement2">
+        &nbsp;
+      </div>
+      <div class="wall wallElement wallElement2">
+        &nbsp;
+      </div>
     </div>
-    <div class="wall wall_right">
-      <div class="brick"></div>
-      <div class="brick bricksmall"></div>
-      <div class="brick bricksmall"></div>
-      <div class="brick"></div>
-      <div class="brick"></div>
-      <div class="brick bricksmall"></div>
-      <div class="brick bricksmall"></div>
-      <div class="brick"></div>
-      <div class="brick"></div>
-      <div class="brick bricksmall"></div>
-      <div class="brick bricksmall"></div>
-      <div class="brick"></div>
-      <div class="brick"></div>
-      <div class="brick bricksmall"></div>
-      <div class="brick bricksmall"></div>
-      <div class="brick"></div>
-      <div class="brick"></div>
-      <div class="brick bricksmall"></div>
-      <div class="brick bricksmall"></div>
-      <div class="brick"></div>
-      <div class="brick"></div>
-      <div class="brick bricksmall"></div>
-      <div class="brick bricksmall"></div>
-      <div class="brick"></div>
-      <div class="brick"></div>
-      <div class="brick bricksmall"></div>
-      <div class="brick bricksmall"></div>
-      <div class="brick"></div>
-      <div class="brick"></div>
-      <div class="brick bricksmall"></div>
-      <div class="brick bricksmall"></div>
-      <div class="brick"></div>
-      <div class="brick"></div>
-      <div class="brick bricksmall"></div>
-      <div class="brick bricksmall"></div>
-      <div class="brick"></div>
-      <div class="brick"></div>
-      <div class="brick bricksmall"></div>
-      <div class="brick bricksmall"></div>
-      <div class="brick"></div>
-      <div class="brick"></div>
-      <div class="brick bricksmall"></div>
-      <div class="brick bricksmall"></div>
-      <div class="brick"></div>
-      <div class="brick"></div>
-      <div class="brick bricksmall"></div>
-      <div class="brick bricksmall"></div>
-      <div class="brick"></div>
+
+   <div class="wall_rundung">
+      <div class="wall wallElement wallElement3">
+        &nbsp;
+      </div>
+      <div class="wall wallElement wallElement3">
+        &nbsp;
+      </div>
     </div>
+
+    <div class="wall_rundung">
+      <div class="wall wallElement wallElement4">
+        &nbsp;
+      </div>
+      <div class="wall wallElement wallElement4">
+        &nbsp;
+      </div>
+    </div>
+
+    <div class="wall wall_left">&nbsp;</div>
+    <div class="wall wall_right wall_background">&nbsp;</div>
   </div>
 </template>
 
@@ -154,42 +61,67 @@ export default {
 
 
 <style scoped>
-.wall {
-  background: #777777;
-  position: absolute;
+.wall,
+.brick {
+  background-color: #777777;
+  background-image: linear-gradient(335deg, #cccccc 23px, transparent 23px),
+    linear-gradient(155deg, #dddddd 23px, transparent 23px),
+    linear-gradient(335deg, #cccccc 23px, transparent 23px),
+    linear-gradient(155deg, #dddddd 23px, transparent 23px);
+  background-size: 58px 58px;
+  background-position: -4px -4px, 0px 29px, 26px 25px, 30px 0px;
 }
 
 .wall_top_zinnen {
-  margin-top: -80px;
-  background: none;
-  overflow: hidden;
-  white-space: nowrap;
+  display: flex;
+  justify-content: space-between;
   width: 100%;
-  text-align: center;
+  margin-top: -80px;
 }
 
 .wall_top {
   width: 100%;
+  height: 116px;
   position: relative;
   overflow: hidden;
   white-space: nowrap;
 }
 
-.brick {
-  background: #cccccc;
-  width: 90px;
-  height: 45px;
-  border-radius: 2px;
-  margin: 4px;
-  display: inline-block;
-  box-shadow: 0 0 19px 1px gray inset;
+.wall_rundung {
+  position: absolute;
+  width: 100%;
+  overflow: hidden;
+  white-space: nowrap;
+  display: flex;
+  justify-content: space-between;
 }
+
+.wallElement{
+    height: 58px;
+}
+.wallElement1{
+    width: 37%;
+}
+.wallElement2{
+    width: 32%;
+    margin-top: 58px;
+}
+.wallElement3{
+    width: 22%;
+    margin-top: 116px;
+}
+.wallElement4{
+    width: 15%;
+    margin-top: 174px;
+}
+
+
 
 .brickzinne,
 .brickhidden {
   margin-left: 20px;
   margin-right: 15px;
-  height: 80px;
+  height: 87px;
   width: 110px;
 }
 
@@ -209,6 +141,18 @@ export default {
   }
 }
 @media screen and (min-width: 900px) {
+  .vertical_stange {
+    color: brown;
+    width: 10px;
+    height: 200px;
+    position: absolute;
+  }
+  .wall_left,
+  .wall_right {
+    margin-top: 232px;
+    position: absolute;
+    height: 580px;
+  }
   .wall_left {
     left: 0px;
     margin-right: 2px;
