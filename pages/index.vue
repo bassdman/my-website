@@ -7,7 +7,7 @@
     <div class="content" id="content">
       <div class="bildich" :class="{flicker:lightOn, visibilityHidden:!lightOn}"></div>
       <div class="signcontainer">
-        <sign width="600" boards="6" stablaenge="0" kettenlaenge="150" class="sign">
+        <sign :width="boardwidth" boards="6" stablaenge="0" kettenlaenge="150" class="sign">
           <div>
             <div class="name pretext totalWidth alignCenter">Manuel Gelsen</div>
             <div
@@ -64,6 +64,20 @@ export default {
   computed: {
     lightOn() {
       return this.$store.state.light.on;
+    },
+    boardwidth(){
+      if (!process.client) return 600;
+
+      const width = document.documentElement.clientWidth;
+
+      console.log(width);
+      if(width > 600)
+        return 600;
+
+      if(width > 400)
+        return width - 100;
+
+      return width - 50;
     }
   },
   created() {
@@ -135,9 +149,11 @@ p {
 .signcontainer{
   width: 100%;
   text-align: center;
+  z-index: 1;
 }
 .sign {
   margin-top: 50px;
+  z-index: 1;
 }
 
 .imAufbau {

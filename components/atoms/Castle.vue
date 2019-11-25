@@ -76,7 +76,9 @@ export default {
   display: flex;
   justify-content: space-between;
   width: 100%;
+  min-width: 100px;
   margin-top: -80px;
+  overflow: hidden;
 }
 
 .wall_top {
@@ -123,6 +125,7 @@ export default {
   margin-right: 15px;
   height: 87px;
   width: 110px;
+  min-width: 100px;
 }
 
 .bricksmall {

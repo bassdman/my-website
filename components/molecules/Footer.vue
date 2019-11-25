@@ -36,6 +36,7 @@ footer {
   display: flex;
   justify-content: center;
   align-items: flex-end;
+  flex-wrap: wrap;
 }
 .colorWhite,
 .colorWhite a {

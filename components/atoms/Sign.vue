@@ -90,6 +90,7 @@ export default {
 .sign_total {
   display: inline-flex;
   flex-direction: column;
+  padding: 20px 10px 0px 10px
 }
 
 .kette_links {
@@ -127,4 +128,17 @@ export default {
   margin-top: -5px;
   flex-direction: column;
 }
+
+@media screen and (max-width: 400px){
+    .text {
+        max-width: 350px;
+    }  
+}
+
+@media screen and (max-width: 600px){
+    .text {
+        max-width: 500px;
+    }  
+}
+
 </style>
