@@ -70,14 +70,13 @@ export default {
 
       const width = document.documentElement.clientWidth;
 
-      console.log(width);
       if(width > 600)
         return 600;
 
       if(width > 400)
         return width - 100;
 
-      return width - 50;
+      return width - 20;
     }
   },
   created() {
@@ -150,6 +149,8 @@ p {
   width: 100%;
   text-align: center;
   z-index: 1;
+  position: sticky;
+  top: -63px;
 }
 .sign {
   margin-top: 50px;
@@ -168,6 +169,8 @@ p {
 
 .castle {
   margin-top: 45vh;
+  position: sticky;
+  top: -87px;
 }
 
 .content {
