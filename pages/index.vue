@@ -158,7 +158,7 @@ p {
 .content {
   max-width: 1200px;
   margin: auto;
-  background: rgba(0, 0, 0, 0.8);
+  /*background: rgba(0, 0, 0, 0.8);*/
   color: white;
   padding: 0px 1em 1em 1em;
   display: flex;
