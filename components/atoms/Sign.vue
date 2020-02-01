@@ -90,7 +90,7 @@ export default {
 .sign_total {
   display: inline-flex;
   flex-direction: column;
-  padding: 20px 10px 0px 10px
+  padding: 20px 10px 0px 10px;
 }
 
 .kette_links {
@@ -115,7 +115,6 @@ export default {
   text-decoration: none;
   font-style: italic;
   font-size: 20px;
-  font-family: fantasy;
 }
 .stab {
   width: 10px;

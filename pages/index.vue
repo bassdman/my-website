@@ -16,25 +16,6 @@
           </div>
         </sign>
       </div>
-      <p class="introText">
-        Schön, dass du da bist. Du bist auf meiner Website gelandet.
-        <br />Wir sind nicht im Auenland...? Ja, natürlich, sorry. Da war ich oben etwas zu viel in meinen Träumen.
-        <span
-          v-if="!lightOn"
-        >
-          <br />Moment, du siehst mich noch gar nicht. Entschuldigung. Ich habe vergessen, das Licht
-          <br />anzumachen. Drücke auf den Schalter auf der rechten Seite rechts - das wird helfen :)
-        </span>
-        <span v-if="lightOn" class="flicker">
-          <br />Gut, dass du das Licht angemacht hast. Es war so düster und unheimlich... schon fast creepy.
-          <br />
-          <br />
-        </span>
-      </p>
-
-      <div
-        class="imAufbau"
-      >Diese Seite ist noch in Bearbeitung, wird aber bald in voller Bl&uuml;te erstrahlen.</div>
     </div>
   </div>
 </template>
@@ -65,16 +46,14 @@ export default {
     lightOn() {
       return this.$store.state.light.on;
     },
-    boardwidth(){
+    boardwidth() {
       if (!process.client) return 600;
 
       const width = document.documentElement.clientWidth;
 
-      if(width > 600)
-        return 600;
+      if (width > 600) return 600;
 
-      if(width > 400)
-        return width - 100;
+      if (width > 400) return width - 100;
 
       return width - 20;
     }
@@ -82,7 +61,10 @@ export default {
   created() {
     this.blockRouteEvent = false;
     this.$store.commit("background/setSrc", require("~/assets/berge.jpg"));
-    this.$store.commit("background/figcaption", `Hintergrund: Privates Photo`);
+    this.$store.commit(
+      "background/figcaption",
+      `Hintergrund:<br>Privates Photo<br><br>`
+    );
 
     if (!process.client) return 0;
 
@@ -145,15 +127,15 @@ p {
   color: white;
 }
 
-.signcontainer{
+.signcontainer {
   width: 100%;
   text-align: center;
   z-index: 1;
   position: sticky;
+  margin-bottom: 325px;
   top: -63px;
 }
 .sign {
-  margin-top: 50px;
   z-index: 1;
 }
 
@@ -190,6 +172,10 @@ p {
   .content {
     max-width: calc(100% - 360px);
   }
+
+  .signcontainer {
+    margin-bottom: 500px;
+  }
 }
 
 /*Halbkreis*/
@@ -211,11 +197,13 @@ p {
 .name {
   font-size: 30px;
   font-weight: bold;
+  font-family: Admiration Pains;
 }
 
 .description {
   font-size: 20px;
   margin-top: 0.5em;
+  font-family: Brushed;
 }
 
 .introText {

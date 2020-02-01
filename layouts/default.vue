@@ -11,6 +11,16 @@
 </template>
 
 <style>
+@font-face {
+  font-family: Admiration Pains;
+  src: url('~assets/Admiration Pains.ttf');
+}
+
+@font-face {
+  font-family: Brushed;
+  src: url('~assets/Brushed.ttf');
+}
+
 html {
   font-family: "Source Sans Pro", -apple-system, BlinkMacSystemFont, "Segoe UI",
     Roboto, "Helvetica Neue", Arial, sans-serif;

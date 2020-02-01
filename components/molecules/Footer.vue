@@ -2,7 +2,7 @@
   <footer>
     <sign link="/impressum" width="180">Impressum</sign>
     <sign link="/datenschutz" width="210">Datenschutz</sign>
-    <sign width="250" boards="6">
+    <sign width="200" boards="6">
       <div class="infosign">
         <div class="colorWhite" v-html="$store.state.background.figCaption"></div>
         <div>v {{version}}</div>
@@ -37,6 +37,7 @@ footer {
   justify-content: center;
   align-items: flex-end;
   flex-wrap: wrap;
+  font-family: Brushed;
 }
 .colorWhite,
 .colorWhite a {
