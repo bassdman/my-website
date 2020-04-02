@@ -13,7 +13,7 @@
 <style>
 @font-face {
   font-family: Admiration Pains;
-  src: url('~assets/Admiration Pains.ttf');
+  src: url('~assets/Admiration-pains.ttf');
 }
 
 @font-face {

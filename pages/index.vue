@@ -1,5 +1,13 @@
 <template>
   <div class="home">
+    <cloud fontsize="small" class="cloudText alignCenter">
+        Icons von<br>
+        <a
+          href="https://www.flaticon.com/de/autoren/wanicon"
+          title="wanicon"
+        >wanicon</a> <br>auf<br>
+        <a href="https://www.flaticon.com/de/" title="Flaticon">www.flaticon.com</a>
+      </cloud>
     <h1 class="welcome">Aaaaah, frische Landluft :)</h1>
     <h1 class="welcomeSubtitle">Moooment, was sehe ich denn da unten?</h1>
 
@@ -22,15 +30,18 @@
 
 <script>
 import Coffeecup from "../components/atoms/Coffeecup.vue";
+import Cloud from "../components/atoms/Cloud.vue";
 import Castle from "../components/atoms/Castle.vue";
 import Sign from "../components/atoms/Sign.vue";
+import { version } from "@/package.json";
 
 export default {
   name: "home",
   components: {
     Coffeecup,
     Castle,
-    Sign
+    Sign,
+    Cloud
   },
   layout: "noheader",
   beforeRouteLeave(to, from, next) {
@@ -39,7 +50,8 @@ export default {
   },
   data() {
     return {
-      showPortrait: false
+      showPortrait: false,
+      version
     };
   },
   computed: {
@@ -167,6 +179,16 @@ p {
   justify-content: center;
   border: 1px solid transparent; /*notwendig wg. eines bugs in chrome. ja, richtig gehört: chrome.*/
 }
+
+.cloudText{
+  color: gray;
+  margin-top: -30px;
+}
+
+.cloudText a {
+  color: gray;
+}
+
 
 @media screen and (min-width: 900px) {
   .content {
