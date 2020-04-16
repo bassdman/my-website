@@ -45,7 +45,8 @@ async function loadCards(context) {
 export default {
   name: "Spieleschmiede",
   created() {
-    this.$store.commit("header/show", false);
+    this.$store.commit("sidebar/show", false);
+    this.$store.commit("background/bgcolor", 'white');
     const self = this;
     auth.onAuthStateChanged(async function(user) {
       if (user) {
@@ -90,7 +91,7 @@ export default {
           name: "description",
           content: "Meine Spieleschmiede"
         },
-        { name: "robots", content: "noindex,nofollow" }
+        { name: "robots", content: "index,follow" }
       ],
       link: [
         { rel: "canonical", href: "https://www.manuelgelsen.de/impressum" },
@@ -112,7 +113,7 @@ export default {
 
 <style scoped>
 .containerCards {
-  width: 1000px;
+  max-width: 1000px;
   margin: auto;
   display: flex;
   flex-wrap: wrap;

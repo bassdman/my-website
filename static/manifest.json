@@ -7,12 +7,12 @@
     "icons": [{
         "src": "favicon-32x32.png",
         "type": "image/png",
-        "sizes": "256x256"
+        "sizes": "32x32"
     }],
     "background_color": "white",
     "theme_color": "#f4f4f4",
-    "start_url": "https://manuelgelsen.de",
-    "scope": "https.//manuelgelsen.de",
+    "start_url": "manuelgelsen.de",
+    "scope": "manuelgelsen.de",
     "display": "standalone",
     "orientation": "portrait-primary"
 }

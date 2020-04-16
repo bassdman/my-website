@@ -1,7 +1,7 @@
 <template>
   <div>
     <Sidebar></Sidebar>
-    <div class="background" v-bind:class="{flickerColor: $store.state.light.on}" v-bind:style="{'background-image':'url('+$store.state.background.src+')'}"></div>
+    <div class="background" v-bind:class="{flickerColor: $store.state.light.on}" v-bind:style="{'background-image':'url('+$store.state.background.src+')','background':$store.state.background.bgcolor }"></div>
     <Lightbulb class="lightbulbLayout" v-bind:on="$store.state.light.on"></Lightbulb>
     <headerElem></headerElem>
     <nuxt v-bind:style="{'visibility':visibility}"/>

@@ -1,5 +1,6 @@
 <template>
-  <div class="sidebar">
+<div>
+  <div class="sidebar" v-show="$store.state.sidebar.show">
     <div class="nail nail1"></div>
     <div class="nail nail2"></div>
     <div class="nail nail3"></div>
@@ -12,9 +13,9 @@
       <div v-on:click="allowAudioFn" v-bind:class="{active:allowAudio}" class="audio">Vorlesen</div>
     </div>
     <audio id="audio1">
-      <source src="welcome.mp3" type="audio/mpeg" />
+      <source src="/welcome.mp3" type="audio/mpeg" />
     </audio>
-  </div>
+  </div></div>
 </template>
 
 <script>

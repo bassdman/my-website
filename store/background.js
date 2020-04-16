@@ -1,7 +1,8 @@
 export const state = () => ({
     class: '',
     src: '',
-    figCaption: ''
+    figCaption: '',
+    bgColor: ''
 })
 export const mutations = {
     class(state, cls) {
@@ -13,4 +14,7 @@ export const mutations = {
     figcaption(state, figCaption) {
         state.figCaption = figCaption;
     },
+    bgcolor(state, color) {
+        state.bgColor = color;
+    }
 }
