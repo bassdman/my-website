@@ -28,8 +28,8 @@
 
 export default {
   name: "lebenslauf",
-  created(){
-    this.$store.commit('header/pagename', 'Lebenslauf');
+  created() {
+    this.$store.commit("header/pagename", "Lebenslauf");
   },
   head() {
     return {
@@ -50,7 +50,8 @@ export default {
         { name: "robots", content: "index,follow" }
       ],
       link: [
-        { rel: "canonical", href: "https://www.manuelgelsen.de/impressum" }
+        { rel: "canonical", href: "https://www.manuelgelsen.de/impressum" },
+        { rel: "manifest", href: "/manifest.json" }
       ]
     };
   },

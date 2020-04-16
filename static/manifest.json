@@ -1,0 +1,18 @@
+{
+    "dir": "ltr",
+    "lang": "de-DE",
+    "name": "Manus Webschmiede",
+    "short_name": "Manu",
+    "description": "Manus Webschmiede. Der Ort, wo Manus Ideen zusammenfinden und ausprobiert werden.",
+    "icons": [{
+        "src": "favicon-32x32.png",
+        "type": "image/png",
+        "sizes": "256x256"
+    }],
+    "background_color": "white",
+    "theme_color": "#f4f4f4",
+    "start_url": "https://manuelgelsen.de",
+    "scope": "https.//manuelgelsen.de",
+    "display": "standalone",
+    "orientation": "portrait-primary"
+}

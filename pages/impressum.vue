@@ -36,28 +36,40 @@
 <script>
 export default {
   name: "impressum",
-  created(){
-    this.$store.commit('header/pagename', 'Impressum');
-    this.$store.commit('background/setSrc', require('~/assets/impressum.jpg'));
-    this.$store.commit('header/show', true);
-    
-    this.$store.commit('background/figcaption', `Hintergrund:<br>Privates Photo`);
+  created() {
+    this.$store.commit("header/pagename", "Impressum");
+    this.$store.commit("background/setSrc", require("~/assets/impressum.jpg"));
+    this.$store.commit("header/show", true);
+
+    this.$store.commit(
+      "background/figcaption",
+      `Hintergrund:<br>Privates Photo`
+    );
   },
-  head(){ return {
-    // Children can override the title.
-    title: "Impressum",
-    // Result: My Page Title ← My Site
-    // If a child changes the title to "My Other Page Title",
-    // it will become: My Other Page Title ← My Site
-    titleTemplate: "Manuel Gelsen | %s",
-    // Define meta tags here.
-    meta: [
-      { name: "description", content: "Impressum  Manuel Gelsen, Postfach 1648, 90706 Fürth, Deutschland. www.manuelgelsen.de  E-Mail: info@manuelgelsen.de" },
-      { name: "robots", content: "noindex,follow" }
-    ],
-    link: [{ rel: "canonical", href: "https://www.manuelgelsen.de/impressum" }]
+  head() {
+    return {
+      // Children can override the title.
+      title: "Impressum",
+      // Result: My Page Title ← My Site
+      // If a child changes the title to "My Other Page Title",
+      // it will become: My Other Page Title ← My Site
+      titleTemplate: "Manuel Gelsen | %s",
+      // Define meta tags here.
+      meta: [
+        {
+          name: "description",
+          content:
+            "Impressum  Manuel Gelsen, Postfach 1648, 90706 Fürth, Deutschland. www.manuelgelsen.de  E-Mail: info@manuelgelsen.de"
+        },
+        { name: "robots", content: "noindex,follow" }
+      ],
+      link: [
+        { rel: "canonical", href: "https://www.manuelgelsen.de/impressum" },
+        { rel: "manifest", href: "/manifest.json" }
+      ]
+    };
   }
-}};
+};
 </script>
 
 <style scoped>
@@ -75,11 +87,11 @@ figcaption {
   font-size: small;
 }
 
-.content{
+.content {
   margin: auto;
   max-width: 1200px;
   color: white;
-  background: rgba(0,0,0,.8);
+  background: rgba(0, 0, 0, 0.8);
   padding: 1em;
 }
 </style>

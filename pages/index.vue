@@ -1,13 +1,13 @@
 <template>
   <div class="home">
     <cloud fontsize="small" class="cloudText alignCenter">
-        Icons von<br>
-        <a
-          href="https://www.flaticon.com/de/autoren/wanicon"
-          title="wanicon"
-        >wanicon</a> <br>auf<br>
-        <a href="https://www.flaticon.com/de/" title="Flaticon">www.flaticon.com</a>
-      </cloud>
+      Icons von
+      <br />
+      <a href="https://www.flaticon.com/de/autoren/wanicon" title="wanicon">wanicon</a>
+      <br />auf
+      <br />
+      <a href="https://www.flaticon.com/de/" title="Flaticon">www.flaticon.com</a>
+    </cloud>
     <h1 class="welcome">Aaaaah, frische Landluft :)</h1>
     <h1 class="welcomeSubtitle">Moooment, was sehe ich denn da unten?</h1>
 
@@ -20,10 +20,13 @@
             <div class="name pretext totalWidth alignCenter">Manuel Gelsen</div>
             <div
               class="description pretext totalWidth alignCenter"
-            >Webdesigner, Querdenker und noch vieles mehr</div>
+            >Webdesigner, Träumer und vieles mehr</div>
           </div>
         </sign>
       </div>
+      <nuxt-link prefetch to="/spieleschmiede">
+          Spieleschmiede
+        </nuxt-link>
     </div>
   </div>
 </template>
@@ -95,7 +98,7 @@ export default {
   },
   head() {
     return {
-      title: "Webdesigner, Querdenker und noch vieles mehr",
+      title: "Webdesigner, Träumer und vieles mehr",
       titleTemplate: "Manuel Gelsen | %s",
       meta: [
         {
@@ -105,7 +108,10 @@ export default {
         },
         { name: "robots", content: "index,follow" }
       ],
-      link: [{ rel: "canonical", href: "https://www.manuelgelsen.de" }]
+      link: [
+        { rel: "canonical", href: "https://www.manuelgelsen.de" },
+        { rel: "manifest", href: "/manifest.json" }
+      ]
     };
   }
 };
@@ -180,7 +186,7 @@ p {
   border: 1px solid transparent; /*notwendig wg. eines bugs in chrome. ja, richtig gehört: chrome.*/
 }
 
-.cloudText{
+.cloudText {
   color: gray;
   margin-top: -30px;
 }
@@ -188,7 +194,6 @@ p {
 .cloudText a {
   color: gray;
 }
-
 
 @media screen and (min-width: 900px) {
   .content {

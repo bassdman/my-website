@@ -4,7 +4,7 @@
     <span class="pagename">{{$store.state.header.pagename}}</span>
     <nuxt-link to="/" class="nameWithTitle">
       <span class="name">Manuel Gelsen</span>
-      <span class="subtitle">Webdesigner, Querdenker und noch vieles mehr</span>
+      <span class="subtitle">Webdesigner, Träumer und vieles mehr</span>
     </nuxt-link>
     <span class="navigation"></span>
   </div>
