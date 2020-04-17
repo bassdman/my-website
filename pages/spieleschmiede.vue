@@ -95,7 +95,7 @@ export default {
         { name: "language", content: "de" },
         {
           name: "description",
-          content: "Meine Spieleschmiede"
+          content: "Hier werden Spiele entwickelt, geschmiedet und entworfen. Für streng geheime Spiele muss man sich anmelden :)"
         },
         { name: "robots", content: "index,follow" }
       ],

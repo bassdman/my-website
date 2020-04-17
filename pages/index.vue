@@ -109,7 +109,7 @@ export default {
         {
           name: "description",
           content:
-            "Was frische Landluft alles bewirkt... Das ist also die offizielle Website von Manuel Gelsen, 30 Jahre, aus Fürth...? Hier ist ja noch alles eine Baustelle. Zeit mal, dem auf den Grund zu gehen."
+            "Was frische Landluft alles bewirkt... Das ist also die offizielle Website von Manuel Gelsen, 30 Jahre, aus Fürth...! Was gibt es hier zu entdecken? Zeit, dem mal auf den Grund zu gehen."
         },
         { name: "robots", content: "index,follow" }
       ],
