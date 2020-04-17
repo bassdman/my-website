@@ -1,7 +1,7 @@
 <template>
   <div>
     <Sidebar></Sidebar>
-    <div class="background" v-bind:class="{flickerColor: $store.state.light.on}" v-bind:style="{'background-image':'url('+$store.state.background.src+')','background':$store.state.background.bgcolor }"></div>
+    <div class="background" v-bind:class="{flickerColor: $store.state.light.on}" v-bind:style="{background:$store.state.background.bgcolor }"></div>
     <Lightbulb class="lightbulbLayout" v-bind:on="$store.state.light.on"></Lightbulb>
     <headerElem></headerElem>
     <nuxt v-bind:style="{'visibility':visibility}"/>
@@ -53,7 +53,7 @@ body{
   min-height: 100vh;
   top: 0px;
   right: 0px;
-  filter: grayscale(1);
+  filter: grayscale(1) brightness(0.05);
   background-size:cover;
   left: 0px;
   position: fixed;
@@ -73,46 +73,46 @@ body{
     filter: grayscale(0.5);
   }
   2% {
-    filter: grayscale(1);
+    filter: grayscale(1) brightness(0.05);
   }
   4% {
     filter: grayscale(0.5);
   }
   6% {
-    filter: grayscale(1);
+    filter: grayscale(1) brightness(0.05);
   }
   8% {
-    filter: grayscale(1);
+    filter: grayscale(1) brightness(0.05);
   }
   9% {
     filter: grayscale(0.5);
   }
   10% {
-    filter: grayscale(1);
+    filter: grayscale(1) brightness(0.05);
   }
   20% {
-    filter: grayscale(1);
+    filter: grayscale(1) brightness(0.05);
   }
   30% {
     filter: grayscale(0.5);
   }
   40% {
-    filter: grayscale(1);
+    filter: grayscale(1) brightness(0.05);
   }
   50% {
     filter: grayscale(0.5);
   }
   60% {
-    filter: grayscale(1);
+    filter: grayscale(1) brightness(0.05);
   }
   70% {
-    filter: grayscale(1);
+    filter: grayscale(1) brightness(0.05);
   }
   80% {
-    filter: grayscale(1);
+    filter: grayscale(1) brightness(0.05);
   }
   90% {
-    filter: grayscale(1);
+    filter: grayscale(1) brightness(0.05);
   }
   100% {
     filter: grayscale(0.5);

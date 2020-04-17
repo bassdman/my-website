@@ -1,5 +1,6 @@
 <template>
-  <article id="post-12" class="post-12 page type-page status-publish hentry content">
+  <article id="post-12" class="post-12 page type-page status-publish hentry content" v-bind:style="{color:textcolor}">
+    <h1>Datenschutz</h1>
     <div class="entry-content gbSiteContent">
       <h3 id="dsg-general-intro"></h3>
       <p>
@@ -284,13 +285,13 @@
 export default {
   name: "datenschutz",
   created() {
-    this.$store.commit("header/pagename", "Datenschutz");
-    this.$store.commit("background/setSrc", require("~/assets/impressum.jpg"));
     this.$store.commit("header/show", true);
-    this.$store.commit(
-      "background/figcaption",
-      `Hintergrund von<br><a href="https://pixabay.com/de/users/pixel2013-2364555/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=3062829">pixel2013</a> auf <a href="https://pixabay.com/de/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=3062829">Pixabay</a>`
-    );
+    this.$store.commit("background/bgcolor", "#00dcffe0");
+  },
+  computed: {
+    textcolor() {
+      return this.$store.state.light.on ? "black" : "white";
+    }
   },
   head() {
     return {
@@ -348,8 +349,11 @@ q {
   margin: auto;
   max-width: 1200px;
   color: white;
-  background: rgba(0, 0, 0, 0.8);
   padding: 1em;
   padding-top: 3em;
+}
+
+h1 {
+  font-size: 50px;
 }
 </style>

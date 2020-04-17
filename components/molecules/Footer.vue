@@ -2,9 +2,8 @@
   <footer>
     <sign link="/impressum" width="180">Impressum</sign>
     <sign link="/datenschutz" width="210">Datenschutz</sign>
-    <sign width="200" boards="6">
+    <sign width="200" boards="4">
       <div class="infosign">
-        <div class="colorWhite" v-html="$store.state.background.figCaption"></div>
         <div>v {{version}}</div>
       </div>
     </sign>

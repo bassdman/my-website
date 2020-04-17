@@ -1,5 +1,5 @@
 <template>
-  <div class="all">
+  <div class="all" v-bind:style="{color:textcolor}">
     <h1>Spieleschmiede</h1>
     <div class="containerLogin" v-if="!isLoggedIn">
       <div class="subcontainerLogin">
@@ -45,8 +45,9 @@ async function loadCards(context) {
 export default {
   name: "Spieleschmiede",
   created() {
-    this.$store.commit("sidebar/show", false);
-    this.$store.commit("background/bgcolor", 'white');
+    //this.$store.commit("sidebar/show", false);
+    this.$store.commit("background/bgcolor", "#00dcffe0");
+
     const self = this;
     auth.onAuthStateChanged(async function(user) {
       if (user) {
@@ -54,6 +55,11 @@ export default {
         await loadCards(self);
       }
     });
+  },
+  computed: {
+    textcolor() {
+      return this.$store.state.light.on ? "black" : "white";
+    }
   },
   methods: {
     async login() {
@@ -157,6 +163,7 @@ button {
   height: 30px;
   border: 1px solid gray;
   margin-top: 30px;
+  font-size: 16px;
   flex: 1 100%;
   cursor: pointer;
 }

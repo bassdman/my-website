@@ -1,5 +1,6 @@
 <template>
   <div class="content">
+    <h1>Impressum</h1>
     <div class="gbSiteContent">
       <p>
         Manuel Gelsen
@@ -37,14 +38,13 @@
 export default {
   name: "impressum",
   created() {
-    this.$store.commit("header/pagename", "Impressum");
-    this.$store.commit("background/setSrc", require("~/assets/impressum.jpg"));
     this.$store.commit("header/show", true);
-
-    this.$store.commit(
-      "background/figcaption",
-      `Hintergrund:<br>Privates Photo`
-    );
+    this.$store.commit("background/bgcolor", '#00dcffe0');
+  },
+  computed: {
+    textcolor(){
+      return this.$store.state.light.on ? 'black' : 'white';
+    }
   },
   head() {
     return {
@@ -91,7 +91,10 @@ figcaption {
   margin: auto;
   max-width: 1200px;
   color: white;
-  background: rgba(0, 0, 0, 0.8);
   padding: 1em;
+}
+
+h1{
+  font-size: 50px;
 }
 </style>

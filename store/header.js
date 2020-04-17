@@ -5,9 +5,6 @@ export const state = () => ({
     show: true
 })
 export const mutations = {
-    pagename(state, pagename) {
-        state.pagename = pagename;
-    },
     show(state, show) {
         if (state.show != show)
             state.show = show;

@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <cloud fontsize="small" class="cloudText alignCenter">
+    <cloud fontsize="small" class="cloudText alignCenter" v-bind:background="cloudbackground">
       Icons von
       <br />
       <a href="https://www.flaticon.com/de/autoren/wanicon" title="wanicon">wanicon</a>
@@ -8,8 +8,10 @@
       <br />
       <a href="https://www.flaticon.com/de/" title="Flaticon">www.flaticon.com</a>
     </cloud>
-    <h1 class="welcome">Aaaaah, frische Landluft :)</h1>
-    <h1 class="welcomeSubtitle">Moooment, was sehe ich denn da unten?</h1>
+    <h1 class="welcome" v-if="!$store.state.light.on">Was für eine schöööne Nacht :)</h1>
+    <h1 class="welcomeSubtitle" v-if="!$store.state.light.on">Zeit, mal die Sterne zu zählen</h1>
+    <h1 class="welcome" v-if="$store.state.light.on">Waah, es ist so hell!!!</h1>
+    <h1 class="welcomeSubtitle" v-if="$store.state.light.on">Wer hat das Licht angemacht?</h1>
 
     <Castle class="castle"></Castle>
     <div class="content" id="content">
@@ -71,16 +73,19 @@ export default {
       if (width > 400) return width - 100;
 
       return width - 20;
-    }
+    },  
+  cloudbackground(){
+    if(this.$store.state.light.on)
+      return 'white';
+    else
+      return '#888888';
+  },
   },
   created() {
     this.blockRouteEvent = false;
-    this.$store.commit("background/setSrc", require("~/assets/berge.jpg"));
-    this.$store.commit(
-      "background/figcaption",
-      `Hintergrund:<br>Privates Photo<br><br>`
-    );
-
+    this.$store.commit("background/bgcolor", '#00dcffe0');
+    this.$store.commit("sidebar/show", true);
+   
     if (!process.client) return 0;
 
     function getContentPosition() {
@@ -187,12 +192,12 @@ p {
 }
 
 .cloudText {
-  color: gray;
+  color: black;
   margin-top: -30px;
 }
 
 .cloudText a {
-  color: gray;
+  color: black;
 }
 
 @media screen and (min-width: 900px) {
