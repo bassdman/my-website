@@ -1,32 +1,43 @@
   <template>
   <!-- Der Default Header -->
   <div class="header" v-bind:class="{'displayNone': !$store.state.header.show || false}">
+    <div></div>
     <nuxt-link to="/" class="nameWithTitle">
       <span class="name">Manuel Gelsen</span>
       <span class="subtitle">Webdesigner, Träumer und vieles mehr</span>
     </nuxt-link>
+    <div class="menu">
+      <label v-if="$store.state.header.buttonAddCard" class="button">
+        <button class="card buttonImage">+</button>
+        <div class="buttonLabel">Neue Karte</div>
+      </label>
+      <label v-if="$store.state.header.buttonAddCard" class="button">
+        <button class="card buttonImage"><img src="~assets/bearbeiten.svg"></button>
+        <div class="buttonLabel">Karten<br>bearbeiten</div>
+      </label>
+    </div>
   </div>
 </template>
 
 <script>
 export default {
-  name: "headerElem",
+  name: "headerElem"
 };
 </script>
 
 <style scoped>
 .header {
   display: flex;
-  position: sticky; 
-  justify-content:center;
+  position: sticky;
+  height: 90px;
+  justify-content: space-between;
   top: 0px;
-  padding-bottom: 1em;
-  background: rgba(0,0,0,.7);
+  background: rgba(0, 0, 0, 0.7);
 }
-.navigation{
+.navigation {
   flex: 1;
 }
-.nameWithTitle{
+.nameWithTitle {
   display: inline-flex;
   text-align: center;
   flex-direction: column;
@@ -45,7 +56,42 @@ export default {
   font-weight: bold;
   color: white;
 }
-.displayNone{
+.menu {
+  color: white;
+  display:flex; 
+  align-items: top;
+}
+.displayNone {
   display: none;
+}
+.button {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.buttonLabel{
+    font-size: 12px;
+    text-align: center;
+    height: 30px;
+    display: inline-flex;
+    align-items: center;
+}
+.card {
+  width: 30px;
+  height: 42px;
+  font-size: larger;
+  border-radius: 3px;
+}
+.button{
+  cursor: pointer;
+  margin: 10px 10px;
+}
+.button:hover .buttonImage{
+  border: 1px solid #00dcffe0;
+  cursor: pointer;
+}
+
+.button:hover .buttonLabel{
+  color: #00dcffe0;
 }
 </style>

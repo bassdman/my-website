@@ -1,12 +1,7 @@
 <template>
   <div class="home">
     <cloud fontsize="small" class="cloudText alignCenter" v-bind:background="cloudbackground">
-      Icons von
-      <br />
-      <a href="https://www.flaticon.com/de/autoren/wanicon" title="wanicon">wanicon</a>
-      <br />auf
-      <br />
-      <a href="https://www.flaticon.com/de/" title="Flaticon">www.flaticon.com</a>
+      Wohin zieht <br> diese Wolke?
     </cloud>
     <h1 class="welcome" v-if="!$store.state.light.on">Was für eine schöööne Nacht :)</h1>
     <h1 class="welcomeSubtitle" v-if="!$store.state.light.on">Zeit, mal die Sterne zu zählen</h1>

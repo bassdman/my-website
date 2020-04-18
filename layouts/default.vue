@@ -53,7 +53,7 @@ body{
   min-height: 100vh;
   top: 0px;
   right: 0px;
-  filter: grayscale(1) brightness(0.05);
+  filter: grayscale(1) brightness(0);
   background-size:cover;
   left: 0px;
   position: fixed;
@@ -73,46 +73,46 @@ body{
     filter: grayscale(0.5);
   }
   2% {
-    filter: grayscale(1) brightness(0.05);
+    filter: grayscale(1) brightness(0);
   }
   4% {
     filter: grayscale(0.5);
   }
   6% {
-    filter: grayscale(1) brightness(0.05);
+    filter: grayscale(1) brightness(0);
   }
   8% {
-    filter: grayscale(1) brightness(0.05);
+    filter: grayscale(1) brightness(0);
   }
   9% {
     filter: grayscale(0.5);
   }
   10% {
-    filter: grayscale(1) brightness(0.05);
+    filter: grayscale(1) brightness(0);
   }
   20% {
-    filter: grayscale(1) brightness(0.05);
+    filter: grayscale(1) brightness(0);
   }
   30% {
     filter: grayscale(0.5);
   }
   40% {
-    filter: grayscale(1) brightness(0.05);
+    filter: grayscale(1) brightness(0);
   }
   50% {
     filter: grayscale(0.5);
   }
   60% {
-    filter: grayscale(1) brightness(0.05);
+    filter: grayscale(1) brightness(0);
   }
   70% {
-    filter: grayscale(1) brightness(0.05);
+    filter: grayscale(1) brightness(0);
   }
   80% {
-    filter: grayscale(1) brightness(0.05);
+    filter: grayscale(1) brightness(0);
   }
   90% {
-    filter: grayscale(1) brightness(0.05);
+    filter: grayscale(1) brightness(0);
   }
   100% {
     filter: grayscale(0.5);

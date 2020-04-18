@@ -66,6 +66,8 @@ export default {
   width: 74mm;
   height: 105mm;
   border: 1px solid black;
+  background: white;
+  color: black;
   padding: 10px;
 }
 h1 {
