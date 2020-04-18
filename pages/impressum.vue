@@ -39,8 +39,10 @@ export default {
   name: "impressum",
   created() {
     this.$store.commit("header/show", true);
+    this.$store.commit("header/hideAllButtons",true);
     this.$store.commit("background/bgcolor", '#00dcffe0');
   },
+ 
   computed: {
     textcolor(){
       return this.$store.state.light.on ? 'black' : 'white';

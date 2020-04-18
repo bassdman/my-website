@@ -47,7 +47,7 @@ export default {
   created() {
     //this.$store.commit("sidebar/show", false);
     this.$store.commit("background/bgcolor", "#00dcffe0");
-
+    this.$store.commit("header/showButtons",['modifyCard','addCard']);
     const self = this;
     auth.onAuthStateChanged(async function(user) {
       if (user) {

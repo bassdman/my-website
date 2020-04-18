@@ -1,17 +1,17 @@
   <template>
   <!-- Der Default Header -->
   <div class="header" v-bind:class="{'displayNone': !$store.state.header.show || false}">
-    <div></div>
+    <div class="menu"></div>
     <nuxt-link to="/" class="nameWithTitle">
       <span class="name">Manuel Gelsen</span>
       <span class="subtitle">Webdesigner, Träumer und vieles mehr</span>
     </nuxt-link>
     <div class="menu">
-      <label v-if="$store.state.header.buttonAddCard" class="button">
+      <label v-if="$store.state.header.buttonAddCard==true" class="button">
         <button class="card buttonImage">+</button>
         <div class="buttonLabel">Neue Karte</div>
       </label>
-      <label v-if="$store.state.header.buttonAddCard" class="button">
+      <label v-if="$store.state.header.buttonModifyCard" class="button">
         <button class="card buttonImage"><img src="~assets/bearbeiten.svg"></button>
         <div class="buttonLabel">Karten<br>bearbeiten</div>
       </label>
@@ -60,6 +60,7 @@ export default {
   color: white;
   display:flex; 
   align-items: top;
+  width: 200px;
 }
 .displayNone {
   display: none;
@@ -87,11 +88,11 @@ export default {
   margin: 10px 10px;
 }
 .button:hover .buttonImage{
-  border: 1px solid #00dcffe0;
+  border: 1px solid goldenrod;
   cursor: pointer;
 }
 
 .button:hover .buttonLabel{
-  color: #00dcffe0;
+  color: goldenrod;
 }
 </style>
