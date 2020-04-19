@@ -19,7 +19,7 @@
     </div>
     <div class="containerCards" v-if="isLoggedIn">
       <div v-for="card in cards" :key="card.title" class="cardContainer">
-        <card :config="card" :modify="$store.state.header.modifyMode"></card>
+        <card :config="card" :modify="$store.state.cards.modifyMode"></card>
       </div>
     </div>
   </div>
@@ -29,20 +29,6 @@
 import card from "../components/gameoflive/karte";
 import { db, auth } from "../plugins/initFirebase";
 
-async function loadCards(context) {
-  return db
-    .collection("cards")
-    .get()
-    .then(querySnapshot => {
-      const cards = [];
-      querySnapshot.forEach(function(doc) {
-        // doc.data() is never undefined for query doc snapshots
-        const card = Object.assign({ _id: doc.id }, doc.data());
-        cards.push(card);
-      });
-      context.cards = cards;
-    });
-}
 
 export default {
   name: "Spieleschmiede",
@@ -54,7 +40,11 @@ export default {
     auth.onAuthStateChanged(async function(user) {
       if (user) {
         self.isLoggedIn = true;
-        await loadCards(self);
+        self.$store.dispatch("cards/load").then((cards) => {
+          console.log('baa')
+          console.log(cards)
+          self.cards = cards;
+        });
       }
     });
   },

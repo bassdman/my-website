@@ -42,7 +42,6 @@
 </template>
 
 <script>
-import { db } from "../../plugins/initFirebase";
 
 const interessen = {
   natur: {
@@ -116,20 +115,7 @@ export default {
         : _default;
     },
     save(evt) {
-      const doc = db.collection("cards").doc(this.config._id);
-      return doc
-        .set({
-          title: this.config.title,
-          interesse: this.config.interesse,
-          description: this.config.description,
-          cardType: this.config.cardType
-        })
-        .then(function() {
-          console.log("Card successfully saved!");
-        })
-        .catch(function(error) {
-          console.error("Error writing document: ", error);
-        });
+      this.$store.dispatch("cards/save", this.config);
     }
   }
 };

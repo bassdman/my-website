@@ -7,7 +7,7 @@
       <span class="subtitle">Webdesigner, Träumer und vieles mehr</span>
     </nuxt-link>
     <div class="menu">
-      <label v-show="$store.state.header.buttonAddCard==true" class="button">
+      <label v-show="$store.state.header.buttonAddCard==true" class="button" v-on:click="addNewCard">
         <button class="card buttonImage">+</button>
         <div class="buttonLabel">Neue Karte</div>
       </label>
@@ -37,9 +37,12 @@ export default {
     };
   },
   methods: {
+    addNewCard(){
+      this.$store.commit("cards/addNewCard");
+    },
     toggleModifyMode() {
       this.modifyMode = !this.modifyMode;
-      this.$store.commit("header/modifyMode", this.modifyMode);
+      this.$store.commit("cards/modifyMode", this.modifyMode);
     }
   }
 };
