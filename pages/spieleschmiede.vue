@@ -18,7 +18,7 @@
       </div>
     </div>
     <div class="containerCards" v-if="isLoggedIn">
-      <div v-for="card in cards" :key="card.title" class="cardContainer">
+      <div v-for="card in $store.state.cards.cards" :key="card._id" class="cardContainer">
         <card :config="card" :modify="$store.state.cards.modifyMode"></card>
       </div>
     </div>
@@ -41,9 +41,7 @@ export default {
       if (user) {
         self.isLoggedIn = true;
         self.$store.dispatch("cards/load").then((cards) => {
-          console.log('baa')
-          console.log(cards)
-          self.cards = cards;
+          self.$store.commit('cards/setCards',cards);
         });
       }
     });
@@ -102,8 +100,7 @@ export default {
       isLoggedIn: false,
       loginEmail: "",
       loginPassword: "",
-      errormsg: "",
-      cards: []
+      errormsg: ""
     };
   }
 };

@@ -7,10 +7,6 @@
       <span class="subtitle">Webdesigner, Träumer und vieles mehr</span>
     </nuxt-link>
     <div class="menu">
-      <label v-show="$store.state.header.buttonAddCard==true" class="button" v-on:click="addNewCard">
-        <button class="card buttonImage">+</button>
-        <div class="buttonLabel">Neue Karte</div>
-      </label>
       <label
         v-show="$store.state.header.buttonModifyCard"
         class="button"
@@ -23,6 +19,10 @@
           Karten
           <br />bearbeiten
         </div>
+      </label>
+      <label v-show="$store.state.header.buttonAddCard==true && modifyMode" class="button" v-on:click="addNewCard">
+        <button class="card buttonImage">+</button>
+        <div class="buttonLabel">Neue Karte</div>
       </label>
     </div>
   </div>
@@ -125,5 +125,9 @@ export default {
 }
 .modifyModeColor {
   color: goldenrod;
+}
+
+.menu{
+  flex-direction: row-reverse;
 }
 </style>

@@ -10,20 +10,24 @@ export const mutations = {
             state.modifyMode = modifyMode;
     },
     addNewCard(state) {
-        state.addNewCard = true;
+        state.cards.unshift({
+            cardType: "initial",
+            description: "Beschreibung einer neuen Karte",
+            interesse: "initial",
+            title: "Titel einer neuen Karte",
+            _id: Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15)
+        })
     },
     update(state, card) {
         state.cards = state.cards.map(_card => {
             if (_card._id == card._id)
-                return card;
+                return Object.assign({}, _card, card);
             else
                 return _card;
         });
-        console.log('updateCard');
-        console.log(state.cards)
+        console.log(state.cards, card)
     },
     setCards(state, cards) {
-        console.log(cards)
         state.cards = cards;
     }
 }
@@ -40,19 +44,16 @@ export const actions = {
                     const card = Object.assign({ _id: doc.id }, doc.data());
                     cards.push(card);
                 });
-                //    context.commit('setCards', cards);
                 return cards;
             });
     },
     save(context, card) {
-        const doc = db.collection("cards").doc(card._id);
-        const cardData = card;
-        delete cardData._id;
+        const doc = getDoc(card);
 
-        return doc
-            .update(cardData)
-            .then(function() {
-                console.log("card saved: ", card);
+        return doc.set(card)
+            .then(function(docRef) {
+                console.log("card saved: ", docRef);
+                return docRef;
             })
             .catch(function(error) {
                 console.error("Error writing document: ", error);
@@ -60,8 +61,9 @@ export const actions = {
     }
 }
 
-export const getters = {
-    cards(state) {
-        return state.cards;
-    }
+function getDoc(card) {
+    if (card._id)
+        return db.collection("cards").doc(card._id)
+    else
+        return db.collection("cards").doc();
 }

@@ -2,7 +2,7 @@
   <div class="cardContainer" :class="{modifyCard:modify}">
     <div class="header">
       <span class="groupTitle" v-if="!modify">{{cardTypeTitle()}}</span>
-      <select v-if="modify" v-model="config.cardType" @change="save($event)">
+      <select v-if="modify" @change="save($event)" id="cardType">
         <option
           v-for="opt in typeSelect()"
           :key="opt.key"
@@ -17,7 +17,7 @@
         v-bind:style="{color:interesse('color','#cccccc')}"
         v-if="!modify && config.cardType=='action'"
       ></span>
-      <select v-if="modify && config.cardType=='action'" @change="save($event)">
+      <select v-if="modify && config.cardType=='action'" @change="save($event)" id="interesse">
         <option
           v-for="opt in interessenSelect()"
           :key="opt.key"
@@ -27,14 +27,16 @@
       </select>
     </div>
     <h1 class="headline" v-if="!modify">{{config.title}}</h1>
-    <input class="headline" v-model="config.title" v-if="modify" @change="save($event)" />
+    <input class="headline" :value="config.title" v-if="modify" @change="save($event)" @click="selectText" id="title" />
 
     <div class="content" v-bind:style="{background:interesse('background','#cccccccc')}">
       <textarea
         class="description"
-        v-model="config.description"
+        :value="config.description"
         @change="save($event)"
         v-if="modify"
+         @click="selectText"
+         id="description"
       ></textarea>
       <div class="description" v-html="config.description" v-if="!modify"></div>
     </div>
@@ -65,6 +67,9 @@ const cardTypes = {
   },
   assholecard: {
     label: "(Anti-) Arschlochkarte"
+  },
+  initial: {
+    label: "Kein Kartentyp definiert"
   }
 };
 
@@ -79,6 +84,9 @@ export default {
     }
   },
   methods: {
+    selectText(evt){
+      evt.target.select();
+    },
     interessenSelect() {
       return Object.keys(interessen).map(interesse =>
         Object.assign(
@@ -115,7 +123,11 @@ export default {
         : _default;
     },
     save(evt) {
-      this.$store.dispatch("cards/save", this.config);
+      const saveObj=Object.assign({},this.config);
+      saveObj[evt.target.id] = evt.target.value;
+
+      this.$store.commit("cards/update",saveObj);
+      this.$store.dispatch("cards/save", saveObj);
     }
   }
 };
