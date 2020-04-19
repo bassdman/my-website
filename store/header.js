@@ -1,20 +1,23 @@
 export const state = () => ({
     show: true,
     buttonAddCard: false,
-    buttonModifyCard: false
+    buttonModifyCard: false,
+    modifyMode: false,
 })
 export const mutations = {
     show(state, show) {
         if (state.show != show)
             state.show = show;
     },
+    modifyMode(state, modifyMode) {
+        if (state.modifyMode != modifyMode)
+            state.modifyMode = modifyMode;
+    },
     hideAllButtons(state) {
-        console.log('hides all buttons')
         state.buttonAddCard = false;
         state.buttonModifyCard = false;
     },
     showButtons(state, buttons = []) {
-        console.log('showbuttons')
         mutations.hideAllButtons(state);
 
         if (typeof buttons == 'string')

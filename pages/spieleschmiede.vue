@@ -2,6 +2,8 @@
   <div class="all" v-bind:style="{color:textcolor}">
     <h1>Spieleschmiede</h1>
     <div class="containerLogin" v-if="!isLoggedIn">
+      <div class="introText">Hier entstehen Ideen, Spiele, werden Sachen ausprobiert,... Manches ist noch nicht für die Allgemeinheit bestimmt, weil noch etwas daran gearbeitet werden soll.
+      Deshalb ist es nur für manche Personen sichtbar :D</div>
       <div class="subcontainerLogin">
         <label>
           E-Mail:
@@ -17,7 +19,7 @@
     </div>
     <div class="containerCards" v-if="isLoggedIn">
       <div v-for="card in cards" :key="card.title" class="cardContainer">
-        <card :config="card"></card>
+        <card :config="card" :modify="$store.state.header.modifyMode"></card>
       </div>
     </div>
   </div>
@@ -45,7 +47,7 @@ async function loadCards(context) {
 export default {
   name: "Spieleschmiede",
   created() {
-    //this.$store.commit("sidebar/show", false);
+    this.$store.commit("sidebar/show", false);
     this.$store.commit("background/bgcolor", "#00dcffe0");
     this.$store.commit("header/showButtons",['modifyCard','addCard']);
     const self = this;
@@ -136,6 +138,7 @@ h1 {
   display: flex;
   justify-content: center;
   min-height: 500px;
+  flex-wrap: wrap;
 }
 .subcontainerLogin {
   display: flex;
@@ -169,5 +172,8 @@ button {
 }
 .error {
   color: red;
+}
+.introText{
+  flex: 1 100%;
 }
 </style>

@@ -7,13 +7,22 @@
       <span class="subtitle">Webdesigner, Träumer und vieles mehr</span>
     </nuxt-link>
     <div class="menu">
-      <label v-if="$store.state.header.buttonAddCard==true" class="button">
+      <label v-show="$store.state.header.buttonAddCard==true" class="button">
         <button class="card buttonImage">+</button>
         <div class="buttonLabel">Neue Karte</div>
       </label>
-      <label v-if="$store.state.header.buttonModifyCard" class="button">
-        <button class="card buttonImage"><img src="~assets/bearbeiten.svg"></button>
-        <div class="buttonLabel">Karten<br>bearbeiten</div>
+      <label
+        v-show="$store.state.header.buttonModifyCard"
+        class="button"
+        v-on:click="toggleModifyMode"
+      >
+        <button class="card buttonImage" :class="{'modifyMode':modifyMode}">
+          <img src="~assets/bearbeiten.svg" />
+        </button>
+        <div class="buttonLabel" v-on:click="toggleModifyMode" :class="{'modifyModeColor':modifyMode}">
+          Karten
+          <br />bearbeiten
+        </div>
       </label>
     </div>
   </div>
@@ -21,7 +30,18 @@
 
 <script>
 export default {
-  name: "headerElem"
+  name: "headerElem",
+  data() {
+    return {
+      modifyMode: false
+    };
+  },
+  methods: {
+    toggleModifyMode() {
+      this.modifyMode = !this.modifyMode;
+      this.$store.commit("header/modifyMode", this.modifyMode);
+    }
+  }
 };
 </script>
 
@@ -58,7 +78,7 @@ export default {
 }
 .menu {
   color: white;
-  display:flex; 
+  display: flex;
   align-items: top;
   width: 200px;
 }
@@ -70,29 +90,37 @@ export default {
   flex-direction: column;
   align-items: center;
 }
-.buttonLabel{
-    font-size: 12px;
-    text-align: center;
-    height: 30px;
-    display: inline-flex;
-    align-items: center;
+.buttonLabel {
+  font-size: 12px;
+  text-align: center;
+  height: 30px;
+  display: inline-flex;
+  align-items: center;
 }
 .card {
   width: 30px;
   height: 42px;
   font-size: larger;
+  border:none;
   border-radius: 3px;
 }
-.button{
-  cursor: pointer;
+.button {
   margin: 10px 10px;
 }
-.button:hover .buttonImage{
-  border: 1px solid goldenrod;
+.button:hover .buttonImage {
+  background: goldenrod;
   cursor: pointer;
 }
 
-.button:hover .buttonLabel{
+.button:hover .buttonLabel {
+  color: goldenrod;
+  cursor: pointer;
+}
+
+.modifyMode {
+  background: goldenrod;
+}
+.modifyModeColor {
   color: goldenrod;
 }
 </style>
