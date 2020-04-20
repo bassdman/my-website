@@ -66,9 +66,11 @@ export default {
 @media screen and (min-width: 550px) {
   .name {
     font-size: 35px;
+    display: block;
   }
   .subtitle {
     font-size: 20px;
+    display: block;
   }
 }
 @media screen and (min-width: 870px) {
