@@ -55,7 +55,7 @@ export default {
     async login() {
       const self = this;
       try {
-        await auth.setPersistence("session");
+        await auth.setPersistence("local");
         await auth.signInWithEmailAndPassword(
           this.loginEmail,
           this.loginPassword

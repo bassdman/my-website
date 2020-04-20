@@ -15,12 +15,20 @@
         <button class="card buttonImage" :class="{'modifyMode':modifyMode}">
           <img src="~assets/bearbeiten.svg" />
         </button>
-        <div class="buttonLabel" v-on:click="toggleModifyMode" :class="{'modifyModeColor':modifyMode}">
+        <div
+          class="buttonLabel"
+          v-on:click="toggleModifyMode"
+          :class="{'modifyModeColor':modifyMode}"
+        >
           Karten
           <br />bearbeiten
         </div>
       </label>
-      <label v-show="$store.state.header.buttonAddCard==true && modifyMode" class="button" v-on:click="addNewCard">
+      <label
+        v-show="$store.state.header.buttonAddCard==true && modifyMode"
+        class="button"
+        v-on:click="addNewCard"
+      >
         <button class="card buttonImage">+</button>
         <div class="buttonLabel">Neue Karte</div>
       </label>
@@ -37,7 +45,7 @@ export default {
     };
   },
   methods: {
-    addNewCard(){
+    addNewCard() {
       this.$store.commit("cards/addNewCard");
     },
     toggleModifyMode() {
@@ -49,6 +57,29 @@ export default {
 </script>
 
 <style scoped>
+.name {
+  display:none;
+}
+.subtitle {
+  display:none;
+}
+@media screen and (min-width: 550px) {
+  .name {
+    font-size: 35px;
+  }
+  .subtitle {
+    font-size: 20px;
+  }
+}
+@media screen and (min-width: 870px) {
+  .name {
+    font-size: 40px;
+  }
+  .subtitle {
+    font-size: 28px;
+  }
+}
+
 .header {
   display: flex;
   position: sticky;
@@ -71,11 +102,9 @@ export default {
 .subtitle {
   color: white;
   text-align: center;
-  font-size: 20px;
 }
 
 .name {
-  font-size: 48px;
   font-weight: bold;
   color: white;
 }
@@ -104,7 +133,7 @@ export default {
   width: 30px;
   height: 42px;
   font-size: larger;
-  border:none;
+  border: none;
   border-radius: 3px;
 }
 .button {
@@ -127,7 +156,7 @@ export default {
   color: goldenrod;
 }
 
-.menu{
+.menu {
   flex-direction: row-reverse;
 }
 </style>

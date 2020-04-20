@@ -27,7 +27,7 @@
       </select>
     </div>
     <h1 class="headline" v-if="!modify">{{config.title}}</h1>
-    <input class="headline" :value="config.title" v-if="modify" @change="save($event)" @click="selectText" id="title" />
+    <input class="headline" :value="config.title" v-if="modify" @change="save($event)" @focus="selectText" id="title" />
 
     <div class="content" v-bind:style="{background:interesse('background','#cccccccc')}">
       <textarea
@@ -35,7 +35,7 @@
         :value="config.description"
         @change="save($event)"
         v-if="modify"
-         @click="selectText"
+         @focus="selectText"
          id="description"
       ></textarea>
       <div class="description" v-html="config.description" v-if="!modify"></div>
