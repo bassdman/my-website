@@ -1,3 +1,8 @@
+const features = [
+    'Object.entries',
+    'Object.values'
+].join('%2C');
+
 module.exports = {
     /*
      ** Headers of the page
@@ -13,7 +18,10 @@ module.exports = {
         link: [
             { rel: 'icon', type: 'image/png', sizes: "16x16", href: '/favicon-16x16.png' },
             { rel: 'icon', type: 'image/png', sizes: "32x32", href: '/favicon-32x32.png' }
-        ]
+        ],
+        script: [
+            { src: `https://polyfill.io/v3/polyfill.min.js?features=${features}`, body: true },
+        ],
     },
     /*
      ** Customize the progress bar color
