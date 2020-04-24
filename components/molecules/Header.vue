@@ -6,7 +6,7 @@
       <span class="name">Manuel Gelsen</span>
       <span class="subtitle">Webdesigner, Träumer und vieles mehr</span>
     </nuxt-link>
-    <div class="menu">
+    <div class="menu"> 
       <label
         v-show="$store.state.header.buttonModifyCard"
         class="button"

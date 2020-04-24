@@ -5,13 +5,17 @@
     "short_name": "Manu",
     "description": "Manus Webschmiede. Der Ort, wo Manus Ideen zusammenfinden und ausprobiert werden.",
     "icons": [{
-        "src": "favicon-32x32.png",
+        "src": "favicon-192x192.png",
         "type": "image/png",
-        "sizes": "32x32"
+        "sizes": "192x192"
+    }, {
+        "src": "favicon-512x512.png",
+        "type": "image/png",
+        "sizes": "512x512"
     }],
     "background_color": "white",
     "theme_color": "#f4f4f4",
-    "start_url": "manuelgelsen.de",
+    "start_url": "/",
     "scope": "manuelgelsen.de",
     "display": "standalone",
     "orientation": "portrait-primary"

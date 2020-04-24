@@ -18,7 +18,7 @@
       </div>
     </div>
     <div class="containerCards" v-if="isLoggedIn">
-      <div v-for="card in $store.state.cards.cards" :key="card._id" class="cardContainer">
+      <div v-for="card in $store.getters['cards/allCards']" :key="card._id" class="cardContainer">
         <card :config="card" :modify="$store.state.cards.modifyMode"></card>
       </div>
     </div>
@@ -60,7 +60,6 @@ export default {
           this.loginEmail,
           this.loginPassword
         );
-        await loadCards(self);
         this.isLoggedIn = true;
       } catch (error) {
         var errorCode = error.code;
@@ -90,7 +89,7 @@ export default {
         { name: "robots", content: "index,follow" }
       ],
       link: [
-        { rel: "canonical", href: "https://www.manuelgelsen.de/impressum" },
+        { rel: "canonical", href: "https://www.manuelgelsen.de/spieleschmiede" },
         { rel: "manifest", href: "/manifest.json" }
       ]
     };

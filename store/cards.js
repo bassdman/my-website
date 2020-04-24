@@ -1,8 +1,43 @@
 import { db, auth } from "../plugins/initFirebase";
+import Vue from 'vue';
+import _ from 'lodash'
+
+const interessen = {
+    natur: {
+        background: "#30ad077d",
+        color: "#30ad07",
+        label: "Natur"
+    },
+    geld: {
+        background: "#f5f75a7d",
+        color: "#ff9900",
+        label: "Geld"
+    },
+    sozial: {
+        background: "#f7705a6e",
+        color: "#f7705a",
+        label: "Sozial"
+    },
+};
+
+const cardTypes = {
+    action: {
+        label: "Aktion"
+    },
+    global: {
+        label: "Global"
+    },
+    assholecard: {
+        label: "(Anti-) Arschlochkarte"
+    },
+    initial: {
+        label: "Kein Kartentyp definiert"
+    }
+};
 
 export const state = () => ({
     modifyMode: false,
-    cards: [],
+    cards: {},
 })
 export const mutations = {
     modifyMode(state, modifyMode) {
@@ -10,22 +45,22 @@ export const mutations = {
             state.modifyMode = modifyMode;
     },
     addNewCard(state) {
-        state.cards.unshift({
+        const id = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
+        const newCard = {
             cardType: "initial",
             description: "Beschreibung einer neuen Karte",
             interesse: "initial",
             title: "Titel einer neuen Karte",
-            _id: Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15)
-        })
+            _id: id,
+            _order: Object.keys(state.cards).length,
+            _created: new Date()
+        };
+
+        Vue.set(state.cards, id, newCard);
+        console.log(newCard._order)
     },
     update(state, card) {
-        state.cards = state.cards.map(_card => {
-            if (_card._id == card._id)
-                return Object.assign({}, _card, card);
-            else
-                return _card;
-        });
-        console.log(state.cards, card)
+        Vue.set(state.cards, card._id, Object.assign({}, state.cards[card._id], card));
     },
     setCards(state, cards) {
         state.cards = cards;
@@ -38,16 +73,16 @@ export const actions = {
             .collection("cards")
             .get()
             .then(querySnapshot => {
-                const cards = [];
+                const cards = {};
                 querySnapshot.forEach(function(doc) {
                     // doc.data() is never undefined for query doc snapshots
                     const card = Object.assign({ _id: doc.id }, doc.data());
-                    cards.push(card);
+                    cards[card._id] = card;
                 });
                 return cards;
             });
     },
-    save(context, card) {
+    save: _.debounce((context, card) => {
         const doc = getDoc(card);
 
         return doc.set(card)
@@ -58,8 +93,23 @@ export const actions = {
             .catch(function(error) {
                 console.error("Error writing document: ", error);
             });
-    }
+    }, 1000)
 }
+
+export const getters = {
+    allCards(state) {
+        const cards = Object.values(state.cards).sort((a, b) => { return b._order - a._order });
+        console.log(cards)
+        return cards;
+    },
+    attribute(state, id, propertyname) {
+        if (state.cards[id])
+            return state.cards[id][propertyname];
+        else
+            return '';
+    },
+
+};
 
 function getDoc(card) {
     if (card._id)

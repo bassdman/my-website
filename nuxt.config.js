@@ -17,7 +17,9 @@ module.exports = {
         ],
         link: [
             { rel: 'icon', type: 'image/png', sizes: "16x16", href: '/favicon-16x16.png' },
-            { rel: 'icon', type: 'image/png', sizes: "32x32", href: '/favicon-32x32.png' }
+            { rel: 'icon', type: 'image/png', sizes: "32x32", href: '/favicon-32x32.png' },
+            { rel: 'icon', type: 'image/png', sizes: "192x192", href: '/favicon-192x192.png' },
+            { rel: 'icon', type: 'image/png', sizes: "512x512", href: '/favicon-512x512.png' }
         ],
         script: [
             { src: `https://polyfill.io/v3/polyfill.min.js?features=${features}`, body: true },
@@ -44,5 +46,14 @@ module.exports = {
                 })
             }
         }
-    }
+    },
+    plugins: [{
+            src: '~/plugins/serviceworkers-init.js',
+            ssr: false
+        },
+        {
+            src: '~/plugins/composition-api.js',
+            ssr: false
+        }
+    ]
 }

@@ -26,25 +26,17 @@
         >{{opt.label}}</option>
       </select>
     </div>
-    <h1 class="headline" v-if="!modify">{{config.title}}</h1>
-    <input class="headline" :value="config.title" v-if="modify" @change="save($event)" @focus="selectText" id="title" />
+    <h1 class="headline" v-if="!modify">{{title}}</h1>
+    <input class="headline" v-model="title" v-if="modify" @focus="selectText"/>
 
     <div class="content" v-bind:style="{background:interesse('background','#cccccccc')}">
-      <textarea
-        class="description"
-        :value="config.description"
-        @change="save($event)"
-        v-if="modify"
-         @focus="selectText"
-         id="description"
-      ></textarea>
-      <div class="description" v-html="config.description" v-if="!modify"></div>
+      <textarea class="description" v-model="description" v-if="modify" @focus="selectText"></textarea>
+      <div class="description" v-html="description" v-if="!modify"></div>
     </div>
   </div>
 </template>
 
 <script>
-
 const interessen = {
   natur: {
     background: "#30ad077d",
@@ -55,7 +47,12 @@ const interessen = {
     background: "#f5f75a7d",
     color: "#ff9900",
     label: "Geld"
-  }
+  },
+  sozial: {
+    background: "#f7705a6e",
+    color: "#f7705a",
+    label: "Sozial"
+  },
 };
 
 const cardTypes = {
@@ -67,6 +64,9 @@ const cardTypes = {
   },
   assholecard: {
     label: "(Anti-) Arschlochkarte"
+  },
+  rohstoff: {
+    label: "Rohstoff"
   },
   initial: {
     label: "Kein Kartentyp definiert"
@@ -83,8 +83,30 @@ export default {
       type: Boolean
     }
   },
+  computed: {
+    description: {
+      get() {
+        return this.config.description;
+      },
+      set(value) {
+        const saveObj = Object.assign({}, this.config);
+        saveObj.description = value;
+        this.$store.dispatch('cards/save',saveObj);
+      }
+    },
+    title: {
+      get() {
+        return this.config.title;
+      },
+      set(value) {
+        const saveObj = Object.assign({}, this.config);
+        saveObj.title = value;
+        this.$store.dispatch('cards/save',saveObj);
+      }
+    }
+  },
   methods: {
-    selectText(evt){
+    selectText(evt) {
       evt.target.select();
     },
     interessenSelect() {
@@ -123,10 +145,10 @@ export default {
         : _default;
     },
     save(evt) {
-      const saveObj=Object.assign({},this.config);
+      const saveObj = Object.assign({}, this.config);
       saveObj[evt.target.id] = evt.target.value;
 
-      this.$store.commit("cards/update",saveObj);
+      this.$store.commit("cards/update", saveObj);
       this.$store.dispatch("cards/save", saveObj);
     }
   }
@@ -187,6 +209,7 @@ export default {
   cursor: pointer;
   box-sizing: content-box;
   outline: none;
+  color: gray;
   padding: 0px;
 }
 
