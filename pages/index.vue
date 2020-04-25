@@ -246,9 +246,9 @@ p {
   border-radius: 200px;
   box-shadow: 0 0 10px 4px black;
   margin-top: -104px;
-  background: url("~assets/ich1.jpg");
-  background-size: cover;
-  display: block;
+  background: url("~assets/ich-neu.png");
+    background-size: 130%;
+    background-position: -55px -7px;  display: block;
   z-index: 1;
 }
 
