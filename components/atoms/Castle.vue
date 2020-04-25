@@ -11,9 +11,6 @@
       <div class="wall brickzinne"></div>
     </div>
     <div class="wall wall_top">&nbsp;</div>
-    <div class="content">
-      <slot></slot>
-    </div>
     <div class="wall_rundung">
       <div class="wall wallElement wallElement1">&nbsp;</div>
       <div class="wall wallElement wallElement1">&nbsp;</div>
@@ -35,6 +32,10 @@
     </div>
     <div class="wall wall_left">&nbsp;</div>
     <div class="wall wall_right wall_background">&nbsp;</div>
+
+    <div class="content">
+      <slot></slot>
+    </div>
   </div>
 </template>
 
@@ -48,7 +49,7 @@ export default {
 <style scoped>
 .content {
   width: 100%;
-  position: absolute;
+  margin-top: -232px;
 }
 .wall,
 .brick {

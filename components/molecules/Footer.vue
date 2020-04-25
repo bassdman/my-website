@@ -1,5 +1,5 @@
 <template>
-  <footer v-bind:style="{marginTop:$store.state.footer.marginTop}">
+  <footer>
     <sign width="200" stablaenge="0" boards="3">
       <div class="iconreference">Icons erstellt von 
         <a href="https://www.flaticon.com/de/autoren/those-icons" title="Those Icons">Those Icons</a>
@@ -36,7 +36,6 @@ export default {
 <style>
 footer {
   text-align: center;
-  margin-top: 77px;
   color: white;
   display: flex;
   justify-content: center;

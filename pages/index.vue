@@ -79,7 +79,6 @@ export default {
     this.$store.commit("background/bgcolor", "#00dcffe0");
     this.$store.commit("sidebar/show", true);
     this.$store.commit("header/show", false);
-    this.$store.commit("footer/marginTop", '36%');
     if (!process.client) return 0;
   },
   head() {

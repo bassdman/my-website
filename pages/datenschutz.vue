@@ -288,7 +288,6 @@ export default {
     this.$store.commit("header/show", true);
     this.$store.commit("background/bgcolor", "#00dcffe0");
     this.$store.commit("header/hideAllButtons",true);
-    this.$store.commit("footer/marginTop");
   },
   computed: {
     textcolor() {

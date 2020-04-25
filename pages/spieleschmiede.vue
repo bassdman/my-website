@@ -36,7 +36,6 @@ export default {
     this.$store.commit("sidebar/show", false);
     this.$store.commit("background/bgcolor", "#00dcffe0");
     this.$store.commit("header/showButtons",['modifyCard','addCard']);
-    this.$store.commit("footer/marginTop");
     this.$store.commit("header/show",true);
 
     const self = this;

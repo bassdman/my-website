@@ -101,7 +101,7 @@ export default {
 .cloud1 {
   top: 80px;
   left: -230px;
-  animation: cloud1 50s infinite linear;
+  animation: cloud1 40s infinite linear;
 }
 
 @keyframes cloud1 {
@@ -109,7 +109,7 @@ export default {
     transform: translate3d(-130px, 0, 0);
   }
   to {
-    transform: translate3d(1900px, 0, 0);
+    transform: translate3d(calc(100vw + 200px), 0, 0);
   }
 }
 
