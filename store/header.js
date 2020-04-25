@@ -5,6 +5,7 @@ export const state = () => ({
 })
 export const mutations = {
     show(state, show) {
+        console.log("header/show" + show)
         if (state.show != show)
             state.show = show;
     },

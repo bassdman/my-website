@@ -1,30 +1,30 @@
 <template>
   <div class="home">
     <cloud fontsize="small" class="cloudText alignCenter" v-bind:background="cloudbackground">
-      Wohin zieht <br> diese Wolke?
+      Wohin zieht
+      <br />diese Wolke?
     </cloud>
     <h1 class="welcome" v-if="!$store.state.light.on">Was für eine schöööne Nacht :)</h1>
     <h1 class="welcomeSubtitle" v-if="!$store.state.light.on">Zeit, mal die Sterne zu zählen</h1>
     <h1 class="welcome" v-if="$store.state.light.on">Waah, es ist so hell!!!</h1>
     <h1 class="welcomeSubtitle" v-if="$store.state.light.on">Wer hat das Licht angemacht?</h1>
 
-    <Castle class="castle"></Castle>
-    <div class="content" id="content">
-      <div class="bildich" :class="{flicker:lightOn, visibilityHidden:!lightOn}"></div>
-      <div class="signcontainer">
-        <sign :width="boardwidth" boards="6" stablaenge="0" kettenlaenge="150" class="sign">
-          <div>
-            <div class="name pretext totalWidth alignCenter">Manuel Gelsen</div>
-            <div
-              class="description pretext totalWidth alignCenter"
-            >Webdesigner, Träumer und vieles mehr</div>
-          </div>
-        </sign>
+    <Castle class="castle">
+      <div class="content" id="content">
+        <div class="bildich" :class="{flicker:lightOn, visibilityHidden:!lightOn}"></div>
+        <div class="signcontainer">
+          <sign :width="boardwidth" boards="6" stablaenge="0" kettenlaenge="150" class="sign">
+            <div>
+              <div class="name pretext totalWidth alignCenter">Manuel Gelsen</div>
+              <div
+                class="description pretext totalWidth alignCenter"
+              >Webdesigner, Träumer und vieles mehr</div>
+            </div>
+          </sign>
+        </div>
+        <nuxt-link prefetch to="/spieleschmiede">Spieleschmiede</nuxt-link>
       </div>
-      <nuxt-link prefetch to="/spieleschmiede">
-          Spieleschmiede
-        </nuxt-link>
-    </div>
+    </Castle>
   </div>
 </template>
 
@@ -68,33 +68,19 @@ export default {
       if (width > 400) return width - 100;
 
       return width - 20;
-    },  
-  cloudbackground(){
-    if(this.$store.state.light.on)
-      return 'white';
-    else
-      return '#888888';
-  },
+    },
+    cloudbackground() {
+      if (this.$store.state.light.on) return "white";
+      else return "#888888";
+    }
   },
   created() {
     this.blockRouteEvent = false;
-    this.$store.commit("background/bgcolor", '#00dcffe0');
+    this.$store.commit("background/bgcolor", "#00dcffe0");
     this.$store.commit("sidebar/show", true);
-   
+    this.$store.commit("header/show", false);
+    this.$store.commit("footer/marginTop", '36%');
     if (!process.client) return 0;
-
-    function getContentPosition() {
-      if (document.getElementById("content") == null) return 0;
-
-      return document.getElementById("content").getBoundingClientRect().top;
-    }
-
-    const self = this;
-    self.$store.commit("header/show", getContentPosition() < -100);
-    document.body.onscroll = function(e) {
-      if (self.blockRouteEvent) return;
-      self.$store.commit("header/show", getContentPosition() < -100);
-    };
   },
   head() {
     return {
@@ -169,14 +155,10 @@ p {
 
 .castle {
   margin-top: 45vh;
-  position: sticky;
-  top: -87px;
 }
 
 .content {
-  max-width: 1200px;
   margin: auto;
-  /*background: rgba(0, 0, 0, 0.8);*/
   color: white;
   padding: 0px 1em 1em 1em;
   display: flex;
@@ -196,10 +178,6 @@ p {
 }
 
 @media screen and (min-width: 900px) {
-  .content {
-    max-width: calc(100% - 360px);
-  }
-
   .signcontainer {
     margin-bottom: 500px;
   }
@@ -247,8 +225,8 @@ p {
   box-shadow: 0 0 10px 4px black;
   margin-top: -104px;
   background: url("~assets/ich-neu.png");
-    background-size: 130%;
-    background-position: -55px -7px;  display: block;
+  background-size: 130%;
+  background-position: -55px -7px;
   z-index: 1;
 }
 

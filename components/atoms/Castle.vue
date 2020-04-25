@@ -11,43 +11,28 @@
       <div class="wall brickzinne"></div>
     </div>
     <div class="wall wall_top">&nbsp;</div>
-
+    <div class="content">
+      <slot></slot>
+    </div>
     <div class="wall_rundung">
-      <div class="wall wallElement wallElement1">
-        &nbsp;
-      </div>
-      <div class="wall wallElement wallElement1">
-        &nbsp;
-      </div>
+      <div class="wall wallElement wallElement1">&nbsp;</div>
+      <div class="wall wallElement wallElement1">&nbsp;</div>
     </div>
 
     <div class="wall_rundung">
-      <div class="wall wallElement wallElement2">
-        &nbsp;
-      </div>
-      <div class="wall wallElement wallElement2">
-        &nbsp;
-      </div>
-    </div>
-
-   <div class="wall_rundung">
-      <div class="wall wallElement wallElement3">
-        &nbsp;
-      </div>
-      <div class="wall wallElement wallElement3">
-        &nbsp;
-      </div>
+      <div class="wall wallElement wallElement2">&nbsp;</div>
+      <div class="wall wallElement wallElement2">&nbsp;</div>
     </div>
 
     <div class="wall_rundung">
-      <div class="wall wallElement wallElement4">
-        &nbsp;
-      </div>
-      <div class="wall wallElement wallElement4">
-        &nbsp;
-      </div>
+      <div class="wall wallElement wallElement3">&nbsp;</div>
+      <div class="wall wallElement wallElement3">&nbsp;</div>
     </div>
 
+    <div class="wall_rundung">
+      <div class="wall wallElement wallElement4">&nbsp;</div>
+      <div class="wall wallElement wallElement4">&nbsp;</div>
+    </div>
     <div class="wall wall_left">&nbsp;</div>
     <div class="wall wall_right wall_background">&nbsp;</div>
   </div>
@@ -61,6 +46,10 @@ export default {
 
 
 <style scoped>
+.content {
+  width: 100%;
+  position: absolute;
+}
 .wall,
 .brick {
   background-color: #777777;
@@ -90,7 +79,6 @@ export default {
 }
 
 .wall_rundung {
-  position: absolute;
   width: 100%;
   overflow: hidden;
   white-space: nowrap;
@@ -98,26 +86,21 @@ export default {
   justify-content: space-between;
 }
 
-.wallElement{
-    height: 58px;
+.wallElement {
+  height: 58px;
 }
-.wallElement1{
-    width: 37%;
+.wallElement1 {
+  width: 37%;
 }
-.wallElement2{
-    width: 32%;
-    margin-top: 58px;
+.wallElement2 {
+  width: 32%;
 }
-.wallElement3{
-    width: 22%;
-    margin-top: 116px;
+.wallElement3 {
+  width: 22%;
 }
-.wallElement4{
-    width: 15%;
-    margin-top: 174px;
+.wallElement4 {
+  width: 15%;
 }
-
-
 
 .brickzinne,
 .brickhidden {
@@ -152,9 +135,8 @@ export default {
   }
   .wall_left,
   .wall_right {
-    margin-top: 232px;
     position: absolute;
-    height: 580px;
+    height: 660px;
   }
   .wall_left {
     left: 0px;

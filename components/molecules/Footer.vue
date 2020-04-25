@@ -1,5 +1,5 @@
 <template>
-  <footer>
+  <footer v-bind:style="{marginTop:$store.state.footer.marginTop}">
     <sign width="200" stablaenge="0" boards="3">
       <div class="iconreference">Icons erstellt von 
         <a href="https://www.flaticon.com/de/autoren/those-icons" title="Those Icons">Those Icons</a>

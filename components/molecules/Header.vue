@@ -1,6 +1,6 @@
   <template>
   <!-- Der Default Header -->
-  <div class="header" v-bind:class="{'displayNone': !$store.state.header.show || false}">
+  <div class="header" v-show="$store.state.header.show">
     <div class="menu"></div>
     <nuxt-link to="/" class="nameWithTitle">
       <span class="name">Manuel Gelsen</span>
