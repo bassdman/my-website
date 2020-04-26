@@ -15,9 +15,9 @@
         class="interesseLabel"
         v-html="interesse('label')"
         v-bind:style="{color:interesse('color','#cccccc')}"
-        v-if="!modify && config.cardType=='action'"
+        v-if="!modify && config.cardType=='ereignis'"
       ></span>
-      <select v-if="modify && config.cardType=='action'" @change="save($event)" id="interesse">
+      <select v-if="modify && config.cardType=='ereignis'" @change="save($event)" id="interesse">
         <option
           v-for="opt in interessenSelect()"
           :key="opt.key"
@@ -37,41 +37,9 @@
 </template>
 
 <script>
-const interessen = {
-  natur: {
-    background: "#30ad077d",
-    color: "#30ad07",
-    label: "Natur"
-  },
-  geld: {
-    background: "#f5f75a7d",
-    color: "#ff9900",
-    label: "Geld"
-  },
-  sozial: {
-    background: "#f7705a6e",
-    color: "#f7705a",
-    label: "Sozial"
-  },
-};
 
-const cardTypes = {
-  action: {
-    label: "Aktion"
-  },
-  global: {
-    label: "Global"
-  },
-  assholecard: {
-    label: "(Anti-) Arschlochkarte"
-  },
-  rohstoff: {
-    label: "Rohstoff"
-  },
-  initial: {
-    label: "Kein Kartentyp definiert"
-  }
-};
+import { ref, computed } from '@vue/composition-api';
+import { interessen, cardTypes } from '../../store/cards';
 
 export default {
   name: "card",
@@ -81,34 +49,41 @@ export default {
     },
     modify: {
       type: Boolean
+    },
+    id : {
+      type: Number
     }
   },
-  computed: {
-    description: {
-      get() {
-        return this.config.description;
-      },
-      set(value) {
-        const saveObj = Object.assign({}, this.config);
+  setup(props, context){
+    function selectText(evt){
+      evt.target.select();
+    }
+
+    const description = computed({
+      get: () => props.config.description,
+      set: value => {
+        const saveObj = Object.assign({}, props.config);
         saveObj.description = value;
-        this.$store.dispatch('cards/save',saveObj);
+        context.root.$store.dispatch('cards/save',saveObj);
       }
-    },
-    title: {
-      get() {
-        return this.config.title;
-      },
-      set(value) {
-        const saveObj = Object.assign({}, this.config);
+    });
+
+    const title = computed({
+      get: () => props.config.title,
+      set: value => {
+        const saveObj = Object.assign({}, props.config);
         saveObj.title = value;
-        this.$store.dispatch('cards/save',saveObj);
+        context.root.$store.dispatch('cards/save',saveObj);
       }
+    });
+
+    return {
+      selectText,
+      description,
+      title,
     }
   },
   methods: {
-    selectText(evt) {
-      evt.target.select();
-    },
     interessenSelect() {
       return Object.keys(interessen).map(interesse =>
         Object.assign(

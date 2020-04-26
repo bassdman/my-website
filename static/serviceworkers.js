@@ -1,5 +1,3 @@
-console.log('serviceworkers initialized')
-
 self.addEventListener('fetch', function(e) {});
 
 

@@ -1,6 +1,8 @@
 import { db, auth } from "../plugins/initFirebase";
 import Vue from 'vue';
-import _ from 'lodash'
+import { computed } from '@vue/composition-api';
+
+import _ from 'lodash';
 
 const interessen = {
     natur: {
@@ -18,17 +20,31 @@ const interessen = {
         color: "#f7705a",
         label: "Sozial"
     },
+    notdefined: {
+        background: "transparent",
+        color: "Black",
+        label: "Kein Interesse"
+    },
 };
 
 const cardTypes = {
-    action: {
-        label: "Aktion"
+    ereignis: {
+        label: "Ereignis"
     },
     global: {
         label: "Global"
     },
     assholecard: {
         label: "(Anti-) Arschlochkarte"
+    },
+    rohstoff: {
+        label: "Rohstoff"
+    },
+    gegenstand: {
+        label: "Gegenstand"
+    },
+    beruf: {
+        label: "Beruf"
     },
     initial: {
         label: "Kein Kartentyp definiert"
@@ -57,7 +73,6 @@ export const mutations = {
         };
 
         Vue.set(state.cards, id, newCard);
-        console.log(newCard._order)
     },
     update(state, card) {
         Vue.set(state.cards, card._id, Object.assign({}, state.cards[card._id], card));
@@ -91,6 +106,7 @@ export const actions = {
                 return docRef;
             })
             .catch(function(error) {
+
                 console.error("Error writing document: ", error);
             });
     }, 1000)
@@ -98,8 +114,8 @@ export const actions = {
 
 export const getters = {
     allCards(state) {
+        console.log('allcards')
         const cards = Object.values(state.cards).sort((a, b) => { return b._order - a._order });
-        console.log(cards)
         return cards;
     },
     attribute(state, id, propertyname) {
@@ -117,3 +133,5 @@ function getDoc(card) {
     else
         return db.collection("cards").doc();
 }
+
+export { cardTypes, interessen }
