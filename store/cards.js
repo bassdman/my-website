@@ -4,11 +4,15 @@ import { computed } from '@vue/composition-api';
 
 import _ from 'lodash';
 
-const interessen = {
+function addKeysToObj(obj) {
+    Object.keys(obj).forEach(key => obj[key].key = key);
+    return obj;
+}
+const interessen = addKeysToObj({
     natur: {
         background: "#30ad077d",
         color: "#30ad07",
-        label: "Natur"
+        label: "Natur",
     },
     geld: {
         background: "#f5f75a7d",
@@ -23,11 +27,12 @@ const interessen = {
     notdefined: {
         background: "transparent",
         color: "Black",
-        label: "Kein Interesse"
+        label: "Kein Interesse",
+        disabled: 'disabled'
     },
-};
+});
 
-const cardTypes = {
+const cardTypes = addKeysToObj({
     ereignis: {
         label: "Ereignis"
     },
@@ -47,9 +52,10 @@ const cardTypes = {
         label: "Beruf"
     },
     initial: {
-        label: "Kein Kartentyp definiert"
+        label: "Kein Kartentyp definiert",
+        disabled: 'disabled'
     }
-};
+});
 
 export const state = () => ({
     modifyMode: false,
@@ -60,19 +66,10 @@ export const mutations = {
         if (state.modifyMode != modifyMode)
             state.modifyMode = modifyMode;
     },
-    addNewCard(state) {
-        const id = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
-        const newCard = {
-            cardType: "initial",
-            description: "Beschreibung einer neuen Karte",
-            interesse: "initial",
-            title: "Titel einer neuen Karte",
-            _id: id,
-            _order: Object.keys(state.cards).length,
-            _created: new Date()
-        };
+    addNewCard(state, newCard) {
 
-        Vue.set(state.cards, id, newCard);
+
+        Vue.set(state.cards, newCard._id, newCard);
     },
     update(state, card) {
         Vue.set(state.cards, card._id, Object.assign({}, state.cards[card._id], card));
@@ -83,6 +80,24 @@ export const mutations = {
 }
 
 export const actions = {
+    createCard: (context, card) => {
+        const newCard = {
+            cardType: "initial",
+            description: "Beschreibung einer neuen Karte",
+            interesse: "initial",
+            title: "Titel einer neuen Karte",
+            _order: Object.keys(context.state.cards).length,
+            _created: new Date()
+        };
+        return db.collection("cards").add(newCard).then(doc => {
+                newCard._id = doc.id;
+                console.log(context)
+                return newCard;
+            })
+            .catch(err => {
+                console.log(err);
+            });
+    },
     load(context) {
         return db
             .collection("cards")
@@ -98,11 +113,9 @@ export const actions = {
             });
     },
     save: _.debounce((context, card) => {
-        const doc = getDoc(card);
-
-        return doc.set(card)
+        return db.collection("cards").doc(card._id).update(card)
             .then(function(docRef) {
-                console.log("card saved: ", docRef);
+                console.log("card saved: ", JSON.stringify(card));
                 return docRef;
             })
             .catch(function(error) {
@@ -127,11 +140,12 @@ export const getters = {
 
 };
 
-function getDoc(card) {
-    if (card._id)
-        return db.collection("cards").doc(card._id)
-    else
-        return db.collection("cards").doc();
+async function getDoc(card) {
+    if (card._id.startsWith('temp_')) {
+        const docRef = await db.collection("cards").add(card)
+        card._id = docRef.id;
+    }
+    return db.collection("cards").doc(card._id)
 }
 
 export { cardTypes, interessen }

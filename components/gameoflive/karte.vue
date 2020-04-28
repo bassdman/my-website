@@ -1,27 +1,29 @@
 <template>
   <div class="cardContainer" :class="{modifyCard:modify}">
     <div class="header">
-      <span class="groupTitle" v-if="!modify">{{cardTypeTitle()}}</span>
-      <select v-if="modify" @change="save($event)" id="cardType">
+      <span class="groupTitle" v-if="!modify">{{getCardType.label}}</span>
+      <select v-if="modify" v-model="cardType">
         <option
           v-for="opt in typeSelect()"
           :key="opt.key"
-          :selected="opt.selected"
+          :selected="config.cardType == opt.selected"
+          :disabled="opt.disabled"
           :value="opt.key"
         >{{opt.text}}</option>
       </select>
 
       <span
         class="interesseLabel"
-        v-html="interesse('label')"
-        v-bind:style="{color:interesse('color','#cccccc')}"
-        v-if="!modify && config.cardType=='ereignis'"
+        v-html="getInteresse.label"
+        v-bind:style="{color:getInteresse.color || '#cccccc'}"
+        v-if="!modify && getCardType.value=='ereignis'"
       ></span>
-      <select v-if="modify && config.cardType=='ereignis'" @change="save($event)" id="interesse">
+      <select v-if="modify && getCardType.key=='ereignis'" v-model="interesse">
         <option
           v-for="opt in interessenSelect()"
           :key="opt.key"
           :selected="opt.selected"
+          :disabled="opt.disabled"
           :value="opt.key"
         >{{opt.label}}</option>
       </select>
@@ -29,7 +31,7 @@
     <h1 class="headline" v-if="!modify">{{title}}</h1>
     <input class="headline" v-model="title" v-if="modify" @focus="selectText"/>
 
-    <div class="content" v-bind:style="{background:interesse('background','#cccccccc')}">
+    <div class="content" v-bind:style="{background:getInteresse.background || '#cccccccc'}">
       <textarea class="description" v-model="description" v-if="modify" @focus="selectText"></textarea>
       <div class="description" v-html="description" v-if="!modify"></div>
     </div>
@@ -62,8 +64,11 @@ export default {
     const description = computed({
       get: () => props.config.description,
       set: value => {
-        const saveObj = Object.assign({}, props.config);
-        saveObj.description = value;
+        const saveObj = {
+          _id: props.config._id,
+          description: value
+        }
+        context.root.$store.commit('cards/update',saveObj);
         context.root.$store.dispatch('cards/save',saveObj);
       }
     });
@@ -71,16 +76,50 @@ export default {
     const title = computed({
       get: () => props.config.title,
       set: value => {
-        const saveObj = Object.assign({}, props.config);
-        saveObj.title = value;
+        const saveObj = {
+          _id: props.config._id,
+          title: value
+        }
+        context.root.$store.commit('cards/update',saveObj);
         context.root.$store.dispatch('cards/save',saveObj);
       }
     });
+
+    const interesse = computed({
+      get: () =>  props.config.interesse,
+      set: value => {
+        const saveObj = {
+          _id: props.config._id,
+          interesse: value
+        }
+        context.root.$store.commit('cards/update',saveObj);
+        context.root.$store.dispatch('cards/save',saveObj);
+      }
+    });
+
+    const cardType = computed({
+      get: () =>  props.config.cardType,
+      set: value => {
+        const saveObj = {
+          _id: props.config._id,
+          cardType: value
+        }
+        context.root.$store.commit('cards/update',saveObj);
+        context.root.$store.dispatch('cards/save',saveObj);
+      }
+    });
+
+    const getInteresse = computed(() =>  interessen[props.config.interesse] || {});
+    const getCardType = computed(() =>  cardTypes[props.config.cardType] || {});
 
     return {
       selectText,
       description,
       title,
+      interesse,
+      cardType,
+      getInteresse,
+      getCardType
     }
   },
   methods: {
@@ -106,25 +145,6 @@ export default {
           cardTypes[cardType]
         )
       );
-    },
-    cardTypeTitle() {
-      const cardType = cardTypes[this.config.cardType];
-
-      if (cardType) return cardType.label;
-
-      return "type '" + this.config.cardType + "' has no title.";
-    },
-    interesse(key, _default = "") {
-      return interessen[this.config.interesse]
-        ? interessen[this.config.interesse][key]
-        : _default;
-    },
-    save(evt) {
-      const saveObj = Object.assign({}, this.config);
-      saveObj[evt.target.id] = evt.target.value;
-
-      this.$store.commit("cards/update", saveObj);
-      this.$store.dispatch("cards/save", saveObj);
     }
   }
 };

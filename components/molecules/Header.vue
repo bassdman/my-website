@@ -37,6 +37,8 @@
 </template>
 
 <script>
+import _ from 'lodash';
+
 export default {
   name: "headerElem",
   data() {
@@ -45,9 +47,10 @@ export default {
     };
   },
   methods: {
-    addNewCard() {
-      this.$store.commit("cards/addNewCard");
-    },
+    addNewCard: _.debounce(async function(event) {
+      const newCard = await this.$store.dispatch('cards/createCard');
+      this.$store.commit("cards/addNewCard", newCard);
+    },200),
     toggleModifyMode() {
       this.modifyMode = !this.modifyMode;
       this.$store.commit("cards/modifyMode", this.modifyMode);
