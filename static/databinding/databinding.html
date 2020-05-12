@@ -27,7 +27,7 @@
         <div class="field">
             <label for="title">What do you want to select???:</label>
             <label>Auto: <input type="radio" name="title" data-model="thing" value="auto" /></label>
-            <label>Buch: <input type="radio" name="title" data-model="thing" value="buch"/></label>
+            <label>Buch: <input type="radio" name="title" data-model="thing" value="buch" /></label>
         </div>
 
         <div class="results">
@@ -39,31 +39,37 @@
         </div>
     </main>
 
-    <script src="./databinding.js"></script>
+    <script type="module">
+        import StateMachine from './databinding.js'; window.StateMachine = StateMachine;
+    </script>
     <script>
-        const bindings = new StateMachine({
-            yesno: false,
-            thing: 'auto',
-            vorname: 'Peter',
-            nachname: 'Hauenstein',
-            margin: 0,
-            nested: {
-                nested2: true
-            },
-            opacity(state) {
-                return 100 - state.margin;
-            },
-            name: function(state) {
-                return state.vorname + ' ' + state.nachname
-            },
-            classnames: function(state) {
-                return state.vorname.toLowerCase();
-            },
-            header: {
-                headtitle: "headtitle"
-            },
-            title: 'HelloWorld!'
+        document.addEventListener("DOMContentLoaded", function() {
+            const bindings = new StateMachine({
+                yesno: false,
+                thing: 'auto',
+                vorname: 'Peter',
+                nachname: 'Hauenstein',
+                margin: 0,
+                nested: {
+                    nested2: true
+                },
+                opacity(state) {
+                    return 100 - state.margin;
+                },
+                name: function(state) {
+                    return state.vorname + ' ' + state.nachname
+                },
+                classnames: function(state) {
+                    return state.vorname.toLowerCase();
+                },
+                header: {
+                    headtitle: "headtitle"
+                },
+                title: 'HelloWorld!'
+            });
         });
+    </script>
+    <script>
     </script>
 </body>
 

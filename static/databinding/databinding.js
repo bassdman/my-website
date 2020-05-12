@@ -1,104 +1,12 @@
-function $(queryOrElem) {
-    function init(queryOrElem) {
-        if (typeof queryOrElem == 'string') {
-            const found = document.querySelectorAll(queryOrElem);
-            if (found.length) return found;
+import $ from './ownquery.js';
 
-            return [document.createElement('div')]
-        }
-
-        if (queryOrElem._own$)
-            return queryOrElem.raw;
-
-        if (!queryOrElem.length)
-            return [queryOrElem]
-
-        return queryOrElem;
-    }
-
-    const elems = init(queryOrElem);
-
-    const returnValue = new Proxy({
-        _own$: true,
-        raw: elems,
-        elems,
-        removeAttribute(key) {
-            for (let elem of elems) {
-                elem.removeAttribute(key);
-            }
-        },
-        show(value = true) {
-            for (let elem of elems) {
-                elem.style.display = value ? 'block' : 'none!important;';
-            }
-        },
-        hide() {
-            for (let elem of elems) {
-                elem.style.display = 'none!important;';
-            }
-        },
-        checked(val) {
-            if (val == null)
-                return elems[0].checked;
-
-            for (let elem of elems) {
-                if (typeof val == 'string' && elem.value == val)
-                    elem.checked = true;
-                else if (typeof val == 'string' && elem.value != val)
-                    elem.checked = false;
-                else
-                    elem.checked = val;
-            }
-        },
-        setAttribute(key, value) {
-            for (let elem of elems) {
-                elem.setAttribute(key, value);
-            }
-        },
-        addEventListener(events, fn) {
-            const _events = events.split(' ');
-
-            for (event of _events) {
-                for (let elem of elems) {
-                    elem.addEventListener(event, () => {
-                        fn($(elem));
-                    });
-                }
-            }
-        }
-    }, {
-        get(target, key) {
-            if (target[key])
-                return target[key];
-
-            if (!target.elems.length)
-                return;
-
-            const value = target.elems[0][key];
-
-            if (typeof value == 'function') {
-                return target[key];
-            }
-            return target.elems[0][key];
-        },
-        set(target, key, value) {
-            if (!target.elems.length)
-                return true;
-
-            for (let elem of target.elems) {
-                elem[key] = value;
-            }
-            return true;
-        }
-
-    });
-    return returnValue;
-
-}
-
-function StateMachine(_state = {}) {
+export default function StateMachine(_state = {}) {
     const computed = {};
     const watched = {};
+
+    function randomId() {
+        return '_rnd' + Math.random().toString(36).substring(2, 15);
+    }
 
     const state = new Proxy(_state, {
         set(target, property, value) {
@@ -132,7 +40,47 @@ function StateMachine(_state = {}) {
 
         code += 'return ' + anfuehrungszeichen + text + anfuehrungszeichen + ';';
 
-        return Function(code)();
+        console.log(code)
+        try {
+            const codeFinal = code + 'return ' + text + ';';
+            return Function(codeFinal)();
+        } catch (e) {
+            try {
+                const codeFinal = code + 'return `' + text + '`;';
+                return Function(codeFinal)();
+            } catch (e) {
+                console.log('code can not be parsed', code)
+            }
+
+        }
+    }
+
+    function toFn(text) {
+        let code = `'use strict';`;
+
+        const _values = values('parsable');
+        Object.keys(_values).forEach(key => {
+            let valueText = _values[key];
+            code += `var ${key} = ${valueText};`;
+        });
+
+        const codeNonString = code + 'return ' + text + ';';
+        const codeString = code + 'return `' + text + '`;';
+
+        try {
+            const fn = Function(codeNonString);
+            fn(); //wirft einen Fehler, wenn invalide
+            return fn;
+        } catch (e) {
+            try {
+                const fn = Function(codeString);
+                fn(); //wirft einen Fehler, wenn invalide
+                return fn;
+            } catch (e) {
+                console.log('code can not be parsed', codeNonString)
+            }
+
+        }
     }
 
     function values(parsable) {
@@ -189,6 +137,13 @@ function StateMachine(_state = {}) {
         if (hasStyleKey) {
             elem.setAttribute('_datastyle', "");
         }
+
+        Object.keys(elem.dataset).forEach(key => {
+            const id = randomId();
+            const fnToCompute = elem.dataset[key];
+
+            computed[id] = toFn(fnToCompute);
+        })
     })
 
     const render = (state, prop, value) => {
@@ -267,11 +222,15 @@ function StateMachine(_state = {}) {
     };
 
     Object.keys(state).forEach(key => {
+        if (typeof state[key] == 'function')
+            computed[key] = state[key];
+
         render(state, key, state[key])
     });
     return {
         state,
         values: values(),
-        watch
+        watch,
+        computed
     }
 };
