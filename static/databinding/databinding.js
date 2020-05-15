@@ -2,11 +2,14 @@ import $ from './ownquery.js';
 //import StateMachine from './Statemachine.js';
 
 export default function StateMachine(_state = {}) {
-    const computed = {};
     const watched = {};
-    const bindings = {};
     const dependencies = {
 
+    };
+    const cache = {
+        computed: {},
+        bindings: {},
+        dependencies: {}
     };
 
     function randomId(prefix) {
@@ -18,7 +21,7 @@ export default function StateMachine(_state = {}) {
             target[property] = value;
             render(target, property, value);
 
-            for (let dependency of dependencies[property]) {
+            for (let dependency of cache.dependencies[property]) {
                 render(target, dependency, state[dependency]);
             }
 
@@ -30,38 +33,13 @@ export default function StateMachine(_state = {}) {
         }
     });
 
-    function compute(text, state, inline = false) {
-        const _values = values('parsable');
+    function compute(text) {
+        const _values = values();
         const paramValues = Object.keys(_values).map(key => _values[key]);
 
         const fn = toFn(text);
         const result = fn(...paramValues); //wirft einen Fehler, wenn invalide
         return result;
-        /*   let code = `'use strict';`;
-           const isObject = text && text.trim().startsWith('{');
-
-           const anfuehrungszeichen = inline && !isObject ? '`' : '';
-
-           const _values = values('parsable');
-           Object.keys(_values).forEach(key => {
-               let valueText = _values[key];
-               code += `var ${key} = ${valueText};`;
-           });
-
-           code += 'return ' + anfuehrungszeichen + text + anfuehrungszeichen + ';';
-
-           try {
-               const codeFinal = code + 'return ' + text + ';';
-               return Function(codeFinal)();
-           } catch (e) {
-               try {
-                   const codeFinal = code + 'return `' + text + '`;';
-                   return Function(codeFinal)();
-               } catch (e) {
-                   console.log('code can not be parsed', code)
-               }
-
-           }*/
     }
 
     function toFn(text) {
@@ -92,14 +70,14 @@ export default function StateMachine(_state = {}) {
             if (!fnText.match(new RegExp("\\b" + keyprefix + key + "\\b")))
                 return;
 
-            if (!dependencies[key]) {
-                dependencies[key] = [];
+            if (!cache.dependencies[key]) {
+                cache.dependencies[key] = [];
             }
 
             if (key !== name) {
                 const matchid = elemid ? elemid + '_' + elemkey : name;
-                dependencies[key].push(matchid);
-                bindings[matchid] = {
+                cache.dependencies[key].push(matchid);
+                cache.bindings[matchid] = {
                     elemid,
                     name,
                     fn: toFn(fn)
@@ -170,7 +148,7 @@ export default function StateMachine(_state = {}) {
             const id = randomId('rnd');
             const fnToCompute = elem.dataset[key];
 
-            computed[id] = toFn(fnToCompute);
+            cache.computed[id] = toFn(fnToCompute);
             addDependencies(fnToCompute, id, elemId, key);
 
             elem.dataset.id = elemId;
@@ -254,7 +232,7 @@ export default function StateMachine(_state = {}) {
 
     Object.keys(state).forEach(key => {
         if (typeof state[key] == 'function') {
-            computed[key] = state[key];
+            cache.computed[key] = state[key];
             addDependencies(state[key], key);
         }
 
@@ -264,8 +242,6 @@ export default function StateMachine(_state = {}) {
         state,
         values: values(),
         watch,
-        computed,
-        dependencies,
-        bindings
+        cache,
     }
 };
