@@ -1,11 +1,16 @@
 import $ from './ownquery.js';
+//import StateMachine from './Statemachine.js';
 
 export default function StateMachine(_state = {}) {
     const computed = {};
     const watched = {};
+    const bindings = {};
+    const dependencies = {
 
-    function randomId() {
-        return '_rnd' + Math.random().toString(36).substring(2, 15);
+    };
+
+    function randomId(prefix) {
+        return prefix + Math.random().toString(36).substring(2, 15);
     }
 
     const state = new Proxy(_state, {
@@ -13,11 +18,10 @@ export default function StateMachine(_state = {}) {
             target[property] = value;
             render(target, property, value);
 
-            Object.keys(state).forEach(key => {
-                if (typeof state[key] == 'function') {
-                    render(target, key, state[key]);
-                }
-            });
+            for (let dependency of dependencies[property]) {
+                render(target, dependency, state[dependency]);
+            }
+
             return true;
         },
         get(obj, prop) {
@@ -27,54 +31,53 @@ export default function StateMachine(_state = {}) {
     });
 
     function compute(text, state, inline = false) {
-        let code = `'use strict';`;
-        const isObject = text && text.trim().startsWith('{');
-
-        const anfuehrungszeichen = inline && !isObject ? '`' : '';
-
         const _values = values('parsable');
-        Object.keys(_values).forEach(key => {
-            let valueText = _values[key];
-            code += `var ${key} = ${valueText};`;
-        });
+        const paramValues = Object.keys(_values).map(key => _values[key]);
 
-        code += 'return ' + anfuehrungszeichen + text + anfuehrungszeichen + ';';
+        const fn = toFn(text);
+        const result = fn(...paramValues); //wirft einen Fehler, wenn invalide
+        return result;
+        /*   let code = `'use strict';`;
+           const isObject = text && text.trim().startsWith('{');
 
-        console.log(code)
-        try {
-            const codeFinal = code + 'return ' + text + ';';
-            return Function(codeFinal)();
-        } catch (e) {
-            try {
-                const codeFinal = code + 'return `' + text + '`;';
-                return Function(codeFinal)();
-            } catch (e) {
-                console.log('code can not be parsed', code)
-            }
+           const anfuehrungszeichen = inline && !isObject ? '`' : '';
 
-        }
+           const _values = values('parsable');
+           Object.keys(_values).forEach(key => {
+               let valueText = _values[key];
+               code += `var ${key} = ${valueText};`;
+           });
+
+           code += 'return ' + anfuehrungszeichen + text + anfuehrungszeichen + ';';
+
+           try {
+               const codeFinal = code + 'return ' + text + ';';
+               return Function(codeFinal)();
+           } catch (e) {
+               try {
+                   const codeFinal = code + 'return `' + text + '`;';
+                   return Function(codeFinal)();
+               } catch (e) {
+                   console.log('code can not be parsed', code)
+               }
+
+           }*/
     }
 
     function toFn(text) {
-        let code = `'use strict';`;
 
         const _values = values('parsable');
-        Object.keys(_values).forEach(key => {
-            let valueText = _values[key];
-            code += `var ${key} = ${valueText};`;
-        });
 
-        const codeNonString = code + 'return ' + text + ';';
-        const codeString = code + 'return `' + text + '`;';
 
+        const paramKeys = Object.keys(_values);
         try {
-            const fn = Function(codeNonString);
-            fn(); //wirft einen Fehler, wenn invalide
+            const codeNonString = 'return ' + text + ';';
+            const fn = Function(...paramKeys, codeNonString);
             return fn;
         } catch (e) {
             try {
-                const fn = Function(codeString);
-                fn(); //wirft einen Fehler, wenn invalide
+                const codeString = 'return `' + text + '`;';
+                const fn = Function(...paramKeys, codeString);
                 return fn;
             } catch (e) {
                 console.log('code can not be parsed', codeNonString)
@@ -82,6 +85,29 @@ export default function StateMachine(_state = {}) {
 
         }
     }
+
+    function addDependencies(fn, name, elemid, elemkey, keyprefix = "") {
+        const fnText = fn.toString();
+        Object.keys(state).forEach(key => {
+            if (!fnText.match(new RegExp("\\b" + keyprefix + key + "\\b")))
+                return;
+
+            if (!dependencies[key]) {
+                dependencies[key] = [];
+            }
+
+            if (key !== name) {
+                const matchid = elemid ? elemid + '_' + elemkey : name;
+                dependencies[key].push(matchid);
+                bindings[matchid] = {
+                    elemid,
+                    name,
+                    fn: toFn(fn)
+                }
+            }
+        });
+    }
+
 
     function values(parsable) {
         const retObj = {};
@@ -138,11 +164,16 @@ export default function StateMachine(_state = {}) {
             elem.setAttribute('_datastyle', "");
         }
 
+        const elemId = elem.dataset.id || randomId('id_')
+
         Object.keys(elem.dataset).forEach(key => {
-            const id = randomId();
+            const id = randomId('rnd');
             const fnToCompute = elem.dataset[key];
 
             computed[id] = toFn(fnToCompute);
+            addDependencies(fnToCompute, id, elemId, key);
+
+            elem.dataset.id = elemId;
         })
     })
 
@@ -168,7 +199,7 @@ export default function StateMachine(_state = {}) {
         })
         $(`[data-class]`).elems.forEach(elem => {
             const classes = elem.dataset.class;
-            const result = compute(classes, state, 'inline');
+            const result = compute(classes, state);
 
             if (typeof result == 'object') {
                 Object.keys(result).forEach(key => {
@@ -184,7 +215,7 @@ export default function StateMachine(_state = {}) {
         });
         $(`[data-style]`).elems.forEach(elem => {
             const styleInline = elem.dataset.style;
-            const result = compute(styleInline, state, 'inline');
+            const result = compute(styleInline, state);
 
             if (typeof result == 'object') {
                 Object.keys(result).forEach(key => {
@@ -214,7 +245,7 @@ export default function StateMachine(_state = {}) {
             for (let style of datastyle) {
                 const valueRaw = elem.dataset[style];
                 const styleName = style.replace('style.', '');
-                const styleValue = compute(valueRaw, state, 'inline');
+                const styleValue = compute(valueRaw, state);
 
                 elem.style[styleName] = styleValue;
             }
@@ -222,8 +253,10 @@ export default function StateMachine(_state = {}) {
     };
 
     Object.keys(state).forEach(key => {
-        if (typeof state[key] == 'function')
+        if (typeof state[key] == 'function') {
             computed[key] = state[key];
+            addDependencies(state[key], key);
+        }
 
         render(state, key, state[key])
     });
@@ -231,6 +264,8 @@ export default function StateMachine(_state = {}) {
         state,
         values: values(),
         watch,
-        computed
+        computed,
+        dependencies,
+        bindings
     }
 };

@@ -25,7 +25,7 @@
         </div>
 
         <div class="field">
-            <label for="title">What do you want to select???:</label>
+            <label for="title">What do you want to select????:</label>
             <label>Auto: <input type="radio" name="title" data-model="thing" value="auto" /></label>
             <label>Buch: <input type="radio" name="title" data-model="thing" value="buch" /></label>
         </div>
@@ -44,7 +44,7 @@
     </script>
     <script>
         document.addEventListener("DOMContentLoaded", function() {
-            const bindings = new StateMachine({
+            window.bindings = new StateMachine({
                 yesno: false,
                 thing: 'auto',
                 vorname: 'Peter',
