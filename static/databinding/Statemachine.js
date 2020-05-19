@@ -62,8 +62,8 @@ function StateMachine(_state = {}) {
         }
     }
 
-    function addDependencies(fn, name, elemid, keyprefix = "", bindingFn, directiveConfig, computation) {
-        const fnText = fn.computation ? fn.computation.toString() : fn.toString();
+    function addDependencies(computationResult, name, elemid, keyprefix = "", bindingFn, ) {
+        const fnText = computationResult.computation ? computationResult.computation.toString() : computationResult.toString();
         Object.keys(state).forEach(key => {
             if (!fnText.match(new RegExp("\\b" + keyprefix + key + "\\b")))
                 return;
@@ -79,10 +79,9 @@ function StateMachine(_state = {}) {
                     elemid,
                     name,
                     bindingFn,
-                    resultFn: toFn(fn),
-                    resultFnRaw: fn,
-                    directiveConfig,
-                    computation
+                    resultFn: toFn(computationResult.computation ? computationResult.computation : computationResult),
+                    resultFnRaw: computationResult.computation ? computationResult.computation : computationResult,
+                    computation: computationResult
                 }
             }
         });
@@ -124,8 +123,6 @@ function StateMachine(_state = {}) {
     for (let initFn of globalCache.onInit) {
         const result = initFn({ state, compute }) || {};
 
-        result.computations = Array.isArray(result.computations) ? result.computations : [result.computations];
-
         if (result.onRender) {
             const initName = result.name || initFn.name;
             const elements = initElements(result.bindTo);
@@ -136,10 +133,12 @@ function StateMachine(_state = {}) {
                 if (elem.dataset.id == null)
                     elem.dataset.id = elemId;
 
-                for (let code of result.computations) {
-                    const fnToCompute = code(elem);
+                let computations = result.computations(elem);
+                if (!Array.isArray(computations))
+                    computations = [computations];
 
-                    addDependencies(fnToCompute, 0, elemId, "", result.onRender, result, code);
+                for (let computation of computations) {
+                    addDependencies(computation, 0, elemId, "", result.onRender);
                 }
 
             }
@@ -154,7 +153,7 @@ function StateMachine(_state = {}) {
             const result = compute(cacheUpdateEntry.resultFn);
 
             if (cacheUpdateEntry.bindingFn)
-                cacheUpdateEntry.bindingFn(elem, result, { values, property: prop, value, directiveConfig: cacheUpdateEntry.directiveConfig, computation: cacheUpdateEntry.computation });
+                cacheUpdateEntry.bindingFn(elem, result, { values, property: prop, value, computation: cacheUpdateEntry.computation });
         }
     };
 
