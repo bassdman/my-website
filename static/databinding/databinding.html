@@ -37,6 +37,8 @@
             <h3 data-class="abc def ${classnames}" data-class.xyz="yesno" data-style="margin-left: ${margin}px;" data-style.opacity="${opacity}%">Wird nur bedingt angezeigt</h3>
             <div data-bind="nested.nested2"></div>
         </div>
+
+        <h3 data-class.xyz="yesno" data-class.abc="opacity == '0'">Doubleclassbinding</h3>
     </main>
 
     <script type="module">
@@ -51,7 +53,7 @@
                 nachname: 'Hauenstein',
                 margin: 0,
                 nested: {
-                    nested2: true
+                    nested2: false
                 },
                 opacity(state) {
                     return 100 - state.margin;

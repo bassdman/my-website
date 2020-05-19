@@ -4,104 +4,133 @@ import StateMachine from './Statemachine.js';
 
 
 
-/*
-    Der Bereich wird ausgelagert
-*/
-
-StateMachine.register(function onRenderInputElements({ compute }) {
+StateMachine.register(function onRenderInputElementCheckboxes() {
     return {
-        onRender(state, prop, value) {
-            const val = typeof value == 'function' ? value(state) : value;
-
-            $(`[data-model="${prop}"]:not([type="radio"])`).value = val;
-            $(`input[data-model="${prop}"][type="radio"][value="${val}"]`).setAttribute('checked', 'checked');
-
-            if (val)
-                $(`input[data-model="${prop}"][type="checkbox"]`).setAttribute('checked', 'checked');
+        bindTo: 'input[data-model][type="checkbox"]',
+        computations: elem => elem.dataset.model,
+        onRender(elem, result, { property, value }) {
+            if (value)
+                elem.setAttribute('checked', 'checked');
             else
-                $(`input[data-model="${prop}"][type="checkbox"]`).removeAttribute('checked');
-
-        }
+                elem.removeAttribute('checked');
+        },
     }
 });
 
-StateMachine.register(function onRenderDataBind({ compute }) {
+StateMachine.register(function onRenderInputElementDefault() {
     return {
-        onRender(state, prop, value) {
-            const val = typeof value == 'function' ? value(state) : value;
-
-            $(`[data-bind="${prop}"]`).innerHTML = val;
-        }
+        bindTo: '[data-model]:not([type="radio"])',
+        computations: elem => elem.dataset.model,
+        onRender(elem, result, { property, value }) {
+            elem.value = value;
+        },
     }
 });
 
-StateMachine.register(function onRenderDataClass({ compute }) {
+StateMachine.register(function onRenderInputElementRadios() {
     return {
-        onRender(state, prop, value) {
-            $(`[data-class]`).elems.forEach(elem => {
-                const classes = elem.dataset.class;
-                const result = compute(classes, state);
-
-                if (typeof result == 'object') {
-                    Object.keys(result).forEach(key => {
-                        const hasClass = result[key];
-                        if (hasClass)
-                            elem.classList.add(key);
-                        else
-                            elem.classList.remove(key);
-                    })
-                } else {
-                    elem.setAttribute('class', result)
-                }
-            });
-        }
+        bindTo: 'input[data-model][type="radio"]',
+        computations: elem => elem.dataset.model,
+        onRender(elem, result, { property, value }) {
+            if (elem.value == value)
+                elem.setAttribute('checked', 'checked');
+        },
     }
 });
 
-StateMachine.register(function onRenderDataStyle({ compute }) {
+StateMachine.register(function onRenderDataBind() {
     return {
-        onRender(state, prop, value) {
-            $(`[data-style]`).elems.forEach(elem => {
-                const styleInline = elem.dataset.style;
-                const result = compute(styleInline, state);
-
-                if (typeof result == 'object') {
-                    Object.keys(result).forEach(key => {
-                        elem.style[key] = result[key];
-                    })
-                } else {
-                    elem.setAttribute('style', result)
-                }
-            });
-        }
+        bindTo: '[data-bind]',
+        computations: elem => elem.dataset.bind,
+        onRender(elem, result, state) {
+            elem.innerHTML = result;
+        },
     }
 });
 
-StateMachine.register(function onRenderStyleXyz({ compute }) {
+StateMachine.register(function onRenderDataClass() {
     return {
-        onElementInit(elem) {
-            const hasStyleKey = Object.keys(elem.dataset).filter(key => key.startsWith('style.')).length > 0;
-            if (hasStyleKey) {
-                elem.setAttribute('_datastyle', "");
+        computations: elem => elem.dataset.class,
+        bindTo: '[data-class]',
+        onRender(elem, result, state) {
+            if (typeof result == 'object') {
+                Object.keys(result).forEach(key => {
+                    const hasClass = result[key];
+                    if (hasClass)
+                        elem.classList.add(key);
+                    else
+                        elem.classList.remove(key);
+                })
+            } else {
+                elem.setAttribute('class', result)
             }
         },
-        onRender(state, prop, value) {
-            $(`[_datastyle]`).elems.forEach(elem => {
-                const datastyle = Object.keys(elem.dataset).filter(key => key.startsWith('style.'));
+    }
+});
 
-                for (let style of datastyle) {
-                    const valueRaw = elem.dataset[style];
-                    const styleName = style.replace('style.', '');
-                    const styleValue = compute(valueRaw, state);
-
-                    elem.style[styleName] = styleValue;
-                }
-            });
+StateMachine.register(function onRenderDataStyle() {
+    return {
+        bindTo: '[data-style]',
+        computations: elem => elem.dataset.style,
+        onRender(elem, result, state) {
+            if (typeof result == 'object') {
+                Object.keys(result).forEach(key => {
+                    elem.style[key] = result[key];
+                })
+            } else {
+                elem.setAttribute('style', result)
+            }
         }
     }
 });
 
-StateMachine.register(function onRenderClassXyz({ compute }) {
+StateMachine.register(function onRenderStyleXyz() {
+    return {
+        bindTo: () => {
+            return Array.from(document.querySelectorAll('*')).filter(elem => {
+                const hasStyleKey = Object.keys(elem.dataset).filter(key => key.startsWith('style.')).length > 0;
+                return hasStyleKey;
+            });
+        },
+        computations: elem => {
+            const computations = Object.keys(elem.dataset).filter(key => key.startsWith('style.')).map(key => elem.dataset[key]);
+            console.log(computations);
+            return computations;
+        },
+        onRender(elem, result, { property }) {
+            elem.style[property] = result;
+        },
+    }
+});
+
+StateMachine.register(function onRenderClassXyz() {
+    const boundElements = Array.from(document.querySelectorAll('*')).filter(elem => {
+        const hasClassKey = Object.keys(elem.dataset).filter(key => key.startsWith('class.')).length > 0;
+        return hasClassKey;
+    });
+
+    return {
+        bindTo: boundElements,
+        computations: elem => {
+            const computations = Object.keys(elem.dataset).filter(key => key.startsWith('class.')).map(key => {
+                return {
+                    computation: elem.dataset[key],
+                    classname: key.replace('class.', '')
+                }
+            });
+            console.log(computations);
+            return computations;
+        },
+        onRender(elem, result, { property, value, computation }) {
+            if (result)
+                elem.classList.add(computation.classname)
+            else
+                elem.classList.remove(computation.classname);
+        },
+    }
+});
+
+/*StateMachine.register(function onRenderClassXyz({ compute }) {
     return {
         onElementInit(elem) {
             const hasClassKey = Object.keys(elem.dataset).filter(key => key.startsWith('class.')).length > 0;
@@ -109,7 +138,7 @@ StateMachine.register(function onRenderClassXyz({ compute }) {
                 elem.setAttribute('_datacls', "");
             }
         },
-        onRender(state, prop, value) {
+        onRenderAlt(state, prop, value) {
             $(`[_datacls]`).elems.forEach(elem => {
                 const dataclasses = Object.keys(elem.dataset).filter(key => key.startsWith('class.'));
 
@@ -127,7 +156,7 @@ StateMachine.register(function onRenderClassXyz({ compute }) {
         }
     }
 });
-
+*/
 StateMachine.register(function addDataModelEvents({ state }) {
     $('[data-model]:not([type="checkbox"])').addEventListener('keyup', function(elem) {
         const name = elem.dataset.model;
@@ -143,9 +172,9 @@ StateMachine.register(function addDataModelEvents({ state }) {
     });
 });
 
-StateMachine.register(function onRenderDataShow({ compute }) {
+/*StateMachine.register(function onRenderDataShow({ compute }) {
     return {
-        onRender(state, prop, value) {
+        onRenderAlt(state, prop, value) {
             $(`[data-show]`).elems.forEach(elem => {
                 const showCondition = elem.dataset.show;
                 const result = compute(showCondition, state);
@@ -154,7 +183,7 @@ StateMachine.register(function onRenderDataShow({ compute }) {
             })
         }
     }
-});
+});*/
 
 /* Ende Der Bereich wird ausgelagert
  */

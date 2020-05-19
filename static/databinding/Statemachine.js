@@ -1,14 +1,11 @@
 const globalCache = {
-    onInit: [],
-    onElementInit: [],
-    onRender: []
+    onInit: []
 }
 
 function StateMachine(_state = {}) {
     const watched = {};
 
     const cache = {
-        computed: {},
         bindings: {},
         dependencies: {}
     };
@@ -34,11 +31,11 @@ function StateMachine(_state = {}) {
         }
     });
 
-    function compute(text) {
+    function compute(text = '') {
         const _values = values();
         const paramValues = Object.keys(_values).map(key => _values[key]);
 
-        const fn = toFn(text);
+        const fn = typeof text == 'string' ? toFn(text) : text;
         const result = fn(...paramValues); //wirft einen Fehler, wenn invalide
         return result;
     }
@@ -65,8 +62,8 @@ function StateMachine(_state = {}) {
         }
     }
 
-    function addDependencies(fn, name, elemid, elemkey, keyprefix = "") {
-        const fnText = fn.toString();
+    function addDependencies(fn, name, elemid, keyprefix = "", bindingFn, directiveConfig, computation) {
+        const fnText = fn.computation ? fn.computation.toString() : fn.toString();
         Object.keys(state).forEach(key => {
             if (!fnText.match(new RegExp("\\b" + keyprefix + key + "\\b")))
                 return;
@@ -76,12 +73,16 @@ function StateMachine(_state = {}) {
             }
 
             if (key !== name) {
-                const matchid = elemid ? elemid + '_' + elemkey : name;
+                const matchid = elemid ? elemid + '_' + randomId('') : name;
                 cache.dependencies[key].push(matchid);
                 cache.bindings[matchid] = {
                     elemid,
                     name,
-                    fn: toFn(fn)
+                    bindingFn,
+                    resultFn: toFn(fn),
+                    resultFnRaw: fn,
+                    directiveConfig,
+                    computation
                 }
             }
         });
@@ -123,50 +124,42 @@ function StateMachine(_state = {}) {
     for (let initFn of globalCache.onInit) {
         const result = initFn({ state, compute }) || {};
 
-        if (result.onElementInit)
-            globalCache.onElementInit.push(result.onElementInit);
-        if (result.onRender)
-            globalCache.onRender.push(result.onRender);
+        result.computations = Array.isArray(result.computations) ? result.computations : [result.computations];
+
+        if (result.onRender) {
+            const initName = result.name || initFn.name;
+            const elements = initElements(result.bindTo);
+
+            for (let elem of elements) {
+                const elemId = elem.dataset.id || randomId('id_');
+
+                if (elem.dataset.id == null)
+                    elem.dataset.id = elemId;
+
+                for (let code of result.computations) {
+                    const fnToCompute = code(elem);
+
+                    addDependencies(fnToCompute, 0, elemId, "", result.onRender, result, code);
+                }
+
+            }
+        }
     }
 
-    document.querySelectorAll('*').forEach(elem => {
-        for (let onElementInitFn of globalCache.onElementInit) {
-            onElementInitFn(elem);
-        }
-
-        const elemId = elem.dataset.id || randomId('id_')
-
-        Object.keys(elem.dataset).forEach(key => {
-            const id = randomId('rnd');
-            const fnToCompute = elem.dataset[key];
-
-            cache.computed[id] = toFn(fnToCompute);
-            addDependencies(fnToCompute, id, elemId, key);
-
-            elem.dataset.id = elemId;
-        })
-
-
-    });
-
     const render = (state, prop, value) => {
-        console.log('render', prop, value);
-
-        const toUpdate = cache.dependencies[prop];
+        const toUpdate = cache.dependencies[prop] || [];
         for (let updateEntry of toUpdate) {
             const cacheUpdateEntry = cache.bindings[updateEntry];
-            console.log(cacheUpdateEntry);
-        }
+            const elem = document.querySelector(`[data-id="${cacheUpdateEntry.elemid}"]`);
+            const result = compute(cacheUpdateEntry.resultFn);
 
-        for (let onRenderFn of globalCache.onRender) {
-            onRenderFn(state, prop, value);
+            if (cacheUpdateEntry.bindingFn)
+                cacheUpdateEntry.bindingFn(elem, result, { values, property: prop, value, directiveConfig: cacheUpdateEntry.directiveConfig, computation: cacheUpdateEntry.computation });
         }
-
     };
 
     Object.keys(state).forEach(key => {
         if (typeof state[key] == 'function') {
-            cache.computed[key] = state[key];
             addDependencies(state[key], key);
         }
 
@@ -181,6 +174,24 @@ function StateMachine(_state = {}) {
     }
 };
 
+
+function initElements(_elements) {
+    let elements = _elements;
+
+    if (typeof elements == 'function')
+        elements = elements();
+
+    if (elements == null)
+        throw new Error('Registerconfig.bindTo returns null but should return a selector, element, Array of elements or function that returns one of these.');
+
+    if (Array.isArray(elements))
+        return elements;
+
+    if (typeof elements == 'string')
+        return document.querySelectorAll(elements);
+
+    return [elements];
+}
 
 function register(fn) {
     if (fn)
