@@ -1,8 +1,3 @@
-const features = [
-    'Object.entries',
-    'Object.values'
-].join('%2C');
-
 module.exports = {
     /*
      ** Headers of the page
@@ -22,7 +17,7 @@ module.exports = {
             { rel: 'icon', type: 'image/png', sizes: "512x512", href: '/favicon-512x512.png' }
         ],
         script: [
-            { src: `https://polyfill.io/v3/polyfill.min.js?features=${features}`, body: true },
+            { src: `https://polyfill.io/v3/polyfill.min.js?features=es6%2ces7`, body: true },
         ],
     },
     /*

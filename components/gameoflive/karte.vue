@@ -4,7 +4,7 @@
       <span class="groupTitle" v-if="!modify">{{getCardType.label}}</span>
       <select v-if="modify" v-model="cardType">
         <option
-          v-for="opt in typeSelect()"
+          v-for="opt in cardTypeOptions"
           :key="opt.key"
           :selected="config.cardType == opt.selected"
           :disabled="opt.disabled"
@@ -20,7 +20,7 @@
       ></span>
       <select v-if="modify && getCardType.key=='ereignis'" v-model="interesse">
         <option
-          v-for="opt in interessenSelect()"
+          v-for="opt in interessenOptions"
           :key="opt.key"
           :selected="opt.selected"
           :disabled="opt.disabled"
@@ -43,6 +43,7 @@
 import { ref, computed } from '@vue/composition-api';
 import { interessen, cardTypes } from '../../store/cards';
 
+console.log(cardTypes)
 export default {
   name: "card",
   props: {
@@ -111,6 +112,32 @@ export default {
 
     const getInteresse = computed(() =>  interessen[props.config.interesse] || {});
     const getCardType = computed(() =>  cardTypes[props.config.cardType] || {});
+    
+    const interessenOptions = computed(() => {
+      return Object.keys(interessen).map(interesse =>
+        Object.assign(
+          {
+            key: interesse,
+            selected: interesse == props.config.interesse
+          },
+          interessen[interesse]
+        )
+      );
+    });
+
+    const cardTypeOptions = computed(() => {
+      return Object.keys(cardTypes).map(cardType =>
+        Object.assign(
+          {
+            key: cardType,
+            selected: cardType == props.config.cardType,
+            text: "Kartentyp: " + cardTypes[cardType].label
+          },
+          cardTypes[cardType]
+        )
+      );
+    });
+
 
     return {
       selectText,
@@ -119,32 +146,9 @@ export default {
       interesse,
       cardType,
       getInteresse,
-      getCardType
-    }
-  },
-  methods: {
-    interessenSelect() {
-      return Object.keys(interessen).map(interesse =>
-        Object.assign(
-          {
-            key: interesse,
-            selected: interesse == this.config.interesse
-          },
-          interessen[interesse]
-        )
-      );
-    },
-    typeSelect() {
-      return Object.keys(cardTypes).map(cardType =>
-        Object.assign(
-          {
-            key: cardType,
-            selected: cardType == this.config.cardType,
-            text: "Kartentyp: " + cardTypes[cardType].label
-          },
-          cardTypes[cardType]
-        )
-      );
+      getCardType,
+      interessenOptions,
+      cardTypeOptions
     }
   }
 };

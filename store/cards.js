@@ -1,6 +1,5 @@
-import { db, auth } from "../plugins/initFirebase";
+import { db } from "../plugins/initFirebase";
 import Vue from 'vue';
-import { computed } from '@vue/composition-api';
 
 import _ from 'lodash';
 
@@ -67,8 +66,6 @@ export const mutations = {
             state.modifyMode = modifyMode;
     },
     addNewCard(state, newCard) {
-
-
         Vue.set(state.cards, newCard._id, newCard);
     },
     update(state, card) {
