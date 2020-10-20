@@ -128,6 +128,12 @@ export default {
   flex-direction: column;
 }
 
+@media screen and (max-width: 870px){
+    .stab {
+        display:none;
+    }  
+}
+
 @media screen and (max-width: 400px){
     .text {
         max-width: 350px;

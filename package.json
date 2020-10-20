@@ -14,9 +14,9 @@
     },
     "dependencies": {
         "@vue/composition-api": "^0.5.0",
-        "firebase": "^7.18.0",
+        "firebase": "^7.24.0",
         "lodash": "^4.17.20",
-        "nuxt": "^2.14.1",
+        "nuxt": "^2.14.7",
         "vue-scroll": "^2.1.13"
     },
     "devDependencies": {

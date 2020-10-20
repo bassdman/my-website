@@ -3,8 +3,9 @@
     <div id="cookieLayer_vintage">
       <div>
         <div id="cookieinhalt">
-          <span>Muhahaaaaa, ich Schlaufink habe erkannt, dass man Cookies nicht nur essen kann. Ich könnte damit auch deine Identität ausspähen oder nutzlosen Text wegspeichern. Könnte ich...</span>
-          <nuxt-link to="/datenschutz" class="datenschutzlink">Lies hier alles zum Thema Datenschutz.</nuxt-link>
+          <span>Hier müsstet ihr eigentlich einstellen dürfen, wie weit ich euch ausspionieren darf. Müsste ich. Aber diese Seite hat 0 Tracking - ich weiß nicht mal, wie viele Benutzer diese Seite besuchen... Also chillt euere Base, nehmt einen Tee und genießt diese Seite :)</span>
+          <nuxt-link to="/datenschutz" class="datenschutzlink">Lies hier die Details zum Thema Datenschutz.</nuxt-link>
+          <button v-on:click="closeAndAccept">Datenschutzbestimmungen Akzeptieren</button>
         </div>
         <span class="cookieLayerCloser" v-on:click="close">&#10006;</span>
       </div>
@@ -19,17 +20,20 @@ export default {
 
     const cookieLayerAccepted = localStorage.getItem('cookieLayerAccepted');
 
-    if(cookieLayerAccepted)
-        this.showLayer = false;
+    if(!cookieLayerAccepted)
+        this.showLayer = true;
   },
   data() {
     return {
-      showLayer: true,
+      showLayer: false,
       fadeOut: false
     };
   },
   methods: {
     close() {
+      this.fadeOut = true;
+    },
+    closeAndAccept() {
       this.fadeOut = true;
       localStorage.setItem('cookieLayerAccepted',true);
     }
@@ -102,6 +106,10 @@ export default {
   animation-name: fadeOut;
   animation-duration: 1s;
   opacity:0;
+}
+
+button{
+  cursor: pointer;
 }
 @keyframes fadeOut {
   from {opacity:1}

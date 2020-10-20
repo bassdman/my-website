@@ -1,8 +1,16 @@
 <template>
   <div class="home">
-    <cloud fontsize="small" class="cloudText alignCenter" v-bind:background="cloudbackground">
-      Wohin zieht
+    <cloud type="2" fontsize="small" class="cloudText alignCenter" v-bind:background="cloudbackground">
+      <br>Wohin zieht
       <br />diese Wolke?
+    </cloud>
+    <cloud :type="4" fontsize="small" class="cloudText alignCenter" v-bind:background="cloudbackground">
+      <a href="https://github.com/bassdman"> <br>Auf zu meinen <br>Github-Projekten</a>
+    </cloud>
+    <cloud :type="1" fontsize="small" class="cloudText alignCenter" v-bind:background="cloudbackground">
+      <nuxt-link to="/lebenslauf">
+          <br>Mein (Arbeits-)Leben
+        </nuxt-link>
     </cloud>
     <h1 class="welcome" v-if="!$store.state.light.on">Was für eine schöööne Nacht :)</h1>
     <h1 class="welcomeSubtitle" v-if="!$store.state.light.on">Zeit, mal die Sterne zu zählen</h1>

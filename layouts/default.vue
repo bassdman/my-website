@@ -1,10 +1,20 @@
 <template>
   <div>
     <Sidebar></Sidebar>
-    <div class="background" v-bind:class="{flickerColor: $store.state.light.on}" v-bind:style="{background:$store.state.background.bgcolor }"></div>
-    <Lightbulb class="lightbulbLayout" v-bind:on="$store.state.light.on"></Lightbulb>
+    <div
+      class="background"
+      v-bind:class="{ flickerColor: $store.state.light.on }"
+      v-bind:style="{ background: $store.state.background.bgcolor }"
+    ></div>
+    <div v-if="!$store.state.light.on">
+      <div v-for="star in stars" v-bind:key="star.id" :data-id="star.id" v-bind:style="{left: star.left, top: star.top,width:star.height,height:star.height,opacity:star.opacity}" class="star"></div>
+    </div>
+    <Lightbulb
+      class="lightbulbLayout"
+      v-bind:on="$store.state.light.on"
+    ></Lightbulb>
     <headerElem></headerElem>
-    <nuxt v-bind:style="{'visibility':visibility}"/>
+    <nuxt v-bind:style="{ visibility: visibility }" />
     <FooterElem></FooterElem>
     <CookieLayer></CookieLayer>
   </div>
@@ -13,12 +23,12 @@
 <style>
 @font-face {
   font-family: Admiration Pains;
-  src: url('~assets/Admiration-pains.ttf');
+  src: url("~assets/Admiration-pains.ttf");
 }
 
 @font-face {
   font-family: Brushed;
-  src: url('~assets/Brushed.ttf');
+  src: url("~assets/Brushed.ttf");
 }
 
 html {
@@ -34,19 +44,26 @@ html {
 }
 
 #app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  font-family: "Avenir", Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: #2c3e50;
 }
 
-.lightbulbLayout{
+.star{
+  position: absolute;
+  background: white;
+  border-radius: 10px;
+  z-index:-1;
+}
+
+.lightbulbLayout {
   position: fixed;
-  top:-70px;
-  right:300px;
+  top: -70px;
+  right: 300px;
   z-index: -1;
 }
-body{
+body {
   margin: 0px;
 }
 .background {
@@ -54,7 +71,7 @@ body{
   top: 0px;
   right: 0px;
   filter: grayscale(1) brightness(0);
-  background-size:cover;
+  background-size: cover;
   left: 0px;
   position: fixed;
   z-index: -1;
@@ -65,8 +82,8 @@ body{
   filter: grayscale(0.5);
 }
 
-.visibilityHidden{
-  visibility:hidden;
+.visibilityHidden {
+  visibility: hidden;
 }
 @keyframes flickerColor {
   0% {
@@ -119,22 +136,47 @@ body{
   }
 }
 
-.bsoffn{
+.bsoffn {
   animation-name: bsoffn;
   animation-duration: 10s;
 }
 @keyframes bsoffn {
-  0% {transform: scale(1)}
-  10% {transform: scale(1.5)}
-  20% {transform: scale(4);margin-top: 100px;}
-  30% {transform: scale(2); margin-top: -150px;}
-  40% {transform: scale(.3);margin-top: -200px;}
-  50% {transform: scale(.1)}
-  60% {transform: scale(1)}
-  70% {transform: scale(3)}
-  80% {transform: scale(2)}
-  90% {transform: scale(1.5)}
-  100% {transform: scale(3)}
+  0% {
+    transform: scale(1);
+  }
+  10% {
+    transform: scale(1.5);
+  }
+  20% {
+    transform: scale(4);
+    margin-top: 100px;
+  }
+  30% {
+    transform: scale(2);
+    margin-top: -150px;
+  }
+  40% {
+    transform: scale(0.3);
+    margin-top: -200px;
+  }
+  50% {
+    transform: scale(0.1);
+  }
+  60% {
+    transform: scale(1);
+  }
+  70% {
+    transform: scale(3);
+  }
+  80% {
+    transform: scale(2);
+  }
+  90% {
+    transform: scale(1.5);
+  }
+  100% {
+    transform: scale(3);
+  }
 }
 </style>
 
@@ -142,8 +184,8 @@ body{
 import HeaderElem from "@/components/molecules/Header.vue";
 import FooterElem from "@/components/molecules/Footer.vue";
 import Lightbulb from "@/components/atoms/Lightbulb.vue";
-import CookieLayer from '@/components/atoms/CookieLayer.vue';
-import Sidebar from '@/components/molecules/Sidebar.vue';
+import CookieLayer from "@/components/atoms/CookieLayer.vue";
+import Sidebar from "@/components/molecules/Sidebar.vue";
 
 export default {
   components: {
@@ -151,15 +193,34 @@ export default {
     FooterElem,
     Lightbulb,
     CookieLayer,
-    Sidebar
+    Sidebar,
   },
-  data(){
+  data() {
     return {
-      visibility: 'hidden'
-    }
+      visibility: "hidden",
+    };
   },
-  mounted(){
-    this.visibility = 'visible';
-  }
+  mounted() {
+    this.visibility = "visible";
+  },
+  computed: {
+    stars() {
+      if(typeof window == 'undefined')
+        return;
+
+      const amountOfStars = 700;
+      let stars = [];
+      for (let i = 0; i < amountOfStars; i++) {
+        stars.push({
+          id: i,
+          left: Math.random() * (window.innerWidth - 20)+'px',
+          top: Math.random() * window.screen.height +'px',
+          height: Math.random()*6 +'px',
+          opacity: Math.random()
+        });
+      }
+      return stars;
+    },
+  },
 };
 </script>
