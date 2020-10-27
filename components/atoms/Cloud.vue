@@ -1,37 +1,37 @@
 <template>
-  <div>
+  <div >
     <style>
       .cloud, .cloud:before, .cloud:after{
         background: {{background}};
         font-size: {{fontsize}}
       }
     </style>
-    <div class="cloud cloud1" v-if="type==1">
+    <div class="cloud cloud1" v-if="type==1" v-on:click="togglePausedMode" :class="{paused:isPaused}">
       <div class="innerText">
         <slot></slot>
       </div>
     </div>
-    <div class="cloud cloud2" v-if="type==2">
+    <div class="cloud cloud2" v-if="type==2" v-on:click="togglePausedMode" :class="{paused:isPaused}">
       <div class="innerText">
         <slot></slot>
       </div>
     </div>
-    <div class="cloud cloud3" v-if="type==3">
+    <div class="cloud cloud3" v-if="type==3" v-on:click="togglePausedMode" :class="{paused:isPaused}">
       <div class="innerText">
         <slot></slot>
       </div>
     </div>
-    <div class="cloud cloud4" v-if="type==4">
+    <div class="cloud cloud4" v-if="type==4" v-on:click="togglePausedMode" :class="{paused:isPaused}">
       <div class="innerText">
         <slot></slot>
       </div>
     </div>
-    <div class="cloud cloud5" v-if="type==5">
+    <div class="cloud cloud5" v-if="type==5" v-on:click="togglePausedMode" :class="{paused:isPaused}">
       <div class="innerText">
         <slot></slot>
       </div>
     </div>
-    <div class="cloud cloud6" v-if="type==6">
+    <div class="cloud cloud6" v-if="type==6" v-on:click="togglePausedMode" :class="{paused:isPaused}">
       <div class="innerText">
         <slot></slot>
       </div>
@@ -42,17 +42,25 @@
 <script>
 export default {
   name: "cloud",
+  data(){
+    return {
+    isPaused: false
+    }
+  },
   methods: {
     cloudclass() {
       const classname = "cloud" + this.type;
       return {
         classname: true
       };
+    },
+    togglePausedMode(){
+      this.isPaused = !this.isPaused;
     }
   },
   props: {
     type: {
-      type: Number,
+      type: [Number,String],
       default: 1
     },
     background: {
@@ -85,6 +93,7 @@ export default {
   -webkit-border-radius: 200px;
   -moz-border-radius: 200px;
   border-radius: 200px;
+  cursor: pointer;
 }
 
 .cloud:before,
@@ -296,5 +305,9 @@ export default {
 
 .innerText {
   margin-top: -20px;
+}
+
+.paused{
+  animation-play-state: paused;
 }
 </style>
