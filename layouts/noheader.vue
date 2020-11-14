@@ -13,7 +13,6 @@
       class="lightbulbLayout"
       v-bind:on="$store.state.light.on"
     ></Lightbulb>
-    <headerElem></headerElem>
     <nuxt v-bind:style="{ visibility: visibility }" />
     <FooterElem></FooterElem>
     <CookieLayer></CookieLayer>
@@ -51,7 +50,7 @@ html {
 }
 
 .star{
-  position: fixed;
+  position: absolute;
   background: white;
   border-radius: 10px;
   z-index:-1;

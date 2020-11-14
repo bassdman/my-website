@@ -1,13 +1,8 @@
 export const state = () => ({
-    show: true,
     buttonAddCard: false,
     buttonModifyCard: false,
 })
 export const mutations = {
-    show(state, show) {
-        if (state.show != show)
-            state.show = show;
-    },
     hideAllButtons(state) {
         state.buttonAddCard = false;
         state.buttonModifyCard = false;

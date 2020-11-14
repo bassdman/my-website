@@ -34,7 +34,7 @@
           <div class="period">seit 05/2017</div>
         </h2>
         <ul>
-          <li>Betreuung der Website <a>https://www.onlineprinters.de</a></li>
+          <li>Betreuung der Website <a href="https://www.onlineprinters.de">https://www.onlineprinters.de</a></li>
           <li>Aufbau / Vereinfachung von Buildprozessen mittels gulp</li>
           <li>Redesign der Website / Aufbau der Architektur hierfür (2020)</li>
           <li>Technologien: Websale, nodejs, javascript, css, html</li>
@@ -350,9 +350,31 @@
 export default {
   name: "lebenslauf",
   created() {
-    this.$store.commit("header/show", true);
     this.$store.commit("background/bgcolor", "#00dcffe0");
     this.$store.commit("header/hideAllButtons", true);
+  },
+    head() {
+    return {
+      // Children can override the title.
+      title: "Lebenslauf",
+      // Result: My Page Title ← My Site
+      // If a child changes the title to "My Other Page Title",
+      // it will become: My Other Page Title ← My Site
+      titleTemplate: "Manuel Gelsen | %s",
+      // Define meta tags here.
+      meta: [
+        { name: "language", content: "de" },
+        {
+          name: "description",
+          content: "Das Leben des Manuel G - kompakt auf einer Seite"
+        },
+        { name: "robots", content: "index,follow" }
+      ],
+      link: [
+        { rel: "canonical", href: "https://www.manuelgelsen.de/lebenslauf" },
+        { rel: "manifest", href: "/manifest.json" }
+      ]
+    };
   },
   computed: {
     textcolor() {

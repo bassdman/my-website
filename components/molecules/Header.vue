@@ -1,6 +1,6 @@
   <template>
   <!-- Der Default Header -->
-  <div class="header" v-show="$store.state.header.show">
+  <div class="header">
     <div class="menu"></div>
     <nuxt-link to="/" class="nameWithTitle">
       <span class="name">Manuel Gelsen</span>

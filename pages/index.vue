@@ -86,7 +86,6 @@ export default {
     this.blockRouteEvent = false;
     this.$store.commit("background/bgcolor", "#00dcffe0");
     this.$store.commit("sidebar/show", true);
-    this.$store.commit("header/show", false);
     if (!process.client) return 0;
   },
   head() {
