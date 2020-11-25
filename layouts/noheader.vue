@@ -50,7 +50,7 @@ html {
 }
 
 .star{
-  position: absolute;
+  position: fixed;
   background: white;
   border-radius: 10px;
   z-index:-1;

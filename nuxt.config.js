@@ -42,6 +42,7 @@ module.exports = {
             }
         }
     },
+    target: 'static',
     plugins: [{
             src: '~/plugins/serviceworkers-init.js',
             ssr: false
