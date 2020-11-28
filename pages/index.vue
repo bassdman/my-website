@@ -1,45 +1,151 @@
 <template>
   <div class="home">
-    <cloud type="2" fontsize="small" class="cloudText alignCenter" v-bind:background="cloudbackground">
-      <br>Wohin zieht
-      <br />diese Wolke?
+    <cloud
+      type="1"
+      fontsize="small"
+      class="cloudText alignCenter"
+      v-bind:background="cloudbackground"
+    >
+      <br />Wohin zieht <br />diese Wolke?
     </cloud>
-    <cloud :type="4" fontsize="small" class="cloudText alignCenter" v-bind:background="cloudbackground">
-      <a href="https://github.com/bassdman"> <br>Auf zu meinen <br>Github-Projekten</a>
-    </cloud>
-    <cloud :type="1" fontsize="small" class="cloudText alignCenter" v-bind:background="cloudbackground">
-      <nuxt-link to="/lebenslauf">
-          <br>Mein (Arbeits-)Leben
-        </nuxt-link>
-    </cloud>
-    <h1 class="welcome" v-if="!$store.state.light.on">Was für eine schöööne Nacht :)</h1>
-    <h1 class="welcomeSubtitle" v-if="!$store.state.light.on">Zeit, mal die Sterne zu zählen</h1>
-    <h1 class="welcome" v-if="$store.state.light.on">Waah, es ist so hell!!!</h1>
-    <h1 class="welcomeSubtitle" v-if="$store.state.light.on">Wer hat das Licht angemacht?</h1>
+    <h1 class="welcome" v-if="!$store.state.light.on">
+      Was für eine schöööne Nacht :)
+    </h1>
+    <h1 class="welcomeSubtitle" v-if="!$store.state.light.on">
+      Zeit, mal die Sterne zu zählen
+    </h1>
+    <h1 class="welcome" v-if="$store.state.light.on">
+      Waah, es ist so hell!!!
+    </h1>
+    <h1 class="welcomeSubtitle" v-if="$store.state.light.on">
+      Wer hat das Licht angemacht?
+    </h1>
 
-    <Castle class="castle">
-      <div class="content" id="content">
-        <div class="bildich" :class="{flicker:lightOn, visibilityHidden:!lightOn}"></div>
-        <div class="signcontainer">
-          <sign :width="boardwidth" boards="6" stablaenge="0" kettenlaenge="150" class="sign">
-            <div>
-              <div class="name pretext totalWidth alignCenter">Manuel Gelsen</div>
-              <div
-                class="description pretext totalWidth alignCenter"
-              >Webdesigner, Träumer und vieles mehr</div>
-            </div>
-          </sign>
+    <House class="castle">
+      <template v-slot:sign>
+        <div class="content" id="content">
+          <div
+            class="bildich"
+            :class="{ flicker: lightOn, visibilityHidden: !lightOn }"
+          ></div>
+          <div class="signcontainer">
+            <sign
+              :width="boardwidth"
+              boards="6"
+              stablaenge="0"
+              kettenlaenge="150"
+              class="sign"
+            >
+              <div>
+                <div class="name pretext totalWidth alignCenter">
+                  Manuel Gelsen
+                </div>
+                <div class="description pretext totalWidth alignCenter">
+                  Webdesigner, Träumer und vieles mehr
+                </div>
+              </div>
+            </sign>
+          </div>
         </div>
-        <nuxt-link prefetch to="/spieleschmiede">Spieleschmiede</nuxt-link>
-      </div>
-    </Castle>
+      </template>
+      <template v-slot:window1>
+        <div class="window"><a href="https://github.com/bassdman">Meine<br>Github-Projekte</a></div>
+      </template>
+      <template v-slot:window2>
+        <div class="window">
+          <nuxt-link to="/lebenslauf">Mein<br>(Arbeits-)Leben </nuxt-link>  
+        </div>
+      </template>
+      <template v-slot:window3>
+        <div class="window">
+          <nuxt-link prefetch to="/spieleschmiede">Spieleschmiede</nuxt-link>
+        </div>   
+      </template>
+      <template v-slot:window4>
+        <div class="window">
+          
+        </div>
+      </template>
+      <template v-slot:footer1>
+        <sign
+          width="200"
+          stablaenge="0"
+          boards="4"
+          class="footer1"
+          :breakpoints="[
+            { maxWidth: 520, width: 450 },
+            {
+              maxWidth: 1040,
+              minWidth: 521,
+              kettenlaenge: 85,
+              width: 250,
+            },
+          ]"
+        >
+          <div class="iconreference">
+            Icons erstellt von
+            <a
+              href="https://www.flaticon.com/de/autoren/those-icons"
+              title="Those Icons"
+              >Those Icons</a
+            >
+            und
+            <a
+              href="https://www.flaticon.com/de/autoren/wanicon"
+              title="wanicon"
+              >wanicon</a
+            >
+            auf
+            <a href="https://www.flaticon.com/de/" title="Flaticon">
+              www.flaticon.com</a
+            >
+          </div>
+        </sign>
+      </template>
+      <template v-slot:footer2>
+        <sign
+          link="/impressum"
+          width="180"
+          boards="3"
+          class="footer2"
+          :breakpoints="[{ maxWidth: 520, width: 450 }]"
+          >Impressum</sign
+        >
+      </template>
+      <template v-slot:footer3>
+        <sign
+          link="/datenschutz"
+          width="210"
+          boards="3"
+          class="footer3"
+          :breakpoints="[{ maxWidth: 520, width: 450 }]"
+          >Datenschutz</sign
+        >
+      </template>
+      <template v-slot:footer4>
+        <sign
+          width="200"
+          boards="2"
+          stablaenge="0"
+          class="footer4"
+          :breakpoints="[
+            { maxWidth: 520, width: 450 },
+            { maxWidth: 1040, minWidth: 521, kettenlaenge: 90 },
+          ]"
+        >
+          <div class="infosign">
+            <div>v&nbsp;{{ version }}</div>
+          </div>
+        </sign>
+      </template>
+    </House>
   </div>
 </template>
 
 <script>
 import Coffeecup from "../components/atoms/Coffeecup.vue";
 import Cloud from "../components/atoms/Cloud.vue";
-import Castle from "../components/atoms/Castle.vue";
+import House from "../components/atoms/House.vue";
 import Sign from "../components/atoms/Sign.vue";
 import { version } from "@/package.json";
 
@@ -47,9 +153,9 @@ export default {
   name: "home",
   components: {
     Coffeecup,
-    Castle,
+    House,
     Sign,
-    Cloud
+    Cloud,
   },
   layout: "noheader",
   beforeRouteLeave(to, from, next) {
@@ -59,7 +165,7 @@ export default {
   data() {
     return {
       showPortrait: false,
-      version
+      version,
     };
   },
   computed: {
@@ -80,13 +186,12 @@ export default {
     cloudbackground() {
       if (this.$store.state.light.on) return "white";
       else return "#888888";
-    }
+    },
   },
   created() {
     this.blockRouteEvent = false;
     this.$store.commit("background/bgcolor", "#00dcffe0");
     this.$store.commit("sidebar/show", true);
-    if (!process.client) return 0;
   },
   head() {
     return {
@@ -96,16 +201,16 @@ export default {
         {
           name: "description",
           content:
-            "Was frische Landluft alles bewirkt... Das ist also die offizielle Website von Manuel Gelsen, 30 Jahre, aus Fürth...! Was gibt es hier zu entdecken? Zeit, dem mal auf den Grund zu gehen."
+            "Was frische Landluft alles bewirkt... Das ist also die offizielle Website von Manuel Gelsen, 30 Jahre, aus Fürth...! Was gibt es hier zu entdecken? Zeit, dem mal auf den Grund zu gehen.",
         },
-        { name: "robots", content: "index,follow" }
+        { name: "robots", content: "index,follow" },
       ],
       link: [
         { rel: "canonical", href: "https://www.manuelgelsen.de" },
-        { rel: "manifest", href: "/manifest.json" }
-      ]
+        { rel: "manifest", href: "/manifest.json" },
+      ],
     };
-  }
+  },
 };
 </script>
 
@@ -135,6 +240,15 @@ export default {
 p {
   line-height: 1.5em;
   color: white;
+}
+
+.window{
+  text-align: center;
+}
+.window a,
+.window a:visited {
+  color: white;
+  font-weight: bold;
 }
 
 .signcontainer {
@@ -181,6 +295,26 @@ p {
 
 .cloudText a {
   color: black;
+}
+
+.footer1,
+.footer2,
+.footer3,
+.footer4 {
+  white-space: normal;
+  color: white;
+  text-align: center;
+  vertical-align: middle;
+}
+
+@media screen and (min-width: 521px) and (max-width: 1040px) {
+  .footer4 {
+    margin-bottom: 20px;
+  }
+
+  .footer1 {
+    margin-left: -30px;
+  }
 }
 
 @media screen and (min-width: 900px) {

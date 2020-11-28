@@ -1,28 +1,38 @@
 <template>
-  <div class="sign_total" v-bind:style="{width:width + 'px'}">
-    <div class="kette kette_links" v-if="kettenlaenge > 0">
+  <div class="sign_total" v-bind:style="{ width: width + 'px' }">
+    <div class="kette kette_links" v-if="getKettenlaenge > 0" v-bind:style="{'marginLeft': marginKetteLeft}">
       <div
         class="ring"
-        v-for="(ring,i) in rings"
+        v-for="(ring, i) in rings"
         :key="ring"
         :index="i"
-        v-bind:style="{'margin-top': -i * 15 + 'px', background: i == 0 || i == rings - 1 ? '#777777' : 'inherit'  }"
-      >&nbsp;</div>
+        v-bind:style="{
+          'margin-top': -i * 15 + 'px',
+          background: i == 0 || i == rings - 1 ? '#777777' : 'inherit',
+        }"
+      >
+        &nbsp;
+      </div>
     </div>
     <div
       class="kette kette_rechts"
-      v-if="kettenlaenge > 0"
-      v-bind:style="{'margin-left':(width-100)+'px'}"
+      v-if="getKettenlaenge > 0"
+      v-bind:style="{ 'marginLeft': marginKetteRight }"
     >
       <div
         class="ring"
-        v-for="(ring,i) in rings"
+        v-for="(ring, i) in rings"
         :key="ring"
         :index="i"
-        v-bind:style="{'margin-top': -i * 15 + 'px', background: i == 0 || i == rings - 1 ? '#777777' : 'inherit'  }"
-      >&nbsp;</div>
+        v-bind:style="{
+          'margin-top': -i * 15 + 'px',
+          background: i == 0 || i == rings - 1 ? '#777777' : 'inherit',
+        }"
+      >
+        &nbsp;
+      </div>
     </div>
-    <div class="signboard" v-bind:style="{width:width + 'px'}">
+    <div class="signboard" v-bind:style="{ width: getWidth + 'px' }">
       <div class="text">
         <nuxt-link class="colorWhite" v-if="link" v-bind:to="link">
           <slot></slot>
@@ -31,7 +41,11 @@
           <slot></slot>
         </span>
       </div>
-      <div v-for="board in _boards" :key="board" v-bind:style="{width: board}">
+      <div
+        v-for="board in _boards"
+        :key="board"
+        v-bind:style="{ width: board }"
+      >
         <div class="brett">&nbsp;</div>
       </div>
     </div>
@@ -49,40 +63,96 @@ export default {
     link: String,
     stablaenge: { default: 50, type: [String, Number] },
     kettenlaenge: { default: 0, type: [String, Number] },
-    boards: { default: 4, type: [Number, String] }
+    boards: { default: 4, type: [Number, String] },
+    breakpoints: { default: function(){return []} },
+  },
+  data(){
+    return {
+      windowWidth: typeof window == 'undefined' ? 0 : window.innerWidth
+    }
   },
   created() {
-    var boards = [];
-    for (let i = 0; i < this.boards; i++) {
-      boards.push(75 + Math.random() * 25 + "%");
-    }
-    this._boards = boards;
+    this.initBoards(this);
+
+    if (!process.client) 
+      return;
+
+    document.addEventListener('scroll', this.handleScroll);
+  },
+  destroyed () {
+    document.removeEventListener('scroll', this.handleScroll);
+  },
+  methods: {
+    handleScroll(){
+      this.windowWidth = window.innerWidth
+    },
+    initBoards(ctx){
+      var boards = [];
+      const numOfBoards = this.getProp('boards');
+      for (let i = 0; i < numOfBoards; i++) { 
+        boards.push(75 + Math.random() * 25 + "%");
+      }
+      ctx._boards = boards;
+    },
+    getProp(value) {
+      if (!process.client) return this[value];
+
+      let returnValue = this[value];
+      if (this.breakpoints) {
+        for (let breakpoint of this.breakpoints) {
+          let minWidth = breakpoint.minWidth || 0;
+          let maxWidth = breakpoint.maxWidth || 0;
+
+          if(this.windowWidth >= minWidth && this.windowWidth <= maxWidth){
+            if(breakpoint[value])
+              returnValue = breakpoint[value];
+          }
+        }
+      }
+      return returnValue;
+    },
   },
   computed: {
+    marginKetteLeft(){
+      const margin = this.getProp('width') * 0.12;
+
+      return margin + 'px';
+    },
+    marginKetteRight(){
+      const width = this.getProp('width');
+      const margin = width - width * 0.12 - 21;
+      return margin + 'px';
+    },
+    getWidth(){
+      return this.getProp('width');
+    },
+    getKettenlaenge(){
+      return this.getProp('kettenlaenge')
+    },
     signclasses() {
       return {
-        height: (this.$props.height || 100) + "px",
-        width: (this.$props.width || 200) + "px"
+        height: (this.getProp('height') || 100) + "px",
+        width: (this.getProp('width') || 200) + "px",
       };
     },
     stabclasses() {
       return {
-        height: this.stablaenge + "px"
+        height: this.getProp('stablaenge') + "px",
       };
     },
     rings() {
-        const retArr = [];
-      const length = parseInt(parseFloat(this.kettenlaenge / 15));
+      const retArr = [];
+      const length = parseInt(parseFloat(this.getProp('kettenlaenge') / 15));
       return length;
     },
     ringstyles() {
       const i = this.index;
       return {
         "margin-top": -i * 15 + "px",
-        background: i == 0 || i == this.rings - 1 ? "#777777" : "inherit"
+        background: i == 0 || i == this.rings - 1 ? "#777777" : "inherit",
       };
-    }
-  }
+    },
+  },
 };
 </script>
 
@@ -93,9 +163,6 @@ export default {
   padding: 20px 10px 0px 10px;
 }
 
-.kette_links {
-  margin-left: 80px;
-}
 .ring {
   width: 15px;
   height: 15px;
@@ -128,22 +195,21 @@ export default {
   flex-direction: column;
 }
 
-@media screen and (max-width: 870px){
-    .stab {
-        display:none;
-    }  
+@media screen and (max-width: 520px) {
+  .stab {
+    display: none;
+  }
 }
 
-@media screen and (max-width: 400px){
-    .text {
-        max-width: 350px;
-    }  
+@media screen and (max-width: 400px) {
+  .text {
+    max-width: 350px;
+  }
 }
 
-@media screen and (max-width: 600px){
-    .text {
-        max-width: 500px;
-    }  
+@media screen and (max-width: 600px) {
+  .text {
+    max-width: 500px;
+  }
 }
-
 </style>

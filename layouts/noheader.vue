@@ -14,7 +14,6 @@
       v-bind:on="$store.state.light.on"
     ></Lightbulb>
     <nuxt v-bind:style="{ visibility: visibility }" />
-    <FooterElem></FooterElem>
     <CookieLayer></CookieLayer>
   </div>
 </template>
@@ -180,16 +179,12 @@ body {
 </style>
 
 <script>
-import HeaderElem from "@/components/molecules/Header.vue";
-import FooterElem from "@/components/molecules/Footer.vue";
 import Lightbulb from "@/components/atoms/Lightbulb.vue";
 import CookieLayer from "@/components/atoms/CookieLayer.vue";
 import Sidebar from "@/components/molecules/Sidebar.vue";
 
 export default {
   components: {
-    HeaderElem,
-    FooterElem,
     Lightbulb,
     CookieLayer,
     Sidebar,
