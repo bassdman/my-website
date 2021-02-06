@@ -43,7 +43,6 @@
 import { ref, computed } from '@vue/composition-api';
 import { interessen, cardTypes } from '../../store/cards';
 
-console.log(cardTypes)
 export default {
   name: "card",
   props: {

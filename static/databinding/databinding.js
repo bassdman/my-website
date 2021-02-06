@@ -94,7 +94,6 @@ StateMachine.register(function onRenderStyleXyz() {
         },
         computations: elem => {
             const computations = Object.keys(elem.dataset).filter(key => key.startsWith('style.')).map(key => elem.dataset[key]);
-            console.log(computations);
             return computations;
         },
         onRender(elem, result, { property }) {
@@ -118,7 +117,6 @@ StateMachine.register(function onRenderClassXyz() {
                     classname: key.replace('class.', '')
                 }
             });
-            console.log(computations);
             return computations;
         },
         onRender(elem, result, { property, value, computation }) {
