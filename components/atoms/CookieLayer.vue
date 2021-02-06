@@ -4,7 +4,7 @@
       <div>
         <div id="cookieinhalt">
           <span>Es ist gut, dass du auf deine Daten achtest. Es gibt viele Leute, die deine Daten für teuer Geld wollen, um was auch immer zu machen. Ich nicht. Diese Seite hat 0 Tracking - ich weiß nicht mal, wie viele Benutzer diese Seite besuchen... Also chillt euere Base, nehmt einen Tee und genießt diese Seite :)</span>
-          <nuxt-link to="/datenschutz" class="datenschutzlink">Für mehr Details, guggst du hier.</nuxt-link>
+          <nuxt-link to="/datenschutz" class="datenschutzlink">Für Details, guggst du hier.</nuxt-link>
           <button v-on:click="closeAndAccept">Datenschutzbestimmungen Akzeptieren</button>
         </div>
         <span class="cookieLayerCloser" v-on:click="close">&#10006;</span>
