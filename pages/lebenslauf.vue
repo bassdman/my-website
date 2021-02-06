@@ -452,7 +452,7 @@ ul {
 }
 
 #objective {
-  width: 500px;
+  max-width: 500px;
   float: left;
   margin-top: 1.75em;
 }

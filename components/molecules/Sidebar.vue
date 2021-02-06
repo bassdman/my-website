@@ -12,9 +12,6 @@
         ></Lichtschalter>
         <div class="label lichtschalterlabel">Licht</div>
       </div>
-      <audio id="audio1">
-        <source src="/welcome.mp3" type="audio/mpeg" />
-      </audio>
     </div>
   </div>
 </template>
