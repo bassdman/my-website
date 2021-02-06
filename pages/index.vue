@@ -30,11 +30,12 @@
           ></div>
           <div class="signcontainer">
             <sign
-              :width="boardwidth"
+              :width="600"
               boards="6"
               stablaenge="0"
               kettenlaenge="150"
               class="sign"
+              :breakpoints="[{maxWidth:630,width:500},{maxWidth:500,width:400}]"
             >
               <div>
                 <div class="name pretext totalWidth alignCenter">
@@ -105,10 +106,18 @@
       <template v-slot:footer2>
         <sign
           link="/impressum"
-          width="180"
+          width="250"
           boards="3"
           class="footer2"
-          :breakpoints="[{ maxWidth: 520, width: 450 }]"
+          stablaenge="0"
+          :breakpoints="[
+            { maxWidth: 520, width: 450 },
+            {
+              maxWidth: 1040,
+              minWidth: 521,
+              kettenlaenge: 85,
+            },
+          ]"
           >Impressum</sign
         >
       </template>
@@ -118,7 +127,17 @@
           width="210"
           boards="3"
           class="footer3"
-          :breakpoints="[{ maxWidth: 520, width: 450 }]"
+          stablaenge="0"
+          :breakpoints="[
+            { maxWidth: 520, width: 450},
+            {
+              maxWidth: 1040,
+              minWidth: 521,
+              kettenlaenge: 85,
+              width: 250,
+            },
+            { minWidth: 1255, stablaenge: 50}
+          ]"
           >Datenschutz</sign
         >
       </template>
@@ -130,13 +149,17 @@
           class="footer4"
           :breakpoints="[
             { maxWidth: 520, width: 450 },
-            { maxWidth: 1040, minWidth: 521, kettenlaenge: 90 },
+            { maxWidth: 1040, minWidth: 521, kettenlaenge: 90,width:250 },
+            { minWidth: 1255, stablaenge: 50}
           ]"
         >
           <div class="infosign">
             <div>v&nbsp;{{ version }}</div>
           </div>
         </sign>
+      </template>
+      <template v-slot:door>
+       <div>Tür</div>
       </template>
     </House>
   </div>
@@ -171,17 +194,6 @@ export default {
   computed: {
     lightOn() {
       return this.$store.state.light.on;
-    },
-    boardwidth() {
-      if (!process.client) return 600;
-
-      const width = document.documentElement.clientWidth;
-
-      if (width > 600) return 600;
-
-      if (width > 400) return width - 100;
-
-      return width - 20;
     },
     cloudbackground() {
       if (this.$store.state.light.on) return "white";
@@ -251,26 +263,8 @@ p {
   font-weight: bold;
 }
 
-.signcontainer {
-  width: 100%;
-  text-align: center;
-  z-index: 1;
-  position: sticky;
-  margin-bottom: 325px;
-  top: -63px;
-}
 .sign {
   z-index: 1;
-}
-
-.imAufbau {
-  padding: 5em;
-  background: #ffa5009e;
-  font-weight: bold;
-  border-radius: 5px;
-  text-align: center;
-  margin: 5em 0em;
-  width: 100%;
 }
 
 .castle {
@@ -280,10 +274,8 @@ p {
 .content {
   margin: auto;
   color: white;
-  padding: 0px 1em 1em 1em;
   display: flex;
-  flex-wrap: wrap;
-  min-height: 100vh;
+  flex-wrap:wrap;
   justify-content: center;
   border: 1px solid transparent; /*notwendig wg. eines bugs in chrome. ja, richtig gehört: chrome.*/
 }
@@ -307,7 +299,15 @@ p {
   vertical-align: middle;
 }
 
+.signcontainer {
+  margin-top: 50px;
+  width: 100%;
+}
+
 @media screen and (min-width: 521px) and (max-width: 1040px) {
+  .signcontainer {
+    width: inherit;
+  }
   .footer4 {
     margin-bottom: 20px;
   }
@@ -320,6 +320,8 @@ p {
 @media screen and (min-width: 900px) {
   .signcontainer {
     margin-bottom: 500px;
+    width: 100%;
+    margin-left: calc(50% - 300px);
   }
 }
 

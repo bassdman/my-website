@@ -1,7 +1,7 @@
 <template>
   <div>
-    <!-- roof -->
-    <div class="wall_top_zinnen">
+    <!-- roof --> 
+    <div class="roof">
       <div class="wall brickzinne"></div>
       <div class="wall brickzinne"></div>
       <div class="wall brickzinne"></div>
@@ -16,29 +16,32 @@
       <div class="slot contentSign">
         <slot name="sign"></slot>
       </div>
-      <div class="slot contentWindow1">
+      <div class="slot contentWindow contentWindow1">
         <slot name="window1"></slot>
       </div>
-      <div class="slot contentWindow2">
+      <div class="slot contentWindow contentWindow2">
         <slot name="window2"></slot>
       </div>
-      <div class="slot contentWindow3">
+      <div class="slot contentWindow contentWindow3">
         <slot name="window3"></slot>
       </div>
-      <div class="slot contentWindow4">
+      <div class="slot contentWindow contentWindow4">
         <slot name="window4"></slot>
       </div>
-      <div class="slot contentFooter1">
+      <div class="slot contentFooter contentFooter1">
         <slot name="footer1"></slot>
       </div>
-      <div class="slot contentFooter2">
+      <div class="slot contentFooter contentFooter2">
         <slot name="footer2"></slot>
       </div>
-      <div class="slot contentFooter3">
+      <div class="slot contentFooter contentFooter3">
         <slot name="footer3"></slot>
       </div>
-      <div class="slot contentFooter4">
+      <div class="slot contentFooter contentFooter4">
         <slot name="footer4"></slot>
+      </div>
+      <div class="slot contentDoor">
+        <slot name="door"></slot>
       </div>
     </div>
   </div>
@@ -61,50 +64,51 @@ export default {
   margin-top: 116px;
   width: 100%;
 }
-.contentWindow1,.contentWindow2,.contentWindow3, .contentWindow4 {
+.contentDoor{
+  width: 250px;
+  height: 250px;
+  background: black;
+  color: white;
+  bottom: 0px;
+  left: calc(50% - 125px);
+}
+.contentWindow {
   width: 200px;
   height: 200px;
-  display:flex;
-  align-items:center;
+  display: flex;
+  align-items: center;
   justify-content: center;
   background: black;
   color: white;
 }
 
-
-.contentFooter1,
-.contentFooter2,
-.contentFooter3,
-.contentFooter4 {
+.contentFooter {
   width: 200px;
 }
 
 @media screen and (max-width: 520px) {
   .wall_top {
-    height: 1500px;
+    height: 2050px;
   }
 
-  .contentFooter1,
-  .contentFooter2,
-  .contentFooter3,
-  .contentFooter4 {
+  .contentFooter {
     left: calc(50% - 225px);
   }
 
   .contentFooter1 {
-    bottom: 0px;
+    bottom: 300px;
   }
 
   .contentFooter2 {
-    bottom: 90px;
+    bottom: 390px;
   }
 
   .contentFooter3 {
-    bottom: 180px;
+    bottom: 480px;
   }
 
   .contentFooter4 {
-    bottom: 270px;
+    bottom: 570px;
   }
 
   .contentWindow1 {
@@ -116,33 +120,43 @@ export default {
     top: 700px;
     right: calc(50% - 100px);
   }
+  .contentWindow3 {
+    top: 950px;
+    left: calc(50% - 100px);
+  }
+
+  .contentWindow4 {
+    top: 1200px;
+    right: calc(50% - 100px);
+  }
 }
 
 @media screen and (min-width: 521px) {
   .wall_top {
-    height: 1400px;
+    height: 1600px;
   }
 
-  .contentFooter1 {
-    left: calc(25% - 100px);
+  .contentWindow {
+    width: 200px;
+    height: 200px;
   }
+
+  .contentFooter1,
   .contentFooter2 {
     left: calc(25% - 100px);
   }
-  .contentFooter3 {
-    left: calc(75% - 100px);
-  }
+  .contentFooter3,
   .contentFooter4 {
     left: calc(75% - 100px);
   }
 
   .contentFooter2,
   .contentFooter3 {
-    bottom: 0px;
+    bottom: 300px;
   }
   .contentFooter1,
   .contentFooter4 {
-    bottom: 150px;
+    bottom: 450px;
   }
 
   .contentWindow1 {
@@ -155,60 +169,71 @@ export default {
     left: calc(75% - 100px);
   }
 
-   .contentWindow3 {
-    top: 800px;
+  .contentWindow3 {
+    top: 750px;
     left: calc(25% - 100px);
   }
 
   .contentWindow4 {
-    top: 800px;
+    top: 750px;
     left: calc(75% - 100px);
   }
 }
 
-@media screen and (min-width: 1040px) {
+@media screen and (min-width: 800px) {
+  .wall_top {
+    height: 1800px;
+  }
+
+  .contentWindow {
+    width: 300px;
+    height: 300px;
+  }
+
+   .contentWindow1,
+  .contentWindow3 {
+    left: calc(25% - 50px);
+  }
+  .contentWindow2,
+  .contentWindow4 {
+    right: calc(25% + 50px);
+  }
+
+  .contentWindow3,
+  .contentWindow4 {
+    top: 850px;
+  }
+}
+
+@media screen and (min-width: 1255px) {
+  .wall_top {
+    height: 1500px;
+  }
+
   .contentFooter1 {
-    left: calc(20% - 100px);
+    left: calc(10% - 100px);
   }
   .contentFooter2 {
-    left: calc(40% - 100px);
+    left: calc(27% - 100px);
   }
   .contentFooter3 {
-    left: calc(60% - 100px);
+    left: calc(70% - 100px);
   }
   .contentFooter4 {
-    left: calc(80% - 100px);
+    left: calc(90% - 100px);
   }
 
   .contentFooter1,
   .contentFooter2,
   .contentFooter3,
-  .contentFooter4 {
+  .contentFooter4,
+  .contentFooter5 {
     bottom: 0px;
   }
 
-  .contentWindow1 {
-    top: 100px;
-    left: 50px;
-  }
-  .contentWindow2 {
-    top: 100px;
-    right: 50px;
-  }
+ 
 }
 
-@media screen and (min-width: 1320px) {
-  .wall_top {
-    height: 700px;
-  }
-
-  .contentWindow1 {
-    left: 150px;
-  }
-  .contentWindow2 {
-    right: 150px;
-  }
-}
 
 .wall,
 .brick {
@@ -221,7 +246,7 @@ export default {
   background-position: -4px -4px, 0px 29px, 26px 25px, 30px 0px;
 }
 
-.wall_top_zinnen {
+.roof {
   display: flex;
   justify-content: space-between;
   width: 100%;

@@ -98,17 +98,22 @@ export default {
       if (!process.client) return this[value];
 
       let returnValue = this[value];
-      if (this.breakpoints) {
-        for (let breakpoint of this.breakpoints) {
-          let minWidth = breakpoint.minWidth || 0;
-          let maxWidth = breakpoint.maxWidth || 0;
+      
+      if (!this.breakpoints) 
+        return returnValue;
+        
+      const breakpoints = Array.isArray(this.breakpoints) ? this.breakpoints : [this.breakpoints];
+      
+      for (let breakpoint of breakpoints) {
+        let minWidth = breakpoint.minWidth || 0;
+        let maxWidth = breakpoint.maxWidth || 0;
 
-          if(this.windowWidth >= minWidth && this.windowWidth <= maxWidth){
-            if(breakpoint[value])
-              returnValue = breakpoint[value];
-          }
+        if(this.windowWidth >= minWidth && this.windowWidth <= maxWidth){
+          if(breakpoint[value])
+            returnValue = breakpoint[value];
         }
       }
+      
       return returnValue;
     },
   },
@@ -160,7 +165,6 @@ export default {
 .sign_total {
   display: inline-flex;
   flex-direction: column;
-  padding: 20px 10px 0px 10px;
 }
 
 .ring {
