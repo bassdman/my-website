@@ -192,16 +192,34 @@ export default {
 
    .contentWindow1,
   .contentWindow3 {
-    left: calc(25% - 50px);
+    left: calc(25% - 150px);
   }
   .contentWindow2,
   .contentWindow4 {
-    right: calc(25% + 50px);
+    right: calc(25% - 150px);
   }
 
   .contentWindow3,
   .contentWindow4 {
     top: 850px;
+  }
+
+  .contentFooter1,
+  .contentFooter2 {
+    left: calc(25% - 185px);
+  }
+  .contentFooter3,
+  .contentFooter4 {
+    left: calc(75% - 60px);
+  }
+
+  .contentFooter2,
+  .contentFooter3 {
+    bottom: 150px;
+  }
+  .contentFooter1,
+  .contentFooter4 {
+    bottom: 0px;
   }
 }
 

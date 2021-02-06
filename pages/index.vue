@@ -159,7 +159,9 @@
         </sign>
       </template>
       <template v-slot:door>
-       <div>Tür</div>
+       <div>
+         
+       </div>
       </template>
     </House>
   </div>
@@ -310,10 +312,6 @@ p {
   }
   .footer4 {
     margin-bottom: 20px;
-  }
-
-  .footer1 {
-    margin-left: -30px;
   }
 }
 
