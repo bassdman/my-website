@@ -4,7 +4,6 @@
       type="1"
       fontsize="small"
       class="cloudText alignCenter"
-      v-bind:background="cloudbackground"
     >
       <br />Wohin zieht <br />diese Wolke?
     </cloud>
@@ -196,10 +195,6 @@ export default {
   computed: {
     lightOn() {
       return this.$store.state.light.on;
-    },
-    cloudbackground() {
-      if (this.$store.state.light.on) return "white";
-      else return "#888888";
     },
   },
   created() {

@@ -3,8 +3,8 @@
     <div id="cookieLayer_vintage">
       <div>
         <div id="cookieinhalt">
-          <span>Hier müsstet ihr eigentlich einstellen dürfen, wie weit ich euch ausspionieren darf. Müsste ich. Aber diese Seite hat 0 Tracking - ich weiß nicht mal, wie viele Benutzer diese Seite besuchen... Also chillt euere Base, nehmt einen Tee und genießt diese Seite :)</span>
-          <nuxt-link to="/datenschutz" class="datenschutzlink">Lies hier die Details zum Thema Datenschutz.</nuxt-link>
+          <span>Es ist gut, dass du auf deine Daten achtest. Es gibt viele Leute, die deine Daten für teuer Geld wollen, um was auch immer zu machen. Ich nicht. Diese Seite hat 0 Tracking - ich weiß nicht mal, wie viele Benutzer diese Seite besuchen... Also chillt euere Base, nehmt einen Tee und genießt diese Seite :)</span>
+          <nuxt-link to="/datenschutz" class="datenschutzlink">Für mehr Details, guggst du hier.</nuxt-link>
           <button v-on:click="closeAndAccept">Datenschutzbestimmungen Akzeptieren</button>
         </div>
         <span class="cookieLayerCloser" v-on:click="close">&#10006;</span>
@@ -48,19 +48,12 @@ export default {
   background-position: top;
 }
 
-#cookieLayer a {
-  color: #000;
-  text-decoration: none;
-}
-#cookieLayer a:hover {
-  text-decoration: underline;
-}
 #cookieLayer #cookieinhalt {
   padding: 10px;
   padding-top: 5px;
   padding-right: 40px;
   background-image: url(data:image/png;base64,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);
-  padding-bottom: 25px;
+  padding-bottom: 10px;
 }
 
 #cookieLayer {
@@ -85,18 +78,20 @@ export default {
   cursor: pointer;
   padding: 4px;
 }
-.datenschutzlink{
-    font-size:larger;
-    display:block;
-    background: goldenrod;
-}
+
 .cookieLayerCloser:hover {
   font: 26px/100% arial, sans-serif;
   right: 7px;
   top: 45px;
   position: absolute;
 }
-
+.datenschutzlink{
+    color: purple;
+    display:block;
+}
+.datenschutzlink:hover {
+  text-decoration: underline;
+}
 .fadeIn{
   animation-name: fadeIn;
   animation-duration: 4s;
@@ -110,6 +105,10 @@ export default {
 
 button{
   cursor: pointer;
+  background: goldenrod;
+  border:none;
+  padding: 5px;
+  margin-top: 10px;
 }
 @keyframes fadeOut {
   from {opacity:1}

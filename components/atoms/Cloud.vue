@@ -94,6 +94,7 @@ export default {
   -moz-border-radius: 200px;
   border-radius: 200px;
   cursor: pointer;
+  color: #888888;
 }
 
 .cloud:before,
