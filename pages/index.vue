@@ -116,6 +116,7 @@
               minWidth: 521,
               kettenlaenge: 85,
             },
+            { minWidth: 1255, stablaenge: 50}
           ]"
           >Impressum</sign
         >
@@ -149,7 +150,6 @@
           :breakpoints="[
             { maxWidth: 520, width: 450 },
             { maxWidth: 1040, minWidth: 521, kettenlaenge: 90,width:250 },
-            { minWidth: 1255, stablaenge: 50}
           ]"
         >
           <div class="infosign">

@@ -106,7 +106,7 @@ export default {
       
       for (let breakpoint of breakpoints) {
         let minWidth = breakpoint.minWidth || 0;
-        let maxWidth = breakpoint.maxWidth || 0;
+        let maxWidth = breakpoint.maxWidth || screen.width;
 
         if(this.windowWidth >= minWidth && this.windowWidth <= maxWidth){
           if(breakpoint[value])

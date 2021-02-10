@@ -65,22 +65,39 @@ export default {
   width: 100%;
 }
 .contentDoor{
-  width: 250px;
-  height: 250px;
-  background: black;
+  width: 350px;
+  height: 350px;
+  background: url('~assets/tor.png'); 
+  background-size: cover;
   color: white;
   bottom: 0px;
-  left: calc(50% - 125px);
+  left: calc(50% - 175px);
 }
+
+.contentWindow1{
+  background: url('~assets/fenster1.png'); 
+}
+.contentWindow2{
+  background: url('~assets/fenster2.png'); 
+}
+.contentWindow3{
+  background: url('~assets/fenster3.png'); 
+}
+.contentWindow4{
+  background: url('~assets/fenster4.png'); 
+}
+
 .contentWindow {
   width: 200px;
   height: 200px;
   display: flex;
   align-items: center;
   justify-content: center;
-  background: black;
   color: white;
+  background-size: 300px 300px;
 }
+
+
 
 .contentFooter {
   width: 200px;
