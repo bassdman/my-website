@@ -67,7 +67,7 @@ export default {
 .contentDoor{
   width: 350px;
   height: 350px;
-  background: url('~assets/tor.png'); 
+  background: url('~assets/tor.webp'); 
   background-size: cover;
   color: white;
   bottom: 0px;
@@ -75,16 +75,16 @@ export default {
 }
 
 .contentWindow1{
-  background: url('~assets/fenster1.png'); 
+  background: url('~assets/fenster1.webp'); 
 }
 .contentWindow2{
-  background: url('~assets/fenster2.png'); 
+  background: url('~assets/fenster2.webp'); 
 }
 .contentWindow3{
-  background: url('~assets/fenster3.png'); 
+  background: url('~assets/fenster3.webp'); 
 }
 .contentWindow4{
-  background: url('~assets/fenster4.png'); 
+  background: url('~assets/fenster4.webp'); 
 }
 
 .contentWindow {

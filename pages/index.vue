@@ -1,11 +1,8 @@
 <template>
   <div class="home">
     <cloud
-      type="1"
-      fontsize="small"
       class="cloudText alignCenter"
     >
-      <br />Wohin zieht <br />diese Wolke?
     </cloud>
     <h1 class="welcome" v-if="!$store.state.light.on">
       Was für eine schöööne Nacht :)
