@@ -19,7 +19,11 @@ module.exports = {
         script: [
             { src: `https://polyfill.io/v3/polyfill.min.js?features=es6%2ces7`, body: true },
         ],
+
     },
+    css: [
+        'bootstrap/dist/css/bootstrap-grid.min.css'
+    ],
     /*
      ** Customize the progress bar color
      */
