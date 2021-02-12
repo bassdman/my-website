@@ -94,7 +94,7 @@ export default {
   align-items: center;
   justify-content: center;
   color: white;
-  background-size: 300px 300px;
+  background-size: 200px 200px;
 }
 
 
@@ -204,6 +204,7 @@ export default {
 
   .contentWindow {
     width: 300px;
+    background-size: 300px 300px;
     height: 300px;
   }
 
