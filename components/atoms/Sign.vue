@@ -146,7 +146,6 @@ export default {
       };
     },
     rings() {
-      const retArr = [];
       const length = parseInt(parseFloat(this.getProp('kettenlaenge') / 15));
       return length;
     },

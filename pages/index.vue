@@ -1,9 +1,6 @@
 <template>
   <div class="home">
-    <cloud
-      class="cloudText alignCenter"
-    >
-    </cloud>
+    <cloud class="cloudText alignCenter"> </cloud>
     <h1 class="welcome" v-if="!$store.state.light.on">
       Was für eine schöööne Nacht :)
     </h1>
@@ -17,164 +14,209 @@
       Wer hat das Licht angemacht?
     </h1>
 
-    <House class="castle">
-      <template v-slot:sign>
-        <div class="content" id="content">
-          <div
-            class="bildich"
-            :class="{ flicker: lightOn, visibilityHidden: !lightOn }"
-          ></div>
-          <div class="signcontainer">
-            <sign
-              :width="600"
-              boards="6"
-              stablaenge="0"
-              kettenlaenge="150"
-              class="sign"
-              :breakpoints="[{maxWidth:630,width:500},{maxWidth:500,width:400}]"
-            >
-              <div>
-                <div class="name pretext totalWidth alignCenter">
-                  Manuel Gelsen
-                </div>
-                <div class="description pretext totalWidth alignCenter">
-                  Webdesigner, Träumer und vieles mehr
+    <div>
+      <!-- roof -->
+      <div class="roof">
+        <div class="wall brickzinne"></div>
+        <div class="wall brickzinne"></div>
+        <div class="wall brickzinne"></div>
+        <div class="wall brickzinne"></div>
+        <div class="wall brickzinne"></div>
+        <div class="wall brickzinne"></div>
+        <div class="wall brickzinne"></div>
+        <div class="wall brickzinne"></div>
+      </div>
+      <!-- end roof -->
+      <div class="wall">
+        <div class="row">
+          <div class="col-12">
+            <div class="slot contentSign">
+              <div class="content" id="content">
+                <div
+                  class="bildich"
+                  :class="{ flicker: lightOn, visibilityHidden: !lightOn }"
+                ></div>
+                <div class="signcontainer">
+                  <sign
+                    :width="600"
+                    boards="6"
+                    stablaenge="0"
+                    kettenlaenge="150"
+                    class="sign"
+                    :breakpoints="[
+                      { maxWidth: 630, width: 500 },
+                      { maxWidth: 500, width: 400 },
+                    ]"
+                  >
+                    <div>
+                      <div class="name pretext totalWidth alignCenter">
+                        Manuel Gelsen
+                      </div>
+                      <div class="description pretext totalWidth alignCenter">
+                        Webdesigner, Träumer und vieles mehr
+                      </div>
+                    </div>
+                  </sign>
                 </div>
               </div>
-            </sign>
+            </div>
           </div>
         </div>
-      </template>
-      <template v-slot:window1>
-        <div class="window"><a href="https://github.com/bassdman">Meine<br>Github-Projekte</a></div>
-      </template>
-      <template v-slot:window2>
-        <div class="window">
-          <nuxt-link to="/lebenslauf">Mein<br>(Arbeits-)Leben </nuxt-link>  
-        </div>
-      </template>
-      <template v-slot:window3>
-        <div class="window">
-          <nuxt-link prefetch to="/spieleschmiede">Spieleschmiede</nuxt-link>
-        </div>   
-      </template>
-      <template v-slot:window4>
-        <div class="window">
-          
-        </div>
-      </template>
-      <template v-slot:footer1>
-        <sign
-          width="200"
-          stablaenge="0"
-          boards="4"
-          class="footer1"
-          :breakpoints="[
-            { maxWidth: 520, width: 450 },
-            {
-              maxWidth: 1040,
-              minWidth: 521,
-              kettenlaenge: 85,
-              width: 250,
-            },
-          ]"
-        >
-          <div class="iconreference">
-            Icons erstellt von
-            <a
-              href="https://www.flaticon.com/de/autoren/those-icons"
-              title="Those Icons"
-              >Those Icons</a
-            >
-            und
-            <a
-              href="https://www.flaticon.com/de/autoren/wanicon"
-              title="wanicon"
-              >wanicon</a
-            >
-            auf
-            <a href="https://www.flaticon.com/de/" title="Flaticon">
-              www.flaticon.com</a
-            >
+        <div class="row mt-5">
+          <div class="col-12 col-md-6 col-xl-3 d-flex justify-content-center">
+            <div class="slot contentWindow contentWindow1">
+              <div class="window">
+                <a href="https://github.com/bassdman"
+                  >Meine<br />Github-Projekte</a
+                >
+              </div>
+            </div>
           </div>
-        </sign>
-      </template>
-      <template v-slot:footer2>
-        <sign
-          link="/impressum"
-          width="250"
-          boards="3"
-          class="footer2"
-          stablaenge="0"
-          :breakpoints="[
-            { maxWidth: 520, width: 450 },
-            {
-              maxWidth: 1040,
-              minWidth: 521,
-              kettenlaenge: 85,
-            },
-            { minWidth: 1255, stablaenge: 50}
-          ]"
-          >Impressum</sign
-        >
-      </template>
-      <template v-slot:footer3>
-        <sign
-          link="/datenschutz"
-          width="210"
-          boards="3"
-          class="footer3"
-          stablaenge="0"
-          :breakpoints="[
-            { maxWidth: 520, width: 450},
-            {
-              maxWidth: 1040,
-              minWidth: 521,
-              kettenlaenge: 85,
-              width: 250,
-            },
-            { minWidth: 1255, stablaenge: 50}
-          ]"
-          >Datenschutz</sign
-        >
-      </template>
-      <template v-slot:footer4>
-        <sign
-          width="200"
-          boards="2"
-          stablaenge="0"
-          class="footer4"
-          :breakpoints="[
-            { maxWidth: 520, width: 450 },
-            { maxWidth: 1040, minWidth: 521, kettenlaenge: 90,width:250 },
-          ]"
-        >
-          <div class="infosign">
-            <div>v&nbsp;{{ version }}</div>
+          <div class="col-12 col-md-6 col-xl-3 d-flex justify-content-center">
+            <div class="slot contentWindow contentWindow2">
+              <div class="window">
+                <nuxt-link to="/lebenslauf"
+                  >Mein<br />(Arbeits-)Leben
+                </nuxt-link>
+              </div>
+            </div>
           </div>
-        </sign>
-      </template>
-      <template v-slot:door>
-       <div>
-         
-       </div>
-      </template>
-    </House>
+          <div class="col-12 col-md-6 col-xl-3 d-flex justify-content-center">
+            <div class="slot contentWindow contentWindow3">
+              <div class="window">
+                <nuxt-link prefetch to="/spieleschmiede"
+                  >Spieleschmiede</nuxt-link>
+              </div>
+            </div>
+          </div>
+          <div class="col-12 col-md-6 col-xl-3 d-flex justify-content-center">
+            <div class="slot contentWindow contentWindow4">
+              <div class="window"></div>
+            </div>
+          </div>
+        </div>
+        <div class="row mt-5">
+          <div class="col-12 col-md-6 col-lg-4 col-xl-2 order-lg-4 d-flex align-items-end justify-content-center">
+            <div class="slot contentFooter contentFooter1">
+              <sign
+                width="200"
+                stablaenge="0"
+                boards="4"
+                class="footer1"
+                :breakpoints="[
+                  { maxWidth: 520, width: 450 },
+                  {
+                    maxWidth: 1040,
+                    minWidth: 521,
+                    kettenlaenge: 85,
+                    width: 250,
+                  },
+                ]"
+              >
+                <div class="iconreference">
+                  Icons erstellt von
+                  <a
+                    href="https://www.flaticon.com/de/autoren/those-icons"
+                    title="Those Icons"
+                    >Those Icons</a
+                  >
+                  und
+                  <a
+                    href="https://www.flaticon.com/de/autoren/wanicon"
+                    title="wanicon"
+                    >wanicon</a
+                  >
+                  auf
+                  <a href="https://www.flaticon.com/de/" title="Flaticon">
+                    www.flaticon.com</a
+                  >
+                </div>
+              </sign>
+            </div>
+          </div>
+          <div class="col-12 col-md-6 col-xl-2 d-flex order-lg-1 align-items-end justify-content-center">
+            <div class="slot contentFooter contentFooter2">
+              <sign
+                link="/impressum"
+                width="250"
+                boards="3"
+                class="footer2"
+                stablaenge="0"
+                :breakpoints="[
+                  { maxWidth: 520, width: 450 },
+                  {
+                    maxWidth: 1199,
+                    minWidth: 521,
+                    kettenlaenge: 85,
+                  },
+                  { minWidth: 1200, stablaenge: 50 },
+                ]"
+                >Impressum</sign
+              >
+            </div>
+          </div>
+          <div class="col-12 col-lg-4 d-flex justify-content-center order-5 order-lg-3 order-xl-2">
+            <div class="slot contentFooter contentDoor"></div>
+          </div>
+          <div class="col-12 col-md-6 col-xl-2 d-flex order-lg-1 align-items-end justify-content-center">
+            <div class="slot contentFooter contentFooter3">
+              <sign
+                link="/datenschutz"
+                width="210"
+                boards="3"
+                class="footer3"
+                stablaenge="0"
+                :breakpoints="[
+                  { maxWidth: 520, width: 450 },
+                  {
+                    maxWidth: 1199,
+                    minWidth: 521,
+                    kettenlaenge: 85,
+                    width: 250,
+                  },
+                  { minWidth: 1200, stablaenge: 50 },
+                ]"
+                >Datenschutz</sign
+              >
+            </div>
+          </div>
+          <div class="col-12 col-md-6 col-lg-4 col-xl-2 d-flex order-lg-2 align-items-end justify-content-center">
+            <div class="slot contentFooter contentFooter4">
+              <sign
+                width="200"
+                boards="2"
+                stablaenge="0"
+                class="footer4"
+                :breakpoints="[
+                  { maxWidth: 520, width: 450 },
+                  {
+                    maxWidth: 1040,
+                    minWidth: 521,
+                    kettenlaenge: 90,
+                    width: 250,
+                  },
+                ]"
+              >
+                <div class="infosign">
+                  <div>v&nbsp;{{ version }}</div>
+                </div>
+              </sign>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
-import Coffeecup from "../components/atoms/Coffeecup.vue";
 import Cloud from "../components/atoms/Cloud.vue";
-import House from "../components/atoms/House.vue";
 import Sign from "../components/atoms/Sign.vue";
 import { version } from "@/package.json";
 
 export default {
   name: "home",
   components: {
-    Coffeecup,
-    House,
     Sign,
     Cloud,
   },
@@ -213,7 +255,6 @@ export default {
       ],
       link: [
         { rel: "canonical", href: "https://www.manuelgelsen.de" },
-        { rel: "manifest", href: "/manifest.json" },
       ],
     };
   },
@@ -248,7 +289,7 @@ p {
   color: white;
 }
 
-.window{
+.window {
   text-align: center;
 }
 .window a,
@@ -269,7 +310,7 @@ p {
   margin: auto;
   color: white;
   display: flex;
-  flex-wrap:wrap;
+  flex-wrap: wrap;
   justify-content: center;
   border: 1px solid transparent; /*notwendig wg. eines bugs in chrome. ja, richtig gehört: chrome.*/
 }
@@ -309,7 +350,6 @@ p {
 
 @media screen and (min-width: 900px) {
   .signcontainer {
-    margin-bottom: 500px;
     width: 100%;
     margin-left: calc(50% - 300px);
   }
@@ -426,5 +466,70 @@ p {
   100% {
     opacity: 1;
   }
+}
+
+.contentSign {
+  margin-top: 116px;
+  width: 100%;
+}
+.contentDoor {
+  width: 350px;
+  height: 350px;
+  background: url("~assets/tor.webp");
+  background-size: cover;
+  color: white;
+}
+
+.contentWindow1 {
+  background: url("~assets/fenster1.webp");
+}
+.contentWindow2 {
+  background: url("~assets/fenster2.webp");
+}
+.contentWindow3 {
+  background: url("~assets/fenster3.webp");
+}
+.contentWindow4 {
+  background: url("~assets/fenster4.webp");
+}
+
+.contentWindow {
+  width: 200px;
+  height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  background-size: 200px 200px;
+}
+
+@media screen and (min-width: 800px) {
+  .contentWindow {
+    width: 300px;
+    background-size: 300px 300px;
+    height: 300px;
+  }
+}
+
+.wall,
+.brick {
+  background: url('~assets/housetexture.webp');
+}
+
+.roof {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  min-width: 100px;
+  margin-top: -80px;
+  overflow: hidden;
+}
+
+.brickzinne {
+  margin-left: 20px;
+  margin-right: 15px;
+  height: 87px;
+  width: 110px;
+  min-width: 100px;
 }
 </style>

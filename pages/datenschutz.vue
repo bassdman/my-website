@@ -150,49 +150,7 @@
         </span>
       </p>
       <p></p>
-      <h3 id="dsg-comments">Kommentare und Beiträge</h3>
-      <p></p>
-      <p>
-        <span class="ts-muster-content">
-          Wenn Nutzer Kommentare oder sonstige Beiträge hinterlassen, können ihre IP-Adressen auf Grundlage unserer berechtigten Interessen im Sinne des Art. 6 Abs. 1 lit. f. DSGVO für 7 Tage gespeichert werden. Das erfolgt zu unserer Sicherheit, falls jemand in Kommentaren und Beiträgen widerrechtliche Inhalte hinterlässt (Beleidigungen, verbotene politische Propaganda, etc.). In diesem Fall können wir selbst für den Kommentar oder Beitrag belangt werden und sind daher an der Identität des Verfassers interessiert.
-          <br />
-          <br />Des Weiteren behalten wir uns vor, auf Grundlage unserer berechtigten Interessen gem. Art. 6 Abs. 1 lit. f. DSGVO, die Angaben der Nutzer zwecks Spamerkennung zu verarbeiten.
-          <br />
-          <br />Auf derselben Rechtsgrundlage behalten wir uns vor, im Fall von Umfragen die IP-Adressen der Nutzer für deren Dauer zu speichern und Cookies zu verwenden, um Mehrfachabstimmungen zu vermeiden.
-          <br />
-          <br />Die im Rahmen der Kommentare und Beiträge mitgeteilte Informationen zur Person, etwaige Kontakt- sowie Websiteinformationen als auch die inhaltlichen Angaben, werden von uns bis zum Widerspruch der Nutzer dauerhaft gespeichert.
-        </span>
-      </p>
-      <p></p>
-      <h3 id="dsg-akismet">Akismet Anti-Spam-Prüfung</h3>
-      <p></p>
-      <p>
-        <span class="ts-muster-content">
-          Unser Onlineangebot nutzt den Dienst „Akismet“, der von der Automattic Inc., 60 29th Street #343, San Francisco, CA 94110, USA, angeboten wird. Die Nutzung erfolgt auf Grundlage unserer berechtigten Interessen im Sinne des Art. 6 Abs. 1 lit. f) DSGVO. Mit Hilfe dieses Dienstes werden Kommentare echter Menschen von Spam-Kommentaren unterschieden. Dazu werden alle Kommentarangaben an einen Server in den USA verschickt, wo sie analysiert und für Vergleichszwecke vier Tage lang gespeichert werden. Ist ein Kommentar als Spam eingestuft worden, werden die Daten über diese Zeit hinaus gespeichert. Zu diesen Angaben gehören der eingegebene Name, die Emailadresse, die IP-Adresse, der Kommentarinhalt, der Referrer, Angaben zum verwendeten Browser sowie dem Computersystem und die Zeit des Eintrags.
-          <br />
-          <br />Nähere Informationen zur Erhebung und Nutzung der Daten durch Akismet finden sich in den Datenschutzhinweisen von Automattic:
-          <a
-            target="_blank"
-            href="https://automattic.com/privacy/"
-            rel="noopener noreferrer"
-          >https://automattic.com/privacy/</a>.
-          <br />
-          <br />Nutzer können gerne Pseudonyme nutzen, oder auf die Eingabe des Namens oder der Emailadresse verzichten. Sie können die Übertragung der Daten komplett verhindern, indem Sie unser Kommentarsystem nicht nutzen. Das wäre schade, aber leider sehen wir sonst keine Alternativen, die ebenso effektiv arbeiten.
-          <br />
-          <br />
-        </span>
-      </p>
-      <p></p>
-      <h3 id="dsg-contact">Kontaktaufnahme</h3>
-      <p></p>
-      <p>
-        <span class="ts-muster-content">
-          Bei der Kontaktaufnahme mit uns (z.B. per Kontaktformular, E-Mail, Telefon oder via sozialer Medien) werden die Angaben des Nutzers zur Bearbeitung der Kontaktanfrage und deren Abwicklung gem. Art. 6 Abs. 1 lit. b. (im Rahmen vertraglicher-/vorvertraglicher Beziehungen), Art. 6 Abs. 1 lit. f. (andere Anfragen) DSGVO verarbeitet.. Die Angaben der Nutzer können in einem Customer-Relationship-Management System („CRM System“) oder vergleichbarer Anfragenorganisation gespeichert werden.
-          <br />
-          <br />Wir löschen die Anfragen, sofern diese nicht mehr erforderlich sind. Wir überprüfen die Erforderlichkeit alle zwei Jahre; Ferner gelten die gesetzlichen Archivierungspflichten.
-        </span>
-      </p>
-      <p></p>
+   
       <h3 id="dsg-hostingprovider">Hosting und E-Mail-Versand</h3>
       <p></p>
       <p>
@@ -261,16 +219,7 @@
       <p></p>
       <h3 id="dsg-thirdparty-xing">Xing</h3>
       <p></p>
-      <p>
-        <span class="ts-muster-content">
-          Innerhalb unseres Onlineangebotes können Funktionen und Inhalte des Dienstes Xing, angeboten durch die XING AG, Dammtorstraße 29-32, 20354 Hamburg, Deutschland, eingebunden werden. Hierzu können z.B. Inhalte wie Bilder, Videos oder Texte und Schaltflächen gehören, mit denen Nutzer Inhalte dieses Onlineangebotes innerhalb von Xing teilen können. Sofern die Nutzer Mitglieder der Plattform Xing sind, kann Xing den Aufruf der o.g. Inhalte und Funktionen den dortigen Profilen der Nutzer zuordnen. Datenschutzerklärung von Xing:
-          <a
-            target="_blank"
-            href="https://privacy.xing.com/de/datenschutzerklaerung"
-            rel="noopener noreferrer"
-          >https://privacy.xing.com/de/datenschutzerklaerung</a>.
-        </span>
-      </p>
+
       <a
         href="https://datenschutz-generator.de"
         class="dsg1-6"
