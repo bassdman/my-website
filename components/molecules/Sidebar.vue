@@ -31,7 +31,7 @@ export default {
 .sidebar {
   background: rgba(0, 0, 0, 0.8);
   box-shadow: 0 0 6px 9px rgba(0, 0, 0, 0.8);
-  position: fixed;
+  position: absolute;
   right: 0px;
   top: 300px;
   width: 100px;

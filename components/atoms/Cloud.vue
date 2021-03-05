@@ -29,10 +29,10 @@ export default {
   width: 300px;
   height: 300px;
   top: 0px;
-  left: -230px;
-  background: url(~assets/cloud.webp);
-  background-size:300px 300px;
-  animation: cloud 40s infinite linear;
+  left: -300px;
+  background: url('~assets/cloud.webp');
+  background-size:300px 300px; 
+  animation: cloud 40s 1 linear;
 }
 
 @keyframes cloud {

@@ -14,9 +14,9 @@
       Wer hat das Licht angemacht?
     </h1>
 
-    <div>
+    <div class="row house">
       <!-- roof -->
-      <div class="roof">
+      <div class="roof col-12">
         <div class="wall brickzinne"></div>
         <div class="wall brickzinne"></div>
         <div class="wall brickzinne"></div>
@@ -27,7 +27,7 @@
         <div class="wall brickzinne"></div>
       </div>
       <!-- end roof -->
-      <div class="wall">
+      <div class="wall col-12">
         <div class="row">
           <div class="col-12">
             <div class="slot contentSign">
@@ -85,7 +85,8 @@
             <div class="slot contentWindow contentWindow3">
               <div class="window">
                 <nuxt-link prefetch to="/spieleschmiede"
-                  >Spieleschmiede</nuxt-link>
+                  >Spieleschmiede</nuxt-link
+                >
               </div>
             </div>
           </div>
@@ -96,7 +97,9 @@
           </div>
         </div>
         <div class="row mt-5">
-          <div class="col-12 col-md-6 col-lg-4 col-xl-2 order-lg-4 d-flex align-items-end justify-content-center">
+          <div
+            class="col-12 col-md-6 col-lg-4 col-xl-2 order-lg-4 d-flex align-items-end justify-content-center"
+          >
             <div class="slot contentFooter contentFooter1">
               <sign
                 width="200"
@@ -134,7 +137,9 @@
               </sign>
             </div>
           </div>
-          <div class="col-12 col-md-6 col-xl-2 d-flex order-lg-1 align-items-end justify-content-center">
+          <div
+            class="col-12 col-md-6 col-xl-2 d-flex order-lg-1 align-items-end justify-content-center"
+          >
             <div class="slot contentFooter contentFooter2">
               <sign
                 link="/impressum"
@@ -155,10 +160,14 @@
               >
             </div>
           </div>
-          <div class="col-12 col-lg-4 d-flex justify-content-center order-5 order-lg-3 order-xl-2">
+          <div
+            class="col-12 col-lg-4 d-flex justify-content-center order-5 order-lg-3 order-xl-2"
+          >
             <div class="slot contentFooter contentDoor"></div>
           </div>
-          <div class="col-12 col-md-6 col-xl-2 d-flex order-lg-1 align-items-end justify-content-center">
+          <div
+            class="col-12 col-md-6 col-xl-2 d-flex order-lg-1 align-items-end justify-content-center"
+          >
             <div class="slot contentFooter contentFooter3">
               <sign
                 link="/datenschutz"
@@ -180,7 +189,9 @@
               >
             </div>
           </div>
-          <div class="col-12 col-md-6 col-lg-4 col-xl-2 d-flex order-lg-2 align-items-end justify-content-center">
+          <div
+            class="col-12 col-md-6 col-lg-4 col-xl-2 d-flex order-lg-2 align-items-end justify-content-center"
+          >
             <div class="slot contentFooter contentFooter4">
               <sign
                 width="200"
@@ -253,15 +264,17 @@ export default {
         },
         { name: "robots", content: "index,follow" },
       ],
-      link: [
-        { rel: "canonical", href: "https://www.manuelgelsen.de" },
-      ],
+      link: [{ rel: "canonical", href: "https://www.manuelgelsen.de" }],
     };
   },
 };
 </script>
 
 <style scoped>
+.house{
+    position: absolute;
+    top: 90vh;
+}
 .welcome,
 .welcomeSubtitle {
   color: white;
@@ -513,7 +526,7 @@ p {
 
 .wall,
 .brick {
-  background: url('~assets/housetexture.webp');
+  background: url("~assets/housetexture.webp"); 
 }
 
 .roof {
